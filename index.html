@@ -2,1103 +2,725 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Ford Sales Mastery — Smart PWA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Objections App - Emotional / Wise Ford Scripts</title>
 <link rel="manifest" href="manifest.json">
 <style>
-  /* --- Reset / base --- */
-  * { box-sizing: border-box; margin:0; padding:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-  html,body { height:100%; background: linear-gradient(180deg,#f6f9ff 0%, #ffffff 100%); color:#1b2b44; -webkit-font-smoothing:antialiased; }
-  header { background: linear-gradient(90deg,#0b63d4 0%, #0646a6 100%); color:white; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-  header h1 { font-size:16px; letter-spacing:0.6px; }
-  header .topbar { display:flex; gap:8px; align-items:center; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+  body, html { height: 100%; width: 100%; background: white; overflow-y: auto; }
 
-  /* Smart mode toggle & favorites */
-  .toggle { background:rgba(255,255,255,0.15); padding:6px 10px; border-radius:8px; color:white; font-weight:700; display:flex; gap:8px; align-items:center; cursor:pointer; }
-  .fav-btn { background:rgba(255,255,255,0.12); padding:6px 10px; border-radius:8px; color:white; cursor:pointer; font-weight:bold; }
+  /* Splash Screen */
+  #splash {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 10;
+    transition: opacity 1s ease;
+  }
+  #splash img { width: 100%; height: auto; object-fit: contain; }
+  #splash p { font-style: italic; font-weight: bold; color: #444; font-size: 16px; text-align: center; margin-top: 10px; }
 
-  .container { max-width:900px; margin:14px auto; padding:12px; }
+  /* Main Container */
+  #main { display: none; padding: 10px; overflow-y: auto; background-color: black; }
 
-  /* Menu */
-  .menu-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:12px; margin-bottom:12px; }
-  .menu-btn { background:linear-gradient(180deg,#007BFF 0%,#005ec2 100%); color:white; border:none; padding:16px; border-radius:12px; font-weight:800; font-size:15px; cursor:pointer; box-shadow:0 6px 20px rgba(3,46,110,0.08); }
-  .menu-btn.secondary { background:linear-gradient(180deg,#f7f8ff 0%, #eef4ff 100%); color:#08306d; border:1px solid #e2ebff; font-weight:700; }
+  .button-group {
+    width: 85%; max-width: 450px;
+    margin: 0 auto 15px auto;
+  }
 
-  /* Back button */
-  .back { display:inline-block; padding:8px 12px; background:#fff; border-radius:10px; box-shadow:0 3px 10px rgba(0,0,0,0.06); border:1px solid #eef3ff; cursor:pointer; font-weight:700; color:#0b3f9a; }
-
-  /* Pages */
-  .page { display:none; }
-  .page.active { display:block; animation: fadeIn .18s ease-in; }
-  @keyframes fadeIn { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:none } }
-
-  /* Objections layout (keeps original visual layout, modernized) */
-  .button-group { width:95%; max-width:760px; margin:10px auto; }
   .button {
-    width:100%; padding:12px; border-radius:10px;
-    background:linear-gradient(180deg,#1b7cff 0%, #0646a6 100%); color:white; font-weight:800;
-    font-size:16px; border:none; cursor:pointer; margin-bottom:8px; box-shadow:0 6px 18px rgba(3,46,110,0.08);
+    width: 100%; padding: 6px; border-radius: 8px;
+    background: #007BFF; color: white; font-weight: bold;
+    font-size: 16px; border: none; cursor: pointer;
+    text-align: center; margin-bottom: 4px;
   }
-  .button:active { transform:translateY(1px); }
+  .button:hover { background: #0056b3; }
+
   .sub-button {
-    width:60%; padding:8px; background:linear-gradient(180deg,#4a4a4f 0%, #2f2f33 100%); color:white;
-    border-radius:10px; border:none; text-align:left; cursor:pointer; display:block; margin-bottom:8px;
-    font-size:12px; float:right; clear:both; box-shadow:0 6px 14px rgba(0,0,0,0.08);
+    width: 60%; padding: 5px; background: #444; color: white;
+    border-radius: 8px; border: none; text-align: left;
+    cursor: pointer; display: block; margin-bottom: 4px;
+    font-size: 10px; white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; float: right; clear: both;
   }
-  .sub-button.small { width:68%; font-size:11px; }
+  .sub-button:hover { background: #333; }
 
-  /* Modal */
-  .modal { display:none; position:fixed; inset:0; background:rgba(6,10,20,0.55); align-items:center; justify-content:center; padding:22px; z-index:9999; }
-  .modal.open { display:flex; }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center; align-items: center;
+    padding: 20px;
+  }
   .modal-content {
-    width:96%; max-width:760px; max-height:88vh; overflow:auto; border-radius:14px; padding:18px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,251,255,0.98));
-    box-shadow: 0 18px 60px rgba(3,20,60,0.28); position:relative; backdrop-filter: blur(6px);
+    background-color: #fefefe;
+    border-radius: 10px;
+    width: 85%; max-width: 560px; max-height: 84vh;
+    overflow-y: auto; padding: 20px; position: relative;
   }
-  .modal .close { position:absolute; right:12px; top:10px; font-size:20px; cursor:pointer; color:#334; font-weight:800; }
-  .modal h3 { font-size:16px; color:#063970; margin-bottom:8px; }
-  p { margin-bottom:14px; line-height:1.48; color:#172033; }
-  .small { color:#556; font-size:13px; margin-top:8px; }
+  .close {
+    color: #aaa; float: right; font-size: 24px;
+    font-weight: bold; cursor: pointer;
+  }
+  .close:hover { color: #000; }
+  .instruction-title { margin-top: 10px; font-weight: bold; color: #333; }
 
-  /* Short bite area */
-  .short-bite { background:linear-gradient(90deg, rgba(7,56,135,0.04), rgba(7,56,135,0.02)); padding:10px; border-radius:10px; margin-bottom:12px; border:1px solid rgba(7,56,135,0.06); }
-  .save-pitch { display:inline-block; margin-left:8px; padding:8px 10px; border-radius:10px; background:linear-gradient(90deg,#ff6b6b,#ff3b3b); color:white; font-weight:800; cursor:pointer; border:none; }
+  p { margin-bottom: 14px; line-height: 1.45; }
+  .small { font-size: 13px; color: #555; }
 
-  /* Feature cards */
-  .feature-card { background:#fff; border-radius:12px; padding:12px; border:1px solid #eef4ff; margin-bottom:10px; box-shadow:0 6px 14px rgba(6,46,110,0.04); }
-  .feature-title { color:#063970; font-weight:800; margin-bottom:8px; }
-
-  /* Openers */
-  .opener { background:linear-gradient(90deg,#fff8f0,#fffdf8); padding:12px; border-radius:10px; border:1px solid #ffeedc; margin-bottom:10px; }
-
-  /* Energy buttons */
-  .energy-btn { padding:10px 12px; margin:6px 8px 6px 0; background:linear-gradient(90deg,#edf6ff,#eaf2ff); border-radius:10px; border:1px solid #d6eaff; cursor:pointer; font-weight:700; color:#07386d; }
-
-  /* Favorites modal list */
-  .fav-list { display:flex; flex-direction:column; gap:8px; max-height:60vh; overflow:auto; padding-right:6px; }
-  .fav-item { background:#fff; border-radius:10px; padding:10px; border:1px solid #eef4ff; display:flex; justify-content:space-between; align-items:center; }
-
-  /* Notes area */
-  textarea { width:100%; min-height:120px; padding:10px; border-radius:10px; border:1px solid #e6eefc; font-size:15px; }
-
-  footer { text-align:center; margin-top:16px; color:#7a8797; font-size:13px; }
-  @media (max-width:680px) { .menu-grid { grid-template-columns: 1fr; } .sub-button { width:68%; } .modal-content { padding:14px; } }
 </style>
 </head>
 <body>
 
-<header>
-  <div style="display:flex; align-items:center; gap:12px;">
-    <img src="LOGO.jpg" alt="Corwin-Ford Tri-Cities" style="height:34px; border-radius:6px; box-shadow:0 4px 18px rgba(3,20,60,0.12)">
-    <div>
-      <h1 style="font-size:15px; margin-bottom:2px;">Corwin-Ford Tri-Cities</h1>
-      <div style="font-size:11px; color:rgba(255,255,255,0.9); margin-top:2px;">Driven by Clarity, Defined by Control</div>
-    </div>
-  </div>
-
-  <div class="topbar">
-    <div id="smart-toggle" class="toggle" title="Toggle Smart Mode (short bites)">
-      <span id="smart-icon">🧠</span>
-      <span id="smart-label">Smart Mode: ON</span>
-    </div>
-    <div id="open-favs" class="fav-btn" title="Open Favorites">❤️ Favorites</div>
-  </div>
-</header>
-
-<div class="container">
-
-  <!-- MAIN MENU -->
-  <div id="page-menu" class="page active">
-    <h2 style="margin:12px 0 10px; color:#07386d;">Main Menu</h2>
-    <div class="menu-grid">
-      <button class="menu-btn" onclick="showPage('page-objections')">Objections & Responses</button>
-      <button class="menu-btn" onclick="showPage('page-features')">Feature Highlights — Ford</button>
-      <button class="menu-btn" onclick="showPage('page-openers')">Water-Style Openers</button>
-      <button class="menu-btn" onclick="showPage('page-energy')">Customer Energy</button>
-      <button class="menu-btn secondary" onclick="showPage('page-notes')">Notes / Quick Save</button>
-    </div>
-    <p style="margin-top:12px; color:#405a7a;">Tip: install to your home screen for offline use. Smart Mode shows a short poetic bite above each full script to help you land the pitch fast.</p>
-  </div>
-
-  <!-- OBJECTIONS PAGE -->
-  <div id="page-objections" class="page">
-    <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-      <h2 style="color:#07386d;">Objections & Responses</h2>
-      <div>
-        <button class="back" onclick="showPage('page-menu')">Back to Menu</button>
-      </div>
-    </div>
-
-    <!-- Button groups (keeps layout) -->
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-payment-big')">MONTHLY PAYMENT TOO HIGH</button>
-      <button class="sub-button" onclick="openModal('modal-payment-mpg')">MPG SAME</button>
-      <button class="sub-button" onclick="openModal('modal-payment-mpg-hi')">MPG HIGHER (CURRENT CAR)</button>
-      <button class="sub-button" onclick="openModal('modal-payment-rate-wait')">WANT TO WAIT FOR LOWER RATES</button>
-      <button class="sub-button small" onclick="openModal('modal-payment-bank-check')">WANT TO CHECK WITH BANK</button>
-    </div>
-
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-price-high')">PRICE TOO HIGH</button>
-      <button class="sub-button" onclick="openModal('modal-price-another')">OTHER DEALER CHEAPER</button>
-      <button class="sub-button" onclick="openModal('modal-price-small')">SLIGHTLY HIGHER</button>
-      <button class="sub-button" onclick="openModal('modal-price-rebate-wait')">WAIT FOR NEXT REBATE</button>
-    </div>
-
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-trade-low')">TRADE-IN VALUE TOO LOW</button>
-      <button class="sub-button" onclick="openModal('modal-trade-offer')">UNEXPECTED DEDUCTIONS</button>
-      <button class="sub-button" onclick="openModal('modal-trade-value')">VALUE SLIGHTLY LOWER THAN EXPECTED</button>
-      <button class="sub-button" onclick="openModal('modal-trade-market-fluct')">MARKET FLUCTUATION CONCERN</button>
-    </div>
-
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-spouse-talk')">NEED TO TALK TO SPOUSE</button>
-      <button class="sub-button" onclick="openModal('modal-spouse-needs')">SPOUSE NEEDS TO SEE NUMBERS</button>
-      <button class="sub-button" onclick="openModal('modal-spouse-wait')">SPOUSE WANTS TIME TO THINK</button>
-    </div>
-
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-think-later')">I WANT TO THINK ABOUT IT</button>
-      <button class="sub-button" onclick="openModal('modal-think-time')">JUST NEED TIME TO DECIDE</button>
-      <button class="sub-button" onclick="openModal('modal-think-comparison')">WAITING TO COMPARE OTHER VEHICLES</button>
-    </div>
-
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-down-low')">DOWN PAYMENT CONCERNS</button>
-      <button class="sub-button" onclick="openModal('modal-down-adjust')">CAN REDUCE DOWN PAYMENT</button>
-      <button class="sub-button" onclick="openModal('modal-down-flex')">FLEXIBLE PAYMENT OPTIONS</button>
-    </div>
-
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-credit-bad')">CREDIT CONCERNS</button>
-      <button class="sub-button" onclick="openModal('modal-credit-help')">NEED CREDIT GUIDANCE</button>
-      <button class="sub-button" onclick="openModal('modal-credit-cosigner')">CONSIDER CO-SIGNER</button>
-      <button class="sub-button" onclick="openModal('modal-credit-rate-wait')">WANT LOWER RATE BEFORE BUY</button>
-    </div>
-
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-dealer-other')">OTHER DEALER OFFER</button>
-      <button class="sub-button" onclick="openModal('modal-dealer-offer')">FOUND ANOTHER DEALER DEAL</button>
-      <button class="sub-button" onclick="openModal('modal-dealer-details')">UNCLEAR COMPARISON DETAILS</button>
-    </div>
-
-    <div class="button-group">
-      <button class="button" onclick="openModal('modal-negative-equity')">NEGATIVE EQUITY</button>
-      <button class="sub-button" onclick="openModal('modal-negative-explain')">WORRIED ABOUT OWING MORE THAN CAR VALUE</button>
-      <button class="sub-button" onclick="openModal('modal-negative-roll')">ROLLING INTO NEW LOAN</button>
-    </div>
-
-    <div class="button-group" style="margin-bottom:36px;">
-      <button class="button" onclick="openModal('modal-not-ready')">NOT READY TO TRADE / BUY</button>
-      <button class="sub-button" onclick="openModal('modal-not-ready-commit')">FEELING COMMITMENT PRESSURE</button>
-      <button class="sub-button" onclick="openModal('modal-not-ready-budget')">WANT TO REVIEW BUDGET FIRST</button>
-    </div>
-
-  </div>
-
-  <!-- FEATURES PAGE (includes older vs newer details) -->
-  <div id="page-features" class="page">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h2 style="color:#063970;">Feature Highlights — Older vs Newer</h2>
-      <button class="back" onclick="showPage('page-menu')">Back to Menu</button>
-    </div>
-
-    <div style="margin-top:12px;">
-      <!-- F-150 -->
-      <div class="feature-card">
-        <div class="feature-title">F-150 — Strength, then Smarter Strength</div>
-        <p><b>Emotional:</b> The F-150 has always been the quiet, dependable backbone — now it’s also the smart partner that thinks for you.</p>
-
-        <p><b>Older models (2015–2019):</b> Traditional V6/V8 options, mechanical towing aids, analog driver assists. Strong frames and payloads, simpler SYNC versions, less advanced safety sensors.</p>
-
-        <p><b>Newer models (2020+):</b> Advanced 3.5L EcoBoost and hybrid options, integrated Pro Power Onboard, more sophisticated trailer tech (Pro Trailer Backup Assist improvements), full Co-Pilot360 suites, SYNC4 with larger displays, OTA updates, and improved fuel management.</p>
-
-        <p><b>Sales tip:</b> For owners of older F-150s, highlight <b>reduced downtime</b>, improved fuel/torque calibration, and electronics that save time on the job.</p>
-      </div>
-
-      <!-- Expedition -->
-      <div class="feature-card">
-        <div class="feature-title">Expedition — Room, quiet, connected</div>
-        <p><b>Emotional:</b> The Expedition has evolved from roomy and reliable to a mobile sanctuary loaded with tech that protects the family.</p>
-
-        <p><b>Older (2015–2018):</b> Large V6/V8 choices, solid towing gear, comfort-focused interiors but simpler infotainment and fewer driver aids.</p>
-
-        <p><b>Newer (2019+):</b> Lighter frames, more efficient twin-turbo engines, advanced 360-degree cameras, adaptive cruise with lane-keeping, integrated rear-seat entertainment upgrades, and improved SYNC/voice systems.</p>
-
-        <p><b>Sales tip:</b> Emphasize quiet cabin tech, safety upgrades, and the reduced long-trip fatigue newer Expedition offers vs older models.</p>
-      </div>
-
-      <!-- Escape -->
-      <div class="feature-card">
-        <div class="feature-title">Escape — Practical, now intelligent</div>
-        <p><b>Emotional:</b> Escape grew from practical freedom to a tech-aware compact that keeps life simple.</p>
-
-        <p><b>Older (2014–2018):</b> Simple efficient engines, basic infotainment, fewer safety assists, and lighter ADAS.</p>
-
-        <p><b>Newer (2019+):</b> Hybrid options, improved turbo engines, Co-Pilot360 standard lines, better infotainment with SYNC3/4, smartphone integration, and more efficient packaging.</p>
-
-        <p><b>Sales tip:</b> For customers upgrading from older Escape, show fuel/electronics improvements and the quiet convenience of modern cabins.</p>
-      </div>
-
-      <!-- Edge -->
-      <div class="feature-card">
-        <div class="feature-title">Edge — style sharpened by tech</div>
-        <p><b>Emotional:</b> Edge moved from a capable mid-size to a refined, tech-forward option that feels premium.</p>
-
-        <p><b>Older (2015–2018):</b> Comfortable interiors, powerful engines but fewer semi-autonomous features, and smaller displays.</p>
-
-        <p><b>Newer (2019+):</b> Advanced infotainment, improved driver assists, adaptive cruise with stop & go, and higher-grade interior materials in many trims.</p>
-
-        <p><b>Sales tip:</b> Show how new tech protects and simplifies daily driving compared to an older Edge.</p>
-      </div>
-
-      <!-- Maverick -->
-      <div class="feature-card">
-        <div class="feature-title">Maverick — small, clever, efficient</div>
-        <p><b>Emotional:</b> Maverick is a fresh idea: a compact truck that feels like a clever life hack.</p>
-
-        <p><b>Launch models (2022 onward):</b> Hybrid standard on many trims, smart bed options, and modern infotainment. No exact "older" baseline, but position it as an upgrade for buyers wanting utility without bulk.</p>
-
-        <p><b>Sales tip:</b> Pitch Maverick to customers who miss truck utility but want modern electronics, low running costs, and clever utility features.</p>
-      </div>
-
-      <!-- Bronco Sport -->
-      <div class="feature-card">
-        <div class="feature-title">Bronco Sport — adventure with polish</div>
-        <p><b>Emotional:</b> Bronco Sport invites outdoor confidence and clarity — it’s designed to make the outdoors accessible and effortless.</p>
-
-        <p><b>Older analog rivals:</b> Older off-road small SUVs had less integrated off-road electronics and simpler drivetrains.</p>
-
-        <p><b>Bronco Sport (modern):</b> Advanced off-road modes, terrain management, better infotainment and connectivity, rugged yet comfortable interiors, and more efficient powertrains.</p>
-
-        <p><b>Sales tip:</b> For customers who had older outdoorsy SUVs, emphasize modern traction tech and connectivity for longer trips without the fuss.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- OPENERS PAGE -->
-  <div id="page-openers" class="page">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h2 style="color:#063970;">Water-Style Openers</h2>
-      <button class="back" onclick="showPage('page-menu')">Back to Menu</button>
-    </div>
-
-    <div style="margin-top:12px;">
-      <div class="opener">
-        <b>Clarity Pitch</b>
-        <p>“Have you ever had one of those foggy mornings — where decisions feel heavy and everything blurs? This isn’t just a vehicle. This is <b>clarity</b> poured into motion.”</p>
-        <p class="small"><b>When:</b> Greeting, when customer seems unsure. Sets a calm, thoughtful tone.</p>
-      </div>
-
-      <div class="opener">
-        <b>Control Pitch</b>
-        <p>“This isn’t merely horsepower. It’s calm in motion — the steady hand that steadies a chaotic day. Do you want to survive your day, or to control it?”</p>
-        <p class="small"><b>When:</b> Payment objections or stress. Moves the buyer toward ownership as empowerment.</p>
-      </div>
-
-      <div class="opener">
-        <b>Freedom Pitch</b>
-        <p>“Some vehicles move you places. Others move your mind. Which sort do you want today?”</p>
-        <p class="small"><b>When:</b> Test drive lead-ins, lifestyle talks (Maverick / Bronco Sport buyers).</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ENERGY PAGE -->
-  <div id="page-energy" class="page">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h2 style="color:#063970;">Customer Energy</h2>
-      <button class="back" onclick="showPage('page-menu')">Back to Menu</button>
-    </div>
-
-    <div style="margin-top:12px;">
-      <button class="energy-btn" onclick="openModal('modal-energy-hesitant')">Hesitant — Calm Reassurance</button>
-      <button class="energy-btn" onclick="openModal('modal-energy-excited')">Excited — Amplify & Close</button>
-      <button class="energy-btn" onclick="openModal('modal-energy-logical')">Logical — Data + Emotion</button>
-      <button class="energy-btn" onclick="openModal('modal-energy-distracted')">Distracted — Curiosity Hook</button>
-    </div>
-  </div>
-
-  <!-- NOTES PAGE -->
-  <div id="page-notes" class="page">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h2 style="color:#063970;">Notes / Quick Save</h2>
-      <button class="back" onclick="showPage('page-menu')">Back to Menu</button>
-    </div>
-
-    <div style="margin-top:12px;">
-      <textarea id="notes-area" placeholder="Type quick notes about customer preferences, follow-ups, or demo reminders..."></textarea>
-      <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="saveNotes()">Save Note</button>
-        <button class="btn btn-ghost" onclick="loadNotes()">Load Last</button>
-        <button class="btn btn-ghost" onclick="clearNotes()">Clear Note</button>
-      </div>
-      <p class="small">Notes store locally on this device for quick follow-ups.</p>
-    </div>
-  </div>
-
-  <footer>Ford Sales Mastery — Corwin-Ford Tri-Cities</footer>
+<!-- Splash -->
+<div id="splash">
+  <img src="LOGO.jpg" alt="Dealership Logo">
+  <p>OBJECTIONS</p>
 </div>
 
-<!-- FAVORITES MODAL -->
-<div id="modal-favorites" class="modal">
+<!-- Main -->
+<div id="main">
+
+<!-- BUTTON GROUPS -->
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-payment-big')">MONTHLY PAYMENT TOO HIGH</button>
+  <button class="sub-button" onclick="openModal('modal-payment-mpg')">MPG SAME</button>
+  <button class="sub-button" onclick="openModal('modal-payment-mpg-hi')">MPG HIGHER (CURRENT CAR)</button>
+  <button class="sub-button" onclick="openModal('modal-payment-rate-wait')">WANT TO WAIT FOR LOWER RATES</button>
+  <button class="sub-button" onclick="openModal('modal-payment-bank-check')">WANT TO CHECK WITH BANK</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-price-high')">PRICE TOO HIGH</button>
+  <button class="sub-button" onclick="openModal('modal-price-another')">OTHER DEALER CHEAPER</button>
+  <button class="sub-button" onclick="openModal('modal-price-small')">SLIGHTLY HIGHER</button>
+  <button class="sub-button" onclick="openModal('modal-price-rebate-wait')">WAIT FOR NEXT REBATE</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-trade-low')">TRADE-IN VALUE TOO LOW</button>
+  <button class="sub-button" onclick="openModal('modal-trade-offer')">UNEXPECTED DEDUCTIONS</button>
+  <button class="sub-button" onclick="openModal('modal-trade-value')">VALUE SLIGHTLY LOWER THAN EXPECTED</button>
+  <button class="sub-button" onclick="openModal('modal-trade-market-fluct')">MARKET FLUCTUATION CONCERN</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-spouse-talk')">NEED TO TALK TO SPOUSE</button>
+  <button class="sub-button" onclick="openModal('modal-spouse-needs')">SPOUSE NEEDS TO SEE NUMBERS</button>
+  <button class="sub-button" onclick="openModal('modal-spouse-wait')">SPOUSE WANTS TIME TO THINK</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-think-later')">I WANT TO THINK ABOUT IT</button>
+  <button class="sub-button" onclick="openModal('modal-think-time')">JUST NEED TIME TO DECIDE</button>
+  <button class="sub-button" onclick="openModal('modal-think-comparison')">WAITING TO COMPARE OTHER VEHICLES</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-down-low')">DOWN PAYMENT CONCERNS</button>
+  <button class="sub-button" onclick="openModal('modal-down-adjust')">CAN REDUCE DOWN PAYMENT</button>
+  <button class="sub-button" onclick="openModal('modal-down-flex')">FLEXIBLE PAYMENT OPTIONS</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-credit-bad')">CREDIT CONCERNS</button>
+  <button class="sub-button" onclick="openModal('modal-credit-help')">NEED CREDIT GUIDANCE</button>
+  <button class="sub-button" onclick="openModal('modal-credit-cosigner')">CONSIDER CO-SIGNER</button>
+  <button class="sub-button" onclick="openModal('modal-credit-rate-wait')">WANT LOWER RATE BEFORE BUY</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-dealer-other')">OTHER DEALER OFFER</button>
+  <button class="sub-button" onclick="openModal('modal-dealer-offer')">FOUND ANOTHER DEALER DEAL</button>
+  <button class="sub-button" onclick="openModal('modal-dealer-details')">UNCLEAR COMPARISON DETAILS</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-negative-equity')">NEGATIVE EQUITY</button>
+  <button class="sub-button" onclick="openModal('modal-negative-explain')">WORRIED ABOUT OWING MORE THAN CAR VALUE</button>
+  <button class="sub-button" onclick="openModal('modal-negative-roll')">ROLLING INTO NEW LOAN</button>
+</div>
+
+<div class="button-group">
+  <button class="button" onclick="openModal('modal-not-ready')">NOT READY TO TRADE / BUY</button>
+  <button class="sub-button" onclick="openModal('modal-not-ready-commit')">FEELING COMMITMENT PRESSURE</button>
+  <button class="sub-button" onclick="openModal('modal-not-ready-budget')">WANT TO REVIEW BUDGET FIRST</button>
+</div>
+
+<!-- MODALS -->
+
+<!-- MONTHLY PAYMENT: main + subs -->
+<div id="modal-payment-big" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="closeModal('modal-favorites')">&times;</span>
-    <h3>Saved Pitches — Favorites</h3>
-    <div id="fav-list" class="fav-list"></div>
-    <div style="margin-top:12px;">
-      <button class="back" onclick="clearFavorites()">Clear All Favorites</button>
-    </div>
+    <span class="close" onclick="closeModal('modal-payment-big')">&times;</span>
+    <b>Script:</b>
+    <p>I completely understand — a higher monthly payment can feel overwhelming. It’s natural to pause and reflect on what’s comfortable for you.</p>
+
+    <p>Think of it this way: every dollar you invest in a Ford — whether it's an F-150 that proves its worth on tough days or an Expedition that carries your family — buys more than transportation. It buys <b>freedom from unexpected repairs</b>, <b>peace of mind with warranty protection</b>, and the quiet assurance that your daily drive will be reliable and safe.</p>
+
+    <p>Sometimes, waiting for a lower payment or rate feels like the safest choice, but often, it’s a delay that costs comfort and certainty. You have the chance to step into <b>control</b> today, rather than chasing tomorrow.</p>
+
+    <p class="small"><b>Closer:</b> "Would you like to feel that clarity today, or keep chasing a number that may never come?"</p>
+
+    <div class="instruction-title">Instruction:</div>
+    <p>Lead with empathy and emotional value (safety, certainty). If they press numbers, show current vs. new total monthly cost including likely repairs, fuel, and warranty. Use a quick monthly breakdown on paper or the tablet.</p>
   </div>
 </div>
 
-<!-- --- ALL MODALS: each contains a .short-bite and the full script + Save My Pitch button --- -->
+<div id="modal-payment-mpg" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-payment-mpg')">&times;</span>
+    <b>Script:</b>
+    <p>I hear you — if the MPG is about the same, it can feel like you’re not gaining enough for the extra payment. That’s a fair observation.</p>
 
-<!-- PAYMENT -->
-<div id="modal-payment-big" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-payment-big')">&times;</span>
-  <div id="payment-big-short" class="short-bite">“Imagine a morning without the worry of another breakdown — not just a lower payment, but calm in motion. That’s what upgrading to a Ford gives you.” <button class="save-pitch" onclick="savePitch('MONTHLY PAYMENT TOO HIGH — Peaceful Control','modal-payment-big')">❤️ Save My Pitch</button></div>
+    <p>But when you look deeper, a Ford’s value shows up in ways MPG can’t measure. The Escape or Edge may offer the same sip of fuel, but you also gain <b>advanced safety systems</b>, better technology, and <b>full warranty coverage</b> that keep your long-term costs and stress lower.</p>
 
-  <h3>MONTHLY PAYMENT TOO HIGH</h3>
-  <b>Script:</b>
-  <p>I completely understand where you’re coming from — a higher monthly payment can feel intimidating, and I want to make sure this purchase truly fits your comfort level.</p>
+    <p>Your time and peace of mind are part of the equation — that’s the real “MPG” of living well.</p>
 
-  <p>Let’s say you kept your current vehicle a little longer. You’d likely face repairs, maintenance costs, or even unexpected breakdowns that add stress and uncertainty. With this newer Ford, those worries disappear — you gain <b>warranty protection</b>, improved reliability, and lower long-term operating costs, which often make up the difference in payment.</p>
+    <p class="small"><b>Closer:</b> "If your monthly peace of mind covered the small MPG gap, would that change your thinking?"</p>
 
-  <p>At the end of the day, this isn’t just about the payment amount — it’s about your overall <b>peace of mind</b> and value for every dollar spent.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Compare total ownership (fuel + maintenance + repairs + warranty). Use simple numbers: show fuel delta per month and projected repair savings per year.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "Would you like to feel that clarity today, or keep chasing a number that may never come?"</p>
+<div id="modal-payment-mpg-hi" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-payment-mpg-hi')">&times;</span>
+    <b>Script:</b>
+    <p>I appreciate that your current car gets slightly better MPG — that shows you think ahead. Smart move.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Lead with empathy and emotional value (safety, certainty). If they press numbers, show current vs. new total monthly cost including likely repairs, fuel, and warranty. Use a quick monthly breakdown on paper or the tablet.</p>
-</div></div>
+    <p>Even so, MPG is only one lens. Moving into a new Ford often brings <b>modern safety</b>, <b>reduced repair stress</b>, and <b>upgraded technology</b>. For many customers, those gains outweigh a handful of extra cents per mile because they bring <b>clarity</b> and confidence every time they drive.</p>
 
-<div id="modal-payment-mpg" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-payment-mpg')">&times;</span>
-  <div class="short-bite">“MPG is a number. But peace of mind is a sentence — and it’s worth more when your family is protected.” <button class="save-pitch" onclick="savePitch('MPG SAME — Peace > Price','modal-payment-mpg')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "Would you rather save a little on gas or sleep easier knowing your family is safer and the car is covered?"</p>
 
-  <h3>MPG SAME</h3>
-  <b>Script:</b>
-  <p>I hear you — if the MPG is about the same, it can feel like you’re not gaining enough for the extra payment. That’s a fair observation.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Respect their efficiency concerns; then pivot to reliability and safety. Offer a month-by-month fuel/repair comparison for clarity.</p>
+  </div>
+</div>
 
-  <p>But when you look deeper, a Ford’s value shows up in ways MPG can’t measure. The Escape or Edge may offer the same sip of fuel, but you also gain <b>advanced safety systems</b>, better technology, and <b>full warranty coverage</b> that keep your long-term costs and stress lower.</p>
+<div id="modal-payment-rate-wait" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-payment-rate-wait')">&times;</span>
+    <b>Script:</b>
+    <p>Waiting for interest rates to drop is understandable. Timing feels like control.</p>
 
-  <p>Your time and peace of mind are part of the equation — that’s the real “MPG” of living well.</p>
+    <p>But markets are unpredictable. Meanwhile, the guarantee of owning a reliable Ford — whether it's a family-ready Expedition or a workhorse F-150 — is a concrete improvement to your daily life. Waiting can mean missing the right match for your needs.</p>
 
-  <p class="small"><b>Closer:</b> "If your monthly peace of mind covered the small MPG gap, would that change your thinking?"</p>
+    <p class="small"><b>Closer:</b> "If we could structure a payment that gives you the reliability now and keeps monthly cost comfortable, would you prefer to act today?"</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Compare total ownership (fuel + maintenance + repairs + warranty). Use simple numbers: show fuel delta per month and projected repair savings per year.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer current rate examples and show trade-offs. If possible, present alternative term options to reduce monthly impact while locking in the vehicle now.</p>
+  </div>
+</div>
 
-<div id="modal-payment-mpg-hi" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-payment-mpg-hi')">&times;</span>
-  <div class="short-bite">“Saving a few cents per mile is good. Sleeping easier because your car won’t leave you on the side of the road — priceless.” <button class="save-pitch" onclick="savePitch('MPG HIGHER — Sleep Easier','modal-payment-mpg-hi')">❤️ Save My Pitch</button></div>
+<div id="modal-payment-bank-check" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-payment-bank-check')">&times;</span>
+    <b>Script:</b>
+    <p>Checking with your bank is a smart step — I’d do the same. Your diligence shows you care about the long view.</p>
 
-  <h3>MPG HIGHER (CURRENT CAR)</h3>
-  <b>Script:</b>
-  <p>I appreciate that your current car gets slightly better MPG — that shows you think ahead. Smart move.</p>
+    <p>Sometimes bank quotes don’t include manufacturer incentives, or they don’t account for warranty and dealer support that come with a Ford purchase. Combining bank insight with what we offer gives you full <b>clarity</b> and true <b>control</b>.</p>
 
-  <p>Even so, MPG is only one lens. Moving into a new Ford often brings <b>modern safety</b>, <b>reduced repair stress</b>, and <b>upgraded technology</b>. For many customers, those gains outweigh a handful of extra cents per mile because they bring <b>clarity</b> and confidence every time they drive.</p>
+    <p class="small"><b>Closer:</b> "Want me to run a side-by-side with your bank quote so you can see which one gives you more protection and value?"</p>
 
-  <p class="small"><b>Closer:</b> "Would you rather save a little on gas or sleep easier knowing your family is safer and the car is covered?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Respect their efficiency concerns; then pivot to reliability and safety. Offer a month-by-month fuel/repair comparison for clarity.</p>
-</div></div>
-
-<div id="modal-payment-rate-wait" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-payment-rate-wait')">&times;</span>
-  <div class="short-bite">“Rates may fall tomorrow. Peace of mind doesn’t wait for a promise.” <button class="save-pitch" onclick="savePitch('RATE WAIT — Certainty Now','modal-payment-rate-wait')">❤️ Save My Pitch</button></div>
-
-  <h3>WANT TO WAIT FOR LOWER RATES</h3>
-  <b>Script:</b>
-  <p>Waiting for interest rates to drop is understandable. Timing feels like control.</p>
-
-  <p>But markets are unpredictable. Meanwhile, the guarantee of owning a reliable Ford — whether it's a family-ready Expedition or a workhorse F-150 — is a concrete improvement to your daily life. Waiting can mean missing the right match for your needs.</p>
-
-  <p class="small"><b>Closer:</b> "If we could structure a payment that gives you the reliability now and keeps monthly cost comfortable, would you prefer to act today?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer current rate examples and show trade-offs. If possible, present alternative term options to reduce monthly impact while locking in the vehicle now.</p>
-</div></div>
-
-<div id="modal-payment-bank-check" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-payment-bank-check')">&times;</span>
-  <div class="short-bite">“Pair your bank’s numbers with our protection — then you’re deciding with full vision.” <button class="save-pitch" onclick="savePitch('BANK CHECK — Combine Perspectives','modal-payment-bank-check')">❤️ Save My Pitch</button></div>
-
-  <h3>WANT TO CHECK WITH BANK</h3>
-  <b>Script:</b>
-  <p>Checking with your bank is a smart step — I’d do the same. Your diligence shows you care about the long view.</p>
-
-  <p>Sometimes bank quotes don’t include manufacturer incentives, or they don’t account for warranty and dealer support that come with a Ford purchase. Combining bank insight with what we offer gives you full <b>clarity</b> and true <b>control</b>.</p>
-
-  <p class="small"><b>Closer:</b> "Want me to run a side-by-side with your bank quote so you can see which one gives you more protection and value?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer to run a simultaneous comparison: bank rate vs dealership-financed rate including incentives. Highlight warranty and service benefits in the dealer option.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer to run a simultaneous comparison: bank rate vs dealership-financed rate including incentives. Highlight warranty and service benefits in the dealer option.</p>
+  </div>
+</div>
 
 <!-- PRICE -->
-<div id="modal-price-high" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-price-high')">&times;</span>
-  <div class="short-bite">“Price is the language of calculation. Peace of mind is the language of living. We can speak both.” <button class="save-pitch" onclick="savePitch('PRICE HIGH — Value Language','modal-price-high')">❤️ Save My Pitch</button></div>
+<div id="modal-price-high" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-price-high')">&times;</span>
+    <b>Script:</b>
+    <p>Price matters — you want to be sure you’re getting the best value.</p>
 
-  <h3>PRICE TOO HIGH</h3>
-  <b>Script:</b>
-  <p>Price matters — you want to be sure you’re getting the best value.</p>
+    <p>But the sticker is only one story. Ask yourself what peace of mind is worth: the warranty on a new Ford, the safety tech that protects your family, and the time you save not dealing with repairs. These are the parts of value that don't show on a tag but change your life.</p>
 
-  <p>But the sticker is only one story. Ask yourself what peace of mind is worth: the warranty on a new Ford, the safety tech that protects your family, and the time you save not dealing with repairs. These are the parts of value that don't show on a tag but change your life.</p>
+    <p class="small"><b>Closer:</b> "Would you like to compare the total cost of ownership side-by-side to see the whole picture?"</p>
 
-  <p class="small"><b>Closer:</b> "Would you like to compare the total cost of ownership side-by-side to see the whole picture?"</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Prepare a total cost chart (insurance, fuel, repairs, warranty). Highlight intangible benefits (safety tech, dealer service).</p>
+  </div>
+</div>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Prepare a total cost chart (insurance, fuel, repairs, warranty). Highlight intangible benefits (safety tech, dealer service).</p>
-</div></div>
+<div id="modal-price-another" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-price-another')">&times;</span>
+    <b>Script:</b>
+    <p>It’s great you’re shopping for the best deal — that’s smart.</p>
 
-<div id="modal-price-another" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-price-another')">&times;</span>
-  <div class="short-bite">“A lower sticker may hide what matters most. Let’s lift the hood on value together.” <button class="save-pitch" onclick="savePitch('PRICE ANOTHER — Apples to Apples','modal-price-another')">❤️ Save My Pitch</button></div>
+    <p>Let’s compare apples-to-apples. Sometimes lower sticker prices at other dealers hide extra fees, shorter warranties, or missing features. When you include total value, our offer for the Ford often proves stronger.</p>
 
-  <h3>OTHER DEALER CHEAPER</h3>
-  <b>Script:</b>
-  <p>It’s great you’re shopping for the best deal — that’s smart.</p>
+    <p class="small"><b>Closer:</b> "If I show you the full breakdown — fees, warranty, and features — would you compare it to their offer now?"</p>
 
-  <p>Let’s compare apples-to-apples. Sometimes lower sticker prices at other dealers hide extra fees, shorter warranties, or missing features. When you include total value, our offer for the Ford often proves stronger.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Ask for their competitor quote. Produce a side-by-side with your total cost, warranty coverages, and included services.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "If I show you the full breakdown — fees, warranty, and features — would you compare it to their offer now?"</p>
+<div id="modal-price-small" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-price-small')">&times;</span>
+    <b>Script:</b>
+    <p>A slightly higher price can sting at first glance.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Ask for their competitor quote. Produce a side-by-side with your total cost, warranty coverages, and included services.</p>
-</div></div>
+    <p>But often that difference buys <b>better safety features</b>, more standard equipment, and stronger coverage — the things that protect you and save stress later. Think of it as paying for a quieter tomorrow.</p>
 
-<div id="modal-price-small" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-price-small')">&times;</span>
-  <div class="short-bite">“A small price gap often buys a quieter tomorrow.” <button class="save-pitch" onclick="savePitch('PRICE SMALL — Quiet Tomorrow','modal-price-small')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "If that small difference delivered bigger peace of mind, would you take it?"</p>
 
-  <h3>SLIGHTLY HIGHER</h3>
-  <b>Script:</b>
-  <p>A slightly higher price can sting at first glance.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Highlight what the small price difference includes (safety, warranty, services). Let them visualize future convenience.</p>
+  </div>
+</div>
 
-  <p>But often that difference buys <b>better safety features</b>, more standard equipment, and stronger coverage — the things that protect you and save stress later. Think of it as paying for a quieter tomorrow.</p>
+<div id="modal-price-rebate-wait" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-price-rebate-wait')">&times;</span>
+    <b>Script:</b>
+    <p>Waiting for the next rebate is tempting — who wouldn’t chase extra savings?</p>
 
-  <p class="small"><b>Closer:</b> "If that small difference delivered bigger peace of mind, would you take it?"</p>
+    <p>But rebates are uncertain and often come with limited inventory or competing buyers. Meanwhile, you can secure the exact Ford that meets your needs now — and that certainty can be worth more than a hypothetical future discount.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Highlight what the small price difference includes (safety, warranty, services). Let them visualize future convenience.</p>
-</div></div>
+    <p class="small"><b>Closer:</b> "Would you like to lock in this level of value today and still keep options open if a promotion appears later?"</p>
 
-<div id="modal-price-rebate-wait" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-price-rebate-wait')">&times;</span>
-  <div class="short-bite">“A rebate is a promise of future hope. Certainty is a gift we can give now.” <button class="save-pitch" onclick="savePitch('REBATE WAIT — Certainty Now','modal-price-rebate-wait')">❤️ Save My Pitch</button></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Explain timing/risk of rebates. Offer to hold vehicle short-term if possible, or show immediate incentives available now.</p>
+  </div>
+</div>
 
-  <h3>WAIT FOR NEXT REBATE</h3>
-  <b>Script:</b>
-  <p>Waiting for the next rebate is tempting — who wouldn’t chase extra savings?</p>
+<!-- TRADE-IN -->
+<div id="modal-trade-low" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-trade-low')">&times;</span>
+    <b>Script:</b>
+    <p>I get it — a low trade-in offer can feel like a disappointment.</p>
 
-  <p>But rebates are uncertain and often come with limited inventory or competing buyers. Meanwhile, you can secure the exact Ford that meets your needs now — and that certainty can be worth more than a hypothetical future discount.</p>
+    <p>Trade values follow market conditions, mileage, and condition. By reviewing the details together and addressing minor issues, we can often find ways to increase your value or show where the numbers come from so you have full <b>clarity</b>.</p>
 
-  <p class="small"><b>Closer:</b> "Would you like to lock in this level of value today and still keep options open if a promotion appears later?"</p>
+    <p class="small"><b>Closer:</b> "Want me to walk through the inspection and values so you can see exactly how we arrived at this number?"</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Explain timing/risk of rebates. Offer to hold vehicle short-term if possible, or show immediate incentives available now.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Show the evaluation report, explain deductions, and discuss simple fixes (detailing, minor repairs) that may increase offer.</p>
+  </div>
+</div>
 
-<!-- TRADE IN -->
-<div id="modal-trade-low" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-trade-low')">&times;</span>
-  <div class="short-bite">“Values move like tides. Let’s map the tide so you’re never surprised.” <button class="save-pitch" onclick="savePitch('TRADE LOW — Map the Tide','modal-trade-low')">❤️ Save My Pitch</button></div>
+<div id="modal-trade-offer" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-trade-offer')">&times;</span>
+    <b>Script:</b>
+    <p>Unexpected deductions are frustrating — that reaction is natural.</p>
 
-  <h3>TRADE-IN VALUE TOO LOW</h3>
-  <b>Script:</b>
-  <p>I get it — a low trade-in offer can feel like a disappointment.</p>
+    <p>Each deduction usually maps to a real cost: tires, body wear, or mechanical items. Transparency gives you <b>control</b>. Let’s review them so nothing feels hidden.</p>
 
-  <p>Trade values follow market conditions, mileage, and condition. By reviewing the details together and addressing minor issues, we can often find ways to increase your value or show where the numbers come from so you have full <b>clarity</b>.</p>
+    <p class="small"><b>Closer:</b> "Shall we go through each deduction together so you can confirm or question any item?"</p>
 
-  <p class="small"><b>Closer:</b> "Want me to walk through the inspection and values so you can see exactly how we arrived at this number?"</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Explain each deduction. Provide photos or inspection notes if available. Offer options to re-evaluate after repairs or detailing.</p>
+  </div>
+</div>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Show the evaluation report, explain deductions, and discuss simple fixes (detailing, minor repairs) that may increase offer.</p>
-</div></div>
+<div id="modal-trade-value" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-trade-value')">&times;</span>
+    <b>Script:</b>
+    <p>A trade-in slightly lower than expected is worth unpacking.</p>
 
-<div id="modal-trade-offer" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-trade-offer')">&times;</span>
-  <div class="short-bite">“Deductions feel personal — but once we explain them, they lose their mystery.” <button class="save-pitch" onclick="savePitch('TRADE DEDUCTIONS — Explain & Calm','modal-trade-offer')">❤️ Save My Pitch</button></div>
+    <p>Minor factors like regional demand, color, or added mileage can shift values. Understanding them gives you <b>clarity</b> and often a route to improve the number.</p>
 
-  <h3>UNEXPECTED DEDUCTIONS</h3>
-  <b>Script:</b>
-  <p>Unexpected deductions are frustrating — that reaction is natural.</p>
+    <p class="small"><b>Closer:</b> "If we adjusted a couple small items or waited a short time, would that make you comfortable moving forward?"</p>
 
-  <p>Each deduction usually maps to a real cost: tires, body wear, or mechanical items. Transparency gives you <b>control</b>. Let’s review them so nothing feels hidden.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Show market comps and explain which items matter most. Suggest quick fixes or timing adjustments to improve offer.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "Shall we go through each deduction together so you can confirm or question any item?"</p>
+<div id="modal-trade-market-fluct" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-trade-market-fluct')">&times;</span>
+    <b>Script:</b>
+    <p>Market fluctuation is real — it can make trade-in timing tricky.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Explain each deduction. Provide photos or inspection notes if available. Offer options to re-evaluate after repairs or detailing.</p>
-</div></div>
+    <p>Locking a fair offer now may protect you from a downward swing. That certainty is a form of <b>control</b> you can use to plan confidently.</p>
 
-<div id="modal-trade-value" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-trade-value')">&times;</span>
-  <div class="short-bite">“Minor factors can move numbers — once exposed, they often shrink.” <button class="save-pitch" onclick="savePitch('TRADE VALUE — Minor Fixes','modal-trade-value')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "Would you prefer the certainty of this offer, or try to time the market and risk a lower number?"</p>
 
-  <h3>VALUE SLIGHTLY LOWER THAN EXPECTED</h3>
-  <b>Script:</b>
-  <p>A trade-in slightly lower than expected is worth unpacking.</p>
-
-  <p>Minor factors like regional demand, color, or added mileage can shift values. Understanding them gives you <b>clarity</b> and often a route to improve the number.</p>
-
-  <p class="small"><b>Closer:</b> "If we adjusted a couple small items or waited a short time, would that make you comfortable moving forward?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Show market comps and explain which items matter most. Suggest quick fixes or timing adjustments to improve offer.</p>
-</div></div>
-
-<div id="modal-trade-market-fluct" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-trade-market-fluct')">&times;</span>
-  <div class="short-bite">“Markets shift — locking a fair offer buys certainty.” <button class="save-pitch" onclick="savePitch('TRADE MARKET — Lock Certainty','modal-trade-market-fluct')">❤️ Save My Pitch</button></div>
-
-  <h3>MARKET FLUCTUATION CONCERN</h3>
-  <b>Script:</b>
-  <p>Market fluctuation is real — it can make trade-in timing tricky.</p>
-
-  <p>Locking a fair offer now may protect you from a downward swing. That certainty is a form of <b>control</b> you can use to plan confidently.</p>
-
-  <p class="small"><b>Closer:</b> "Would you prefer the certainty of this offer, or try to time the market and risk a lower number?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Show recent trend data if available and present the pros/cons of holding vs selling privately vs trading now.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Show recent trend data if available and present the pros/cons of holding vs selling privately vs trading now.</p>
+  </div>
+</div>
 
 <!-- SPOUSE -->
-<div id="modal-spouse-talk" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-spouse-talk')">&times;</span>
-  <div class="short-bite">“Good decisions are shared decisions. Let’s make it simple for both of you.” <button class="save-pitch" onclick="savePitch('SPOUSE TALK — Shared Decision','modal-spouse-talk')">❤️ Save My Pitch</button></div>
+<div id="modal-spouse-talk" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-spouse-talk')">&times;</span>
+    <b>Script:</b>
+    <p>It’s right to want your spouse involved — decisions like this deserve both voices.</p>
 
-  <h3>NEED TO TALK TO SPOUSE</h3>
-  <b>Script:</b>
-  <p>It’s right to want your spouse involved — decisions like this deserve both voices.</p>
+    <p>We’ll prepare a clear summary of numbers and benefits so the conversation is calm and productive. That clarity gives both of you <b>control</b> over the outcome.</p>
 
-  <p>We’ll prepare a clear summary of numbers and benefits so the conversation is calm and productive. That clarity gives both of you <b>control</b> over the outcome.</p>
+    <p class="small"><b>Closer:</b> "Want to call them now and walk through the highlights together?"</p>
 
-  <p class="small"><b>Closer:</b> "Want to call them now and walk through the highlights together?"</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer a one-page summary, bring them into the conversation via call or video, and be ready to answer specific spouse questions.</p>
+  </div>
+</div>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer a one-page summary, bring them into the conversation via call or video, and be ready to answer specific spouse questions.</p>
-</div></div>
+<div id="modal-spouse-needs" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-spouse-needs')">&times;</span>
+    <b>Script:</b>
+    <p>Your spouse wanting the numbers is perfectly reasonable.</p>
 
-<div id="modal-spouse-needs" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-spouse-needs')">&times;</span>
-  <div class="short-bite">“Numbers calm doubt — let’s give the numbers to both of you.” <button class="save-pitch" onclick="savePitch('SPOUSE NEEDS — Send Numbers','modal-spouse-needs')">❤️ Save My Pitch</button></div>
+    <p>We’ll show monthly payments, warranty coverage, fuel estimates, and trade-in figures so both of you can see the full picture without stress.</p>
 
-  <h3>SPOUSE NEEDS TO SEE NUMBERS</h3>
-  <b>Script:</b>
-  <p>Your spouse wanting the numbers is perfectly reasonable.</p>
+    <p class="small"><b>Closer:</b> "If it looks solid on paper, would you be comfortable moving forward?"</p>
 
-  <p>We’ll show monthly payments, warranty coverage, fuel estimates, and trade-in figures so both of you can see the full picture without stress.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Provide a neat, easy-to-read breakdown and offer to email or print it for review together.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "If it looks solid on paper, would you be comfortable moving forward?"</p>
+<div id="modal-spouse-wait" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-spouse-wait')">&times;</span>
+    <b>Script:</b>
+    <p>It’s okay to want to wait until your spouse has time to consider.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Provide a neat, easy-to-read breakdown and offer to email or print it for review together.</p>
-</div></div>
+    <p>We’ll make the information effortless to review so the decision is calm and confident — not pressured.</p>
 
-<div id="modal-spouse-wait" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-spouse-wait')">&times;</span>
-  <div class="short-bite">“Waiting is okay — let’s make that wait purposeful and short.” <button class="save-pitch" onclick="savePitch('SPOUSE WAIT — Short Follow-up','modal-spouse-wait')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "Would a short follow-up tomorrow or a printed summary help your spouse decide?"</p>
 
-  <h3>SPOUSE WANTS TIME TO THINK</h3>
-  <b>Script:</b>
-  <p>It’s okay to want to wait until your spouse has time to consider.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer to schedule a specific follow-up time; provide a takeaway summary and invite any follow-up questions.</p>
+  </div>
+</div>
 
-  <p>We’ll make the information effortless to review so the decision is calm and confident — not pressured.</p>
+<!-- THINK ABOUT IT -->
+<div id="modal-think-later" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-think-later')">&times;</span>
+    <b>Script:</b>
+    <p>Thinking it over shows you want the right decision — that’s wise.</p>
 
-  <p class="small"><b>Closer:</b> "Would a short follow-up tomorrow or a printed summary help your spouse decide?"</p>
+    <p>I’ll give you a simple comparison of costs and benefits so you can think clearly, not emotionally, and return to the decision with confidence.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer to schedule a specific follow-up time; provide a takeaway summary and invite any follow-up questions.</p>
-</div></div>
+    <p class="small"><b>Closer:</b> "Would you like me to hold the vehicle while you think, or would you prefer a 24-hour follow-up?"</p>
 
-<!-- THINK -->
-<div id="modal-think-later" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-think-later')">&times;</span>
-  <div class="short-bite">“Thinking shows care. Let’s give you clear facts so thinking leads to confidence.” <button class="save-pitch" onclick="savePitch('THINK LATER — Facts Not Fear','modal-think-later')">❤️ Save My Pitch</button></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer a short hold/backup plan if possible. Provide a simple comparison and schedule a follow-up call within a date/time window.</p>
+  </div>
+</div>
 
-  <h3>I WANT TO THINK ABOUT IT</h3>
-  <b>Script:</b>
-  <p>Thinking it over shows you want the right decision — that’s wise.</p>
+<div id="modal-think-time" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-think-time')">&times;</span>
+    <b>Script:</b>
+    <p>Taking time to decide is normal.</p>
 
-  <p>I’ll give you a simple comparison of costs and benefits so you can think clearly, not emotionally, and return to the decision with confidence.</p>
+    <p>We’ll prepare an easy-to-read side-by-side: your current car vs the Ford you like — payments, fuel, insurance, and likely repair savings — so you can decide from <b>clarity</b>, not pressure.</p>
 
-  <p class="small"><b>Closer:</b> "Would you like me to hold the vehicle while you think, or would you prefer a 24-hour follow-up?"</p>
+    <p class="small"><b>Closer:</b> "Do you want that summary emailed or printed?"</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer a short hold/backup plan if possible. Provide a simple comparison and schedule a follow-up call within a date/time window.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer both digital and printed options, and set an explicit follow-up timeframe.</p>
+  </div>
+</div>
 
-<div id="modal-think-time" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-think-time')">&times;</span>
-  <div class="short-bite">“Decisions deserve space — give them the right information and a simple next step.” <button class="save-pitch" onclick="savePitch('THINK TIME — Give Space','modal-think-time')">❤️ Save My Pitch</button></div>
+<div id="modal-think-comparison" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-think-comparison')">&times;</span>
+    <b>Script:</b>
+    <p>Comparing vehicles is smart — you want to be sure it’s the right fit.</p>
 
-  <h3>JUST NEED TIME TO DECIDE</h3>
-  <b>Script:</b>
-  <p>Taking time to decide is normal.</p>
+    <p>We’ll pull a comparison showing features, safety, and ownership costs so you can clearly see where each option wins.</p>
 
-  <p>We’ll prepare an easy-to-read side-by-side: your current car vs the Ford you like — payments, fuel, insurance, and likely repair savings — so you can decide from <b>clarity</b>, not pressure.</p>
+    <p class="small"><b>Closer:</b> "If this one wins on total value, are you ready to move forward?"</p>
 
-  <p class="small"><b>Closer:</b> "Do you want that summary emailed or printed?"</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Prepare a feature and cost comparison. Highlight wins specific to the customer's priorities (towing, safety, tech).</p>
+  </div>
+</div>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer both digital and printed options, and set an explicit follow-up timeframe.</p>
-</div></div>
+<!-- DOWN PAYMENT -->
+<div id="modal-down-low" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-down-low')">&times;</span>
+    <b>Script:</b>
+    <p>A larger down payment is helpful, but not always necessary.</p>
 
-<div id="modal-think-comparison" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-think-comparison')">&times;</span>
-  <div class="short-bite">“Comparisons turn doubt into clarity. Let’s show which one truly serves you.” <button class="save-pitch" onclick="savePitch('THINK COMPARE — Show Wins','modal-think-comparison')">❤️ Save My Pitch</button></div>
+    <p>We can structure a plan that reduces upfront cash while still delivering <b>warranty</b> and the reliability of a Ford. That gives you <b>control</b> of your cash flow without sacrificing the gains of a new vehicle.</p>
 
-  <h3>WAITING TO COMPARE OTHER VEHICLES</h3>
-  <b>Script:</b>
-  <p>Comparing vehicles is smart — you want to be sure it’s the right fit.</p>
+    <p class="small"><b>Closer:</b> "Would a lower down payment that keeps your monthly comfortable help you decide?"</p>
 
-  <p>We’ll pull a comparison showing features, safety, and ownership costs so you can clearly see where each option wins.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Show down payment scenarios and resulting monthly numbers; explain trade-offs of higher interest vs cash availability.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "If this one wins on total value, are you ready to move forward?"</p>
+<div id="modal-down-adjust" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-down-adjust')">&times;</span>
+    <b>Script:</b>
+    <p>Reducing the down payment is a valid option if you need cash for other priorities.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Prepare a feature and cost comparison. Highlight wins specific to the customer's priorities (towing, safety, tech).</p>
-</div></div>
+    <p>We’ll model a reduced down payment and show how terms change so you can choose the best balance of cash and monthly comfort.</p>
 
-<!-- DOWN -->
-<div id="modal-down-low" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-down-low')">&times;</span>
-  <div class="short-bite">“Cash is comfort. But comfort can be shaped—let’s craft a plan that keeps both.” <button class="save-pitch" onclick="savePitch('DOWN LOW — Crafted Comfort','modal-down-low')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "Want me to show you a 12-, 36-, and 60-month example so you can pick what's best?"</p>
 
-  <h3>DOWN PAYMENT CONCERNS</h3>
-  <b>Script:</b>
-  <p>A larger down payment is helpful, but not always necessary.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Present multiple scenarios and let the customer choose; highlight long-term cost vs short-term ease.</p>
+  </div>
+</div>
 
-  <p>We can structure a plan that reduces upfront cash while still delivering <b>warranty</b> and the reliability of a Ford. That gives you <b>control</b> of your cash flow without sacrificing the gains of a new vehicle.</p>
+<div id="modal-down-flex" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-down-flex')">&times;</span>
+    <b>Script:</b>
+    <p>Flexible payment options exist to protect your monthly budget while delivering the Ford you want.</p>
 
-  <p class="small"><b>Closer:</b> "Would a lower down payment that keeps your monthly comfortable help you decide?"</p>
+    <p>We can explore term, down payment, and possible incentives to shape a plan that fits your life and keeps you in control.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Show down payment scenarios and resulting monthly numbers; explain trade-offs of higher interest vs cash availability.</p>
-</div></div>
+    <p class="small"><b>Closer:</b> "Would flexible terms make you feel comfortable moving forward today?"</p>
 
-<div id="modal-down-adjust" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-down-adjust')">&times;</span>
-  <div class="short-bite">“Smaller up front. Less stress now. We’ll model the choices.” <button class="save-pitch" onclick="savePitch('DOWN ADJUST — Model Options','modal-down-adjust')">❤️ Save My Pitch</button></div>
-
-  <h3>CAN REDUCE DOWN PAYMENT</h3>
-  <b>Script:</b>
-  <p>Reducing the down payment is a valid option if you need cash for other priorities.</p>
-
-  <p>We’ll model a reduced down payment and show how terms change so you can choose the best balance of cash and monthly comfort.</p>
-
-  <p class="small"><b>Closer:</b> "Want me to show you a 12-, 36-, and 60-month example so you can pick what's best?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Present multiple scenarios and let the customer choose; highlight long-term cost vs short-term ease.</p>
-</div></div>
-
-<div id="modal-down-flex" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-down-flex')">&times;</span>
-  <div class="short-bite">“Flexibility protects your budget and your freedom — let’s design both.” <button class="save-pitch" onclick="savePitch('DOWN FLEX — Protect Budget','modal-down-flex')">❤️ Save My Pitch</button></div>
-
-  <h3>FLEXIBLE PAYMENT OPTIONS</h3>
-  <b>Script:</b>
-  <p>Flexible payment options exist to protect your monthly budget while delivering the Ford you want.</p>
-
-  <p>We can explore term, down payment, and possible incentives to shape a plan that fits your life and keeps you in control.</p>
-
-  <p class="small"><b>Closer:</b> "Would flexible terms make you feel comfortable moving forward today?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Show blended options (term + down payment + incentives) and recommend the option that minimizes total pain while securing the car.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Show blended options (term + down payment + incentives) and recommend the option that minimizes total pain while securing the car.</p>
+  </div>
+</div>
 
 <!-- CREDIT -->
-<div id="modal-credit-bad" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-credit-bad')">&times;</span>
-  <div class="short-bite">“Credit stumbles don’t define you. There are practical paths forward.” <button class="save-pitch" onclick="savePitch('CREDIT BAD — Practical Paths','modal-credit-bad')">❤️ Save My Pitch</button></div>
+<div id="modal-credit-bad" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credit-bad')">&times;</span>
+    <b>Script:</b>
+    <p>Credit questions are common; you’re not alone.</p>
 
-  <h3>CREDIT CONCERNS</h3>
-  <b>Script:</b>
-  <p>Credit questions are common; you’re not alone.</p>
+    <p>There are routes to get you into a Ford while we work on improving the financial profile. We’ll find realistic options that preserve <b>reliability</b> and safety for you and your family.</p>
 
-  <p>There are routes to get you into a Ford while we work on improving the financial profile. We’ll find realistic options that preserve <b>reliability</b> and safety for you and your family.</p>
+    <p class="small"><b>Closer:</b> "Would you like me to run a conservative estimate so we can see realistic monthly numbers right now?"</p>
 
-  <p class="small"><b>Closer:</b> "Would you like me to run a conservative estimate so we can see realistic monthly numbers right now?"</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer conservative financing examples and alternative programs; discuss co-signer or deferred solutions if available.</p>
+  </div>
+</div>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer conservative financing examples and alternative programs; discuss co-signer or deferred solutions if available.</p>
-</div></div>
+<div id="modal-credit-help" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credit-help')">&times;</span>
+    <b>Script:</b>
+    <p>We can walk you through credit options step-by-step.</p>
 
-<div id="modal-credit-help" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-credit-help')">&times;</span>
-  <div class="short-bite">“A plan unrolls debt into possibility — let’s sketch one now.” <button class="save-pitch" onclick="savePitch('CREDIT HELP — Plan & Possibility','modal-credit-help')">❤️ Save My Pitch</button></div>
+    <p>This guidance gives you <b>clarity</b> and the ability to make a controlled, informed financing choice without feeling rushed or overwhelmed.</p>
 
-  <h3>NEED CREDIT GUIDANCE</h3>
-  <b>Script:</b>
-  <p>We can walk you through credit options step-by-step.</p>
+    <p class="small"><b>Closer:</b> "Want a quick plan to improve your financing over the next 6–12 months, or do you need a solution now?"</p>
 
-  <p>This guidance gives you <b>clarity</b> and the ability to make a controlled, informed financing choice without feeling rushed or overwhelmed.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Outline concrete next steps for credit improvement and show payment simulations for now vs later.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "Want a quick plan to improve your financing over the next 6–12 months, or do you need a solution now?"</p>
+<div id="modal-credit-cosigner" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credit-cosigner')">&times;</span>
+    <b>Script:</b>
+    <p>A co-signer can be a practical solution to secure better financing if that option is available to you.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Outline concrete next steps for credit improvement and show payment simulations for now vs later.</p>
-</div></div>
+    <p>It’s a way to gain access to more favorable terms while you build back your profile.</p>
 
-<div id="modal-credit-cosigner" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-credit-cosigner')">&times;</span>
-  <div class="short-bite">“A co-signer can be the bridge between now and better terms.” <button class="save-pitch" onclick="savePitch('CREDIT COSIGNER — Bridge','modal-credit-cosigner')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "Would discussing a co-signer option be helpful so we can see the numbers?"</p>
 
-  <h3>CONSIDER CO-SIGNER</h3>
-  <b>Script:</b>
-  <p>A co-signer can be a practical solution to secure better financing if that option is available to you.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Explain co-signer roles and impact on rate; present examples with and without co-signer to show benefits.</p>
+  </div>
+</div>
 
-  <p>It’s a way to gain access to more favorable terms while you build back your profile.</p>
+<div id="modal-credit-rate-wait" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-credit-rate-wait')">&times;</span>
+    <b>Script:</b>
+    <p>Waiting for lower rates is understandable, but timing is uncertain.</p>
 
-  <p class="small"><b>Closer:</b> "Would discussing a co-signer option be helpful so we can see the numbers?"</p>
+    <p>If the vehicle you want is available now, securing it with a practical plan may be wiser than risking future increases or losing the exact Ford you chose.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Explain co-signer roles and impact on rate; present examples with and without co-signer to show benefits.</p>
-</div></div>
+    <p class="small"><b>Closer:</b> "If we modeled a conservative rate and it still fits your budget, would you consider moving forward today?"</p>
 
-<div id="modal-credit-rate-wait" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-credit-rate-wait')">&times;</span>
-  <div class="short-bite">“Risking availability for a hoped lower rate can cost more than the rate itself.” <button class="save-pitch" onclick="savePitch('CREDIT RATE WAIT — Availability Risk','modal-credit-rate-wait')">❤️ Save My Pitch</button></div>
-
-  <h3>WANT LOWER RATE BEFORE BUY</h3>
-  <b>Script:</b>
-  <p>Waiting for lower rates is understandable, but timing is uncertain.</p>
-
-  <p>If the vehicle you want is available now, securing it with a practical plan may be wiser than risking future increases or losing the exact Ford you chose.</p>
-
-  <p class="small"><b>Closer:</b> "If we modeled a conservative rate and it still fits your budget, would you consider moving forward today?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Run conservative-rate scenarios and show availability risk vs potential savings from waiting.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Run conservative-rate scenarios and show availability risk vs potential savings from waiting.</p>
+  </div>
+</div>
 
 <!-- OTHER DEALER -->
-<div id="modal-dealer-other" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-dealer-other')">&times;</span>
-  <div class="short-bite">“Don’t let a bright sticker blind you to what’s missing underneath.” <button class="save-pitch" onclick="savePitch('DEALER OTHER — Full View','modal-dealer-other')">❤️ Save My Pitch</button></div>
+<div id="modal-dealer-other" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-dealer-other')">&times;</span>
+    <b>Script:</b>
+    <p>It’s good you’re checking other dealers — you want the best outcome.</p>
 
-  <h3>OTHER DEALER OFFER</h3>
-  <b>Script:</b>
-  <p>It’s good you’re checking other dealers — you want the best outcome.</p>
+    <p>Let’s make sure the comparison is complete: fees, warranty length, included services, and the actual vehicle condition. When we compare total value, you’ll know which offer truly wins.</p>
 
-  <p>Let’s make sure the comparison is complete: fees, warranty length, included services, and the actual vehicle condition. When we compare total value, you’ll know which offer truly wins.</p>
+    <p class="small"><b>Closer:</b> "Want me to compare our offer line-by-line with theirs?"</p>
 
-  <p class="small"><b>Closer:</b> "Want me to compare our offer line-by-line with theirs?"</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Request competitor quote details and produce a side-by-side comparison factoring in warranty and dealer service.</p>
+  </div>
+</div>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Request competitor quote details and produce a side-by-side comparison factoring in warranty and dealer service.</p>
-</div></div>
+<div id="modal-dealer-offer" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-dealer-offer')">&times;</span>
+    <b>Script:</b>
+    <p>Finding another dealer’s deal is normal; let’s examine it carefully.</p>
 
-<div id="modal-dealer-offer" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-dealer-offer')">&times;</span>
-  <div class="short-bite">“A deal is more than price — it’s protection, convenience, and peace of mind.” <button class="save-pitch" onclick="savePitch('DEALER OFFER — Value Over Price','modal-dealer-offer')">❤️ Save My Pitch</button></div>
+    <p>Sometimes a lower price lacks items you value, like dealer servicing or extended warranty. We’ll show the full value so you can choose from <b>clarity</b>.</p>
 
-  <h3>FOUND ANOTHER DEALER DEAL</h3>
-  <b>Script:</b>
-  <p>Finding another dealer’s deal is normal; let’s examine it carefully.</p>
+    <p class="small"><b>Closer:</b> "If our full-value comparison still favors us, would you choose to stay?"</p>
 
-  <p>Sometimes a lower price lacks items you value, like dealer servicing or extended warranty. We’ll show the full value so you can choose from <b>clarity</b>.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Explain included/excluded items clearly and show the long-term value differences.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "If our full-value comparison still favors us, would you choose to stay?"</p>
+<div id="modal-dealer-details" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-dealer-details')">&times;</span>
+    <b>Script:</b>
+    <p>If the comparison details are unclear, I can break everything down so nothing surprises you later.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Explain included/excluded items clearly and show the long-term value differences.</p>
-</div></div>
+    <p>Clarity is control — let’s review all numbers, features, and warranties together so you can make an informed choice.</p>
 
-<div id="modal-dealer-details" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-dealer-details')">&times;</span>
-  <div class="short-bite">“Clear comparisons remove doubt — we’ll make everything transparent.” <button class="save-pitch" onclick="savePitch('DEALER DETAILS — Transparent Compare','modal-dealer-details')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "Would you like the full line-by-line now or an emailed copy to review?"</p>
 
-  <h3>UNCLEAR COMPARISON DETAILS</h3>
-  <b>Script:</b>
-  <p>If the comparison details are unclear, I can break everything down so nothing surprises you later.</p>
-
-  <p>Clarity is control — let’s review all numbers, features, and warranties together so you can make an informed choice.</p>
-
-  <p class="small"><b>Closer:</b> "Would you like the full line-by-line now or an emailed copy to review?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer both immediate walkthrough and a digital copy for review; highlight differences in plain language.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer both immediate walkthrough and a digital copy for review; highlight differences in plain language.</p>
+  </div>
+</div>
 
 <!-- NEGATIVE EQUITY -->
-<div id="modal-negative-equity" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-negative-equity')">&times;</span>
-  <div class="short-bite">“Negative equity is heavy — but lightened with clear options.” <button class="save-pitch" onclick="savePitch('NEGATIVE EQUITY — Lighten Options','modal-negative-equity')">❤️ Save My Pitch</button></div>
+<div id="modal-negative-equity" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-negative-equity')">&times;</span>
+    <b>Script:</b>
+    <p>Negative equity is stressful, but it can be managed.</p>
 
-  <h3>NEGATIVE EQUITY</h3>
-  <b>Script:</b>
-  <p>Negative equity is stressful, but it can be managed.</p>
+    <p>We’ll explore options: rollover with clear payment modeling, trade-in strategies to minimize impact, or waiting while you pay down the balance. Your financial control is the goal.</p>
 
-  <p>We’ll explore options: rollover with clear payment modeling, trade-in strategies to minimize impact, or waiting while you pay down the balance. Your financial control is the goal.</p>
+    <p class="small"><b>Closer:</b> "Would you like me to show realistic payment scenarios that account for your current balance?"</p>
 
-  <p class="small"><b>Closer:</b> "Would you like me to show realistic payment scenarios that account for your current balance?"</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Show scenarios: roll-in vs pay-off vs private sale. Present monthly impact and risks plainly.</p>
+  </div>
+</div>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Show scenarios: roll-in vs pay-off vs private sale. Present monthly impact and risks plainly.</p>
-</div></div>
+<div id="modal-negative-explain" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-negative-explain')">&times;</span>
+    <b>Script:</b>
+    <p>Worrying about owing more than a car is normal.</p>
 
-<div id="modal-negative-explain" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-negative-explain')">&times;</span>
-  <div class="short-bite">“Numbers explained lose their power to frighten.” <button class="save-pitch" onclick="savePitch('NEGATIVE EXPLAIN — Demystify','modal-negative-explain')">❤️ Save My Pitch</button></div>
+    <p>We’ll explain how the numbers work and find solutions that avoid surprise payments and preserve your long-term comfort and stability.</p>
 
-  <h3>WORRIED ABOUT OWING MORE THAN CAR VALUE</h3>
-  <b>Script:</b>
-  <p>Worrying about owing more than a car is normal.</p>
+    <p class="small"><b>Closer:</b> "Shall I model the options now so you can choose the least-risk path?"</p>
 
-  <p>We’ll explain how the numbers work and find solutions that avoid surprise payments and preserve your long-term comfort and stability.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Break down the payoff, trade-in value, and potential rolled amounts. Show a conservative monthly plan option.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "Shall I model the options now so you can choose the least-risk path?"</p>
+<div id="modal-negative-roll" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-negative-roll')">&times;</span>
+    <b>Script:</b>
+    <p>Rolling negative equity into a new loan is possible but needs careful design.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Break down the payoff, trade-in value, and potential rolled amounts. Show a conservative monthly plan option.</p>
-</div></div>
+    <p>We’ll show how it affects monthly payments and overall cost so you can decide with <b>clarity</b>.</p>
 
-<div id="modal-negative-roll" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-negative-roll')">&times;</span>
-  <div class="short-bite">“Rolling can work if it’s designed for comfort and clarity.” <button class="save-pitch" onclick="savePitch('NEGATIVE ROLL — Design for Comfort','modal-negative-roll')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "If a rolled plan kept your monthly payment within comfort, would you consider it?"</p>
 
-  <h3>ROLLING INTO NEW LOAN</h3>
-  <b>Script:</b>
-  <p>Rolling negative equity into a new loan is possible but needs careful design.</p>
-
-  <p>We’ll show how it affects monthly payments and overall cost so you can decide with <b>clarity</b>.</p>
-
-  <p class="small"><b>Closer:</b> "If a rolled plan kept your monthly payment within comfort, would you consider it?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Present rolled vs non-rolled scenarios, explain interest and term impacts, and recommend conservative options.</p>
-</div></div>
+    <div class="instruction-title">Instruction:</div>
+    <p>Present rolled vs non-rolled scenarios, explain interest and term impacts, and recommend conservative options.</p>
+  </div>
+</div>
 
 <!-- NOT READY -->
-<div id="modal-not-ready" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-not-ready')">&times;</span>
-  <div class="short-bite">“Not ready is a decision too — let’s make it purposeful, not vague.” <button class="save-pitch" onclick="savePitch('NOT READY — Purposeful Wait','modal-not-ready')">❤️ Save My Pitch</button></div>
+<div id="modal-not-ready" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-not-ready')">&times;</span>
+    <b>Script:</b>
+    <p>Not being ready is perfectly fine. The right choice takes a little time.</p>
 
-  <h3>NOT READY TO TRADE / BUY</h3>
-  <b>Script:</b>
-  <p>Not being ready is perfectly fine. The right choice takes a little time.</p>
+    <p>I’ll make it simple: clear numbers, plain language, and no pressure. That’s how you gain true <b>control</b> over this decision.</p>
 
-  <p>I’ll make it simple: clear numbers, plain language, and no pressure. That’s how you gain true <b>control</b> over this decision.</p>
+    <p class="small"><b>Closer:</b> "Would you like to set a specific follow-up so this isn’t left open-ended?"</p>
 
-  <p class="small"><b>Closer:</b> "Would you like to set a specific follow-up so this isn’t left open-ended?"</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer a concrete follow-up time and a printed/digital summary to reduce friction for the next meeting.</p>
+  </div>
+</div>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer a concrete follow-up time and a printed/digital summary to reduce friction for the next meeting.</p>
-</div></div>
+<div id="modal-not-ready-commit" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-not-ready-commit')">&times;</span>
+    <b>Script:</b>
+    <p>Feeling pressure about commitment is normal — big decisions are weighty.</p>
 
-<div id="modal-not-ready-commit" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-not-ready-commit')">&times;</span>
-  <div class="short-bite">“Pressure removes choice. Let’s remove pressure.” <button class="save-pitch" onclick="savePitch('NOT READY COMMIT — Remove Pressure','modal-not-ready-commit')">❤️ Save My Pitch</button></div>
+    <p>We’ll remove the pressure by focusing on facts and small steps so you feel comfortable with whatever choice you make.</p>
 
-  <h3>FEELING COMMITMENT PRESSURE</h3>
-  <b>Script:</b>
-  <p>Feeling pressure about commitment is normal — big decisions are weighty.</p>
+    <p class="small"><b>Closer:</b> "Would a short test drive and a simple written summary ease that pressure?"</p>
 
-  <p>We’ll remove the pressure by focusing on facts and small steps so you feel comfortable with whatever choice you make.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Offer low-pressure next steps: test drive, printed comparison, and a scheduled follow-up that suits their timeline.</p>
+  </div>
+</div>
 
-  <p class="small"><b>Closer:</b> "Would a short test drive and a simple written summary ease that pressure?"</p>
+<div id="modal-not-ready-budget" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-not-ready-budget')">&times;</span>
+    <b>Script:</b>
+    <p>Reviewing your budget first is the responsible choice.</p>
 
-  <div class="instruction-title">Instruction:</div>
-  <p>Offer low-pressure next steps: test drive, printed comparison, and a scheduled follow-up that suits their timeline.</p>
-</div></div>
+    <p>We’ll show realistic monthly scenarios and flexible solutions so you can be confident your budget stays healthy while you get the Ford you need.</p>
 
-<div id="modal-not-ready-budget" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-not-ready-budget')">&times;</span>
-  <div class="short-bite">“Budget-first decisions are responsible decisions — let’s honor that.” <button class="save-pitch" onclick="savePitch('NOT READY BUDGET — Budget First','modal-not-ready-budget')">❤️ Save My Pitch</button></div>
+    <p class="small"><b>Closer:</b> "Would a conservative payment plan that leaves room in your budget be helpful?"</p>
 
-  <h3>WANT TO REVIEW BUDGET FIRST</h3>
-  <b>Script:</b>
-  <p>Reviewing your budget first is the responsible choice.</p>
+    <div class="instruction-title">Instruction:</div>
+    <p>Present conservative payment options and emphasize preservation of cash flow and financial goals.</p>
+  </div>
+</div>
 
-  <p>We’ll show realistic monthly scenarios and flexible solutions so you can be confident your budget stays healthy while you get the Ford you need.</p>
+</div> <!-- end main -->
 
-  <p class="small"><b>Closer:</b> "Would a conservative payment plan that leaves room in your budget be helpful?"</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Present conservative payment options and emphasize preservation of cash flow and financial goals.</p>
-</div></div>
-
-<!-- ENERGY MODALS -->
-<div id="modal-energy-hesitant" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-energy-hesitant')">&times;</span>
-  <div class="short-bite">“Slow your voice, slow your steps — give a hesitant customer room and facts.” <button class="save-pitch" onclick="savePitch('ENERGY HESITANT — Slow Reassure','modal-energy-hesitant')">❤️ Save My Pitch</button></div>
-
-  <h3>HESITANT — CALM REASSURANCE</h3>
-  <b>Script:</b>
-  <p>When someone’s hesitant, they need calm and certainty.</p>
-
-  <p>Say something like: “I get it — big choices deserve time. Let’s slow down and look at the facts together so you feel in control.”</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Lower your voice, slow pace, offer a short comparison and small next step (test drive or hold). Avoid pressure.</p>
-</div></div>
-
-<div id="modal-energy-excited" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-energy-excited')">&times;</span>
-  <div class="short-bite">“Mirror their energy and move to a confident next step.” <button class="save-pitch" onclick="savePitch('ENERGY EXCITED — Mirror & Close','modal-energy-excited')">❤️ Save My Pitch</button></div>
-
-  <h3>EXCITED — AMPLIFY & CLOSE</h3>
-  <b>Script:</b>
-  <p>When a customer is excited, amplify that feeling and channel it to close.</p>
-
-  <p>Try: “I love your energy — imagine pulling up in an F-150 that matches that confidence. Want to lock this and make that feeling yours?”</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Mirror energy, shorten decision steps, use confident closers. Keep momentum moving to concrete next step.</p>
-</div></div>
-
-<div id="modal-energy-logical" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-energy-logical')">&times;</span>
-  <div class="short-bite">“Give clean numbers, then anchor them to emotion.” <button class="save-pitch" onclick="savePitch('ENERGY LOGICAL — Facts + Feel','modal-energy-logical')">❤️ Save My Pitch</button></div>
-
-  <h3>LOGICAL — DATA + EMOTION</h3>
-  <b>Script:</b>
-  <p>For logical customers, pair data with the emotional anchor.</p>
-
-  <p>“Here are clear numbers for fuel, insurance, and repairs — and the one idea I want you to feel is <b>confidence</b> when you start the engine.”</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Use charts, clear comparisons, and then tie back to the emotional benefit (safety, certainty).</p>
-</div></div>
-
-<div id="modal-energy-distracted" class="modal"><div class="modal-content">
-  <span class="close" onclick="closeModal('modal-energy-distracted')">&times;</span>
-  <div class="short-bite">“A one-word question pulls focus — then show a single, relevant feature.” <button class="save-pitch" onclick="savePitch('ENERGY DISTRACTED — Hook','modal-energy-distracted')">❤️ Save My Pitch</button></div>
-
-  <h3>DISTRACTED — CURIOSITY HOOK</h3>
-  <b>Script:</b>
-  <p>If someone is distracted, use a curiosity hook to pull attention back.</p>
-
-  <p>“Quick question — if you could pick one thing this vehicle absolutely must have, what would it be?”</p>
-
-  <div class="instruction-title">Instruction:</div>
-  <p>Ask a one-word or one-choice question, then pivot to a short demo of that feature.</p>
-</div></div>
 
 <script>
-  /* --- App state --- */
-  let smartMode = true; // ON by default (shows short bite + full). When OFF, short bites hidden.
-  const smartLabel = document.getElementById('smart-label');
-  const smartIcon = document.getElementById('smart-icon');
-  const smartToggle = document.getElementById('smart-toggle');
-  const favBtn = document.getElementById('open-favs');
+  setTimeout(() => {
+    const s = document.getElementById('splash');
+    s.style.opacity = '0';
+    setTimeout(() => {
+      s.style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+    }, 450);
+  }, 1200);
 
-  /* Page navigation */
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const el = document.getElementById(id);
-    if (el) el.classList.add('active');
-    window.scrollTo({top:0,behavior:'instant'});
-  }
-
-  /* Modal controls */
   function openModal(id) {
     const m = document.getElementById(id);
-    if (!m) return;
-    m.classList.add('open');
-    // Show/hide short bite based on smartMode:
-    m.querySelectorAll('.short-bite').forEach(sb => sb.style.display = smartMode ? 'block' : 'none');
+    if (m) m.style.display = 'flex';
   }
-  function closeModal(id) { const m = document.getElementById(id); if (m) m.classList.remove('open'); }
-  window.onclick = (e) => {
-    if (e.target.classList && e.target.classList.contains('modal')) e.target.classList.remove('open');
-  };
-
-  /* Smart mode toggle */
-  function updateSmartUI() {
-    smartLabel.textContent = 'Smart Mode: ' + (smartMode ? 'ON' : 'OFF');
-    smartIcon.textContent = smartMode ? '🧠' : '🔕';
-    // show/hide all short bites on screen (existing modals closed)
-    document.querySelectorAll('.short-bite').forEach(sb => sb.style.display = smartMode ? 'block' : 'none');
-  }
-  smartToggle.addEventListener('click', () => { smartMode = !smartMode; updateSmartUI(); });
-
-  /* Favorites (localStorage) */
-  function savePitch(title, id) {
-    // Grab the short bite + full script summary:
+  function closeModal(id) {
     const m = document.getElementById(id);
-    if (!m) return;
-    const shortElem = m.querySelector('.short-bite');
-    const fullHeading = m.querySelector('h3') ? m.querySelector('h3').innerText : title;
-    const shortText = shortElem ? shortElem.innerText.replace(/❤️ Save My Pitch$/,'').trim() : '';
-    const fullTextNodes = Array.from(m.querySelectorAll('p')).slice(0,3).map(p=>p.innerText.trim());
-    const fullSummary = fullTextNodes.join(' ');
-    const item = { id, title: fullHeading, short: shortText, full: fullSummary, ts: Date.now() };
-    const stored = JSON.parse(localStorage.getItem('ford_favs') || '[]');
-    // avoid duplicates:
-    if (!stored.find(s=>s.id===id)) stored.unshift(item);
-    localStorage.setItem('ford_favs', JSON.stringify(stored));
-    alert('Pitch saved to Favorites.');
-    renderFavs();
+    if (m) m.style.display = 'none';
   }
-
-  function renderFavs() {
-    const list = document.getElementById('fav-list');
-    const stored = JSON.parse(localStorage.getItem('ford_favs') || '[]');
-    list.innerHTML = '';
-    if (!stored.length) { list.innerHTML = '<div class="small">No favorites saved yet. Tap ❤️ Save My Pitch on any modal.</div>'; return; }
-    stored.forEach(s => {
-      const div = document.createElement('div'); div.className='fav-item';
-      const left = document.createElement('div'); left.style.maxWidth='78%';
-      left.innerHTML = `<strong style="color:#07386d">${s.title}</strong><div class="small" style="margin-top:6px">${s.short || s.full}</div>`;
-      const right = document.createElement('div');
-      const openBtn = document.createElement('button'); openBtn.className='back'; openBtn.style.cursor='pointer'; openBtn.innerText='Open';
-      openBtn.onclick = ()=>{ closeModal('modal-favorites'); openModal(s.id); };
-      const delBtn = document.createElement('button'); delBtn.className='back'; delBtn.style.background='#fff6f6'; delBtn.style.color='#a42d2d'; delBtn.innerText='Remove';
-      delBtn.onclick = ()=>{ removeFavorite(s.id); };
-      right.appendChild(openBtn); right.appendChild(delBtn);
-      div.appendChild(left); div.appendChild(right);
-      list.appendChild(div);
+  window.onclick = function(event) {
+    document.querySelectorAll('.modal').forEach(modal => {
+      if (event.target === modal) modal.style.display = "none";
     });
   }
-
-  function removeFavorite(id) {
-    let stored = JSON.parse(localStorage.getItem('ford_favs') || '[]');
-    stored = stored.filter(s => s.id !== id);
-    localStorage.setItem('ford_favs', JSON.stringify(stored));
-    renderFavs();
-  }
-
-  function clearFavorites() {
-    if (!confirm('Clear all saved pitches?')) return;
-    localStorage.removeItem('ford_favs');
-    renderFavs();
-  }
-
-  favBtn.addEventListener('click', ()=> { renderFavs(); openModal('modal-favorites'); });
-
-  /* Notes localStorage */
-  function saveNotes() {
-    const text = document.getElementById('notes-area').value;
-    localStorage.setItem('ford_notes', text);
-    alert('Note saved locally.');
-  }
-  function loadNotes() {
-    const text = localStorage.getItem('ford_notes') || '';
-    document.getElementById('notes-area').value = text;
-    if (!text) alert('No saved note found.');
-  }
-  function clearNotes() {
-    if (confirm('Clear saved note?')) { localStorage.removeItem('ford_notes'); document.getElementById('notes-area').value = ''; }
-  }
-
-  /* init */
-  updateSmartUI();
-  renderFavs();
-
-  /* keyboard close */
-  document.addEventListener('keydown', e => { if (e.key==='Escape') document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open')); });
 </script>
 
 </body>
