@@ -2729,9 +2729,51 @@ function renderCompetitorText(competitors) {
   );
 }
 
-// ----------------------------------------------------------------------
 // NEW FLASHCARD COMPONENT - REVISED FOR DYNAMIC HEIGHT FIX
 // ----------------------------------------------------------------------
+
+// --- THE SMARTER FOOTNOTE DETECTIVE ---
+// This function checks the text on the back of the card (Strengths/Usage) for technical words
+// and generates the corresponding footnotes and tags.
+function getFootnoteText(trimData) {
+  const footnotes = []; // To hold the collected footnote strings
+  const taggedTermMap = {}; // To map the term (e.g., "FlexBed") to its superscript number (e.g., '¹')
+  
+  // 1. COMBINE ALL TEXT FROM THE BACK OF THE CARD
+  const allBackText = [
+      ...(trimData.strengths || []),
+      ...(trimData.usage || []),
+      ...(trimData.demographic || [])
+  ].join(" | ");
+
+  // --- DEFINITIONS (Add more terms here!) ---
+  const definitions = [
+      { term: "BlueCruise", note: "BlueCruise is a hands-free highway driving feature that works on pre-mapped sections of divided highways (Hands-Free Blue Zones). It requires an active subscription after a trial period." },
+      { term: "FlexBed", note: "The Ford FlexBed is the Maverick’s uniquely designed truck bed system that lets you reconfigure, divide, organize, power, and customize the bed without needing expensive aftermarket equipment. It’s basically a modular cargo management system built into the Maverick’s 4.5-foot bed." },
+      { term: "EcoBoost", note: "EcoBoost is a Ford engine technology that uses turbocharging and direct injection to deliver power similar to a larger engine, but with better fuel efficiency." },
+      { term: "Trail Control", note: "Trail Control is an off-road cruise control system that manages throttle and braking on rough terrain, allowing the driver to focus on steering." },
+      { term: "Active X seating", note: "Active X seating is Ford's durable, stain-resistant synthetic material that offers the look and feel of leather." },
+      { term: "Pro Trailer Backup Assist", note: "Pro Trailer Backup Assist allows the driver to steer the trailer using a knob, while the truck handles the steering wheel and controls the trailer's direction." }
+  ];
+
+  // 2. SEARCH THE TEXT AND COLLECT FOOTNOTES
+  definitions.forEach((def) => {
+      // Check if the technical term exists in the back-of-card text (case-insensitive search)
+      if (allBackText.toLowerCase().includes(def.term.toLowerCase())) {
+          const superscript = footnotes.length + 1; // 1, 2, 3...
+          // Use actual superscript characters for 1 and 2, and fall back to a number+space for others
+          const superscriptChar = superscript === 1 ? '¹' : superscript === 2 ? '²' : (superscript + ' '); 
+          
+          // Add the footnote string, starting with the correct superscript.
+          footnotes.push(`${superscriptChar} ${def.note}`);
+          
+          // Store the term and its superscript for tagging the list items
+          taggedTermMap[def.term] = superscriptChar;
+      }
+  });
+
+  return { footnotes, taggedTermMap };
+}
 
 function FlashCard({ trimData }) {
   const [isFlipped, setIsFlipped] = React.useState(false);
@@ -2812,13 +2854,30 @@ function FlashCard({ trimData }) {
       margin: "10px 5px 10px 5px" // 10px top/bottom margin for separation
   };
 
+  // --- 🔑 STEP 1: ADD THE TAGGING HELPER (HIGHLIGHITER) ---
+  const tagTextWithSuperscript = (text, taggedTermMap) => {
+    let resultText = text;
+    
+    for (const term in taggedTermMap) {
+      const superscript = taggedTermMap[term];
+      const regex = new RegExp(`\\b(${term})\\b`, 'gi');
+      
+      // Replaces the matched word with the word plus the superscript
+      resultText = resultText.replace(regex, (match) => `${match}${superscript}`);
+    }
+    return resultText;
+  };
+  
+  // 🔑 STEP 2A: Run the detective and get the results BEFORE defining backContent
+  const { footnotes, taggedTermMap } = getFootnoteText(trimData); 
+
 
   // Content for the Back Card (Strengths, Usage, Demographic)
   const backContent = React.createElement(
     'div',
     { style: backContentStyle }, 
     
-    // Green Bubble Banner
+    // Green Bubble Banner (Best for... logic)
     React.createElement(
       'div',
       { style: { 
@@ -2836,9 +2895,24 @@ function FlashCard({ trimData }) {
           fontSize: '10px',
           display: 'inline-block' 
         }},
-        trimData.useTitle
+        // The logic to clean the title and add the prefix
+        (() => {
+          let title = trimData.useTitle.trim();
+          const lowerTitle = title.toLowerCase();
+
+          if (lowerTitle.startsWith('best for ')) {
+            title = title.substring(9).trim(); 
+          } 
+          else if (lowerTitle.startsWith('best ')) {
+            title = title.substring(5).trim(); 
+          }
+          
+          title = title.charAt(0).toUpperCase() + title.slice(1);
+          return "Best for " + title;
+        })()
       )
     ),
+
     
     // Full Title
     React.createElement(
@@ -2852,33 +2926,51 @@ function FlashCard({ trimData }) {
       // Ensure the UL container itself is left aligned
       'ul',
       { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
-      // The LI style contains the critical 'textAlign: left' change
-      trimData.strengths.map((s, i) => React.createElement('li', { key: i, style: listItemStyle }, s))
+      // 🔑 CHANGE 1: Apply the tagTextWithSuperscript helper
+      trimData.strengths.map((s, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(s, taggedTermMap)))
     ),
     // Usage
     React.createElement('h5', { style: categoryTitleStyle }, "Usage"),
     React.createElement(
       'ul',
       { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
-      trimData.usage.map((t, i) => React.createElement('li', { key: i, style: listItemStyle }, t))
+      // 🔑 CHANGE 2: Apply the tagTextWithSuperscript helper
+      trimData.usage.map((t, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(t, taggedTermMap)))
     ),
     // Target Demographic
     trimData.demographic && React.createElement('h5', { style: categoryTitleStyle }, "Target Demographic"),
     trimData.demographic && React.createElement(
       'ul',
       { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
-      trimData.demographic.map((d, i) => React.createElement('li', { key: i, style: listItemStyle }, d))
+      // 🔑 CHANGE 3: Apply the tagTextWithSuperscript helper
+      trimData.demographic.map((d, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(d, taggedTermMap)))
     ),
 
     // --- 2. CHANGE: ADD THE GREY HORIZONTAL LINE HERE ---
     React.createElement("hr", { style: backDividerStyle }),
 
-    // Superscript Definition (Footnote paragraph)
-    React.createElement(
-      "p", 
-      { style: { fontSize: '10px', marginTop: '5px', textAlign: 'left', lineHeight: '1.2', color: '#666' } },
-      "¹ The Ford FlexBed is the Maverick’s uniquely designed truck bed system that lets you reconfigure, divide, organize, power, and customize the bed without needing expensive aftermarket equipment. It’s basically a modular cargo management system built into the Maverick’s 4.5-foot bed."
-    )
+    // --- 🔑 STEP 3C: DYNAMICALLY RENDER FOOTNOTES ---
+    // If we have any footnotes collected (footnotes.length > 0)
+    footnotes.length > 0 ? (
+        // Map over the footnotes array and create a new paragraph for each one
+        footnotes.map((text, index) => 
+            React.createElement(
+                "p", 
+                { 
+                    key: index, 
+                    style: { 
+                        fontSize: '10px', 
+                        marginTop: '5px', 
+                        textAlign: 'left', 
+                        lineHeight: '1.2', 
+                        color: '#666' 
+                    } 
+                },
+                text
+            )
+        )
+    ) : null
+    // --- END DYNAMIC FOOTNOTE LOGIC ---
   );
 
   const frontSide = React.createElement(
@@ -2895,7 +2987,7 @@ function FlashCard({ trimData }) {
         zIndex: isFlipped ? 1 : 2, 
       } 
     },
-    // Front Content JSX (Original Card Details)
+    // Front Content JSX (Original Card Details - UNCHANGED)
     React.createElement(
       'div', 
       { style: { flexGrow: 1, display: 'flex', flexDirection: 'column', paddingBottom: '20px' } }, 
