@@ -2918,7 +2918,7 @@ function FlashCard({ trimData }) {
     React.createElement(
       'h4',
       { style: { color: '#004d40', marginBottom: '10px', textAlign: 'center' } },
-      trimData.name + " - Key Details"
+      trimData.name // <-- We removed the concatenation
     ),
     // Strengths
     React.createElement('h5', { style: categoryTitleStyle }, "Strengths & Trade-offs"),
