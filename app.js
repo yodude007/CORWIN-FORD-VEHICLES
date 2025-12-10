@@ -2993,10 +2993,11 @@ function TransitConfigCard({ vehicleSpecs }) {
       )
     ),
 
-    // 2. Key Dimensions Section (Existing with Image)
+    // 2. Key Dimensions Section (Images only, list deleted)
     React.createElement("h4", { style: h4Style }, "KEY ROOF & LENGTH DIMENSIONS"),
     
-    // --- HEIGHT DIAGRAM ---
+    // --- ROOF HEIGHT DIAGRAM SECTION (Your Original) ---
+    React.createElement("h5", { style: { color: '#00796b', marginBottom: '5px', marginTop: '0', textAlign: 'center' } }, "Roof Height Comparison"),
     React.createElement("div", { style: { textAlign: 'center', marginBottom: '15px' } },
         React.createElement("img", {
           src: "./images/transit_height_visual.jpg", 
@@ -3010,33 +3011,29 @@ function TransitConfigCard({ vehicleSpecs }) {
             marginBottom: "5px" 
           }
         }),
-        React.createElement("p", { style: { fontSize: '10px', color: '#666', marginBottom: '0' } }, "Roof Height Comparison")
+        React.createElement("p", { style: { fontSize: '10px', color: '#666', marginBottom: '0' } }, "")
     ),
 
-    // --- LENGTH DIAGRAM ---
+    // --- BODY AND WHEELBASE LENGTHS DIAGRAM SECTION (Your New Image) ---
+    React.createElement("h5", { style: { color: '#00796b', marginBottom: '5px', marginTop: '0', textAlign: 'center' } }, "Body and Wheelbase Lengths"),
     React.createElement("div", { style: { textAlign: 'center', marginBottom: '15px' } },
-        ""
-    ),
-
-    
-    // Dimension List
-    React.createElement(
-      "ul",
-      { style: { listStyleType: 'none', padding: '0', fontSize: '12px', textAlign: 'left' } },
-      
-      React.createElement("li", { style: { marginBottom: '5px' } }, 
-          React.createElement("b", { style: { color: '#00796b' } }, "Regular Length: "), vehicleSpecs.dimensions.regularLength),
-          
-      React.createElement("li", { style: { marginBottom: '5px' } }, 
-          React.createElement("b", { style: { color: '#00796b' } }, "Long Length: "), "237.6 in"),
-
-      React.createElement("li", { style: { marginBottom: '5px' } }, 
-          React.createElement("b", { style: { color: '#00796b' } }, "Extended Length (EL): "), vehicleSpecs.dimensions.extendedLength),
-          
-      React.createElement("li", { style: { marginBottom: '10px' } }, 
-          React.createElement("b", { style: { color: '#00796b' } }, "Wheelbases: "), vehicleSpecs.dimensions.wheelbases.join(" & ")),
+        React.createElement("img", {
+          src: "./images/transit_length_visual.jpg", // The image file to be used for the side profiles
+          alt: "Ford Transit Length Dimensions: Regular, Long, and Extended",
+          style: { 
+            width: "100%", 
+            height: "auto", 
+            maxWidth: '350px',
+            border: "1px solid black", // Maintain black border style
+            borderRadius: "5px", 
+            marginBottom: "5px" 
+          }
+        }),
+        React.createElement("p", { style: { fontSize: '10px', color: '#666', marginBottom: '0' } }, "")
     ),
     
+    // The Dimension List was DELETED here as requested.
+
     // 3. Cargo Volume Section (Existing)
     React.createElement("h4", { style: h4Style }, "MAX CARGO VOLUME"),
     React.createElement(
@@ -3463,34 +3460,51 @@ function CategoryPage({ category, onSelectVehicle }) {
   );
 }
 
-// Vehicle Page Component (No further changes)
+// Vehicle Page Component (Contains the new layout logic)
 function VehiclePage({ vehicle, onBack, onHome }) {
+  // 1. Determine Layout based on Aspect Ratio
   const isPortrait = window.innerWidth < window.innerHeight;
   const isTransit = vehicle.name === "Transit"; // Flag for conditional rendering
   
-  // Layout direction is always column for Transit now (to stack the Config Card above trims)
-  const flexContainerDirection = "column";
+  // Base direction is always column to stack Config Card above Trims Container
+  const mainFlexDirection = "column";
 
-  // Center the main flex container
+  // 2. Define Main Container Style (Config Card + Trims)
   const mainFlexStyle = {
     marginTop: "10px",
     display: "flex",
-    justifyContent: "center", // This centers the elements within the column
-    alignItems: "center", // This centers the config card horizontally
-    flexDirection: flexContainerDirection,
+    justifyContent: "center", // Centers elements within the column
+    alignItems: "center",     // Centers the config card horizontally
+    flexDirection: mainFlexDirection,
     gap: "20px"
   };
 
-  // Trims container should still allow wrapping and horizontal flow
-  const trimsContainerStyle = {
-    display: "flex",
-    justifyContent: "center", // Center the group of trim cards
-    flexWrap: "wrap",
-    flexDirection: "row", 
-    alignItems: "flex-start",
-    width: "100%", // Take full width available
-    minWidth: '250px' 
-  };
+  // 3. Define Trims Container Style (Handles the individual trim cards)
+  let trimsContainerStyle;
+  
+  if (isPortrait) {
+    // PORTRAIT MODE: Single column, vertically stacked.
+    trimsContainerStyle = {
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "nowrap", // Crucial: Prevents wrapping to a second column
+      flexDirection: "column", // Stack items vertically
+      alignItems: "center", // Center the cards themselves
+      width: "100%", 
+    };
+  } else {
+    // LANDSCAPE MODE: Single row, horizontally scrollable.
+    trimsContainerStyle = {
+      display: "flex",
+      justifyContent: "flex-start", // Start from the left
+      flexWrap: "nowrap", // Crucial: Keeps all cards in one row
+      flexDirection: "row", 
+      alignItems: "flex-start",
+      width: "100%",
+      overflowX: "auto", // Enables horizontal scrolling if cards exceed screen width
+      padding: "0 5px" // Add slight padding for scroll visual
+    };
+  }
 
 
   return React.createElement(
@@ -3513,15 +3527,15 @@ function VehiclePage({ vehicle, onBack, onHome }) {
       })
     ),
     
-    // NEW FLEX CONTAINER: Wraps the config card and the trim cards
+    // Main Container: Config Card + Trim Cards
     React.createElement(
       "div",
       { style: mainFlexStyle },
       
-      // 1. Transit Config Card (Only appears for Transit, centered by mainFlexStyle)
+      // 1. Transit Config Card
       isTransit && vehicle.specs && React.createElement(TransitConfigCard, { vehicleSpecs: vehicle.specs }),
       
-      // 2. Trim Cards Container (Used for all vehicles)
+      // 2. Trim Cards Container (Layout controlled by new trimsContainerStyle)
       React.createElement(
         "div",
         { style: trimsContainerStyle },
@@ -3534,7 +3548,7 @@ function VehiclePage({ vehicle, onBack, onHome }) {
           return React.createElement(StandardTrimCard, { key: trim.name, trimData: trim });
         })
       )
-    ) // End of New Flex Container
+    ) // End of Main Flex Container
   );
 }
 
