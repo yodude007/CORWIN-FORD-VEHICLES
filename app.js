@@ -2144,32 +2144,58 @@ trims: [
         }
       ]
     },
-    {
+{
       name: "Transit",
       image: "./images/Transit.jpg",
-      price: "$58,680",
+      price: "$47,400", // Updated to the lowest starting price (Cargo Van T-150)
+      
+      // SPECS OBJECT REMAINS UNCHANGED
+      specs: {
+        identityMatrix: [
+          { name: "Transit-150", wheelbase: ["130 in", "148 in"], roof: ["Low", "Medium"], bodyLength: ["Regular", "Long"] },
+          { name: "Transit-250", wheelbase: ["130 in", "148 in"], roof: ["Low", "Medium", "High"], bodyLength: ["Regular", "Long"] },
+          { name: "Transit-350", wheelbase: ["130 in", "148 in"], roof: ["Low", "Medium", "High"], bodyLength: ["Regular", "Long"] },
+          { name: "Transit-350HD (DRW)", wheelbase: ["148 in"], roof: ["High"], bodyLength: ["Extended (EL)"] }
+        ],
+        dimensions: {
+          wheelbases: ["130 in", "148 in"],
+          lowRoofHeight: "82.4 in – 82.9 in",
+          mediumRoofHeight: "99.1 in – 101.3 in",
+          highRoofHeight: "109.6 in – 110.4 in",
+          regularLength: "217.8 in – 237.6 in",
+          extendedLength: "263.9 in",
+        },
+        maxCapacities: {
+          cargoVanVolume: "487.3 cu ft (High Roof, Extended)",
+          passengerVanVolume: "461.9 cu ft (High Roof, Extended)",
+        },
+        uniqueIdentifier: "Transit-350HD is the only model with Dual Rear Wheels (DRW)."
+      },
+      // END SPECS OBJECT
+
       trims: [
       {
           name: "Cargo Van T-150 (LR)",
-          price: "$47,400", // Starting price
+          price: "$47,400",
           engine: "3.5L PFDi V6",
+          engineOptions: "3.5L EcoBoost V6", 
           horsepower: "275 hp",
           torque: "260 lb-ft",
           transmission: "10-speed Automatic SelectShift",
-          transmissionOptions: "3.5L EcoBoost V6 (310 hp / 400 lb-ft)", // Highest engine option
-          towing: "7,500 lbs", // Max towing based on typical Transit configurations
+          transmissionOptions: "None",
+          towing: "7,500 lbs",
           suspension: "Independent MacPherson-strut / Leaf springs",
-          groundClearance: "7.0 in", // Estimated average
-          bedSize: "126 in (at floor)", // Max Cargo Length
+          groundClearance: "7.0 in",
+          bedSize: "126 in (at floor)",
           bluecruise: "No",
-          cam360: "Optional", // Based on 360-Degree Camera with Split View feature
+          cam360: "Optional",
           heatedSeats: "No",
-          clothSeats: "Optional", // Dark Palazzo Gray Cloth is an option
+          clothSeats: "Optional",
           upgradedOptions: "Intelligent All-Wheel Drive, SYNC 4 w/ 12\" Display",
-          other: "Standard Ford Pro Telematics, Max Payload 3,668 lbs (RWD)", // Highest payload in the T-150 section
+          other: "Standard Ford Pro Telematics, Max Payload 3,668 lbs (RWD)",
           competitors:
             "Competitors: Ram ProMaster Cargo Van, Chevrolet Express Cargo Van. The Transit T-150 offers superior payload capacity and the flexibility of the powerful EcoBoost V6 and Intelligent All-Wheel Drive options.",
-          image: "./images/Transit_CargoVan_T150.jpg", // Placeholder image path
+          image: "./images/Transit_CargoVan_T150.jpg",
           useTitle: "Versatile Standard Cargo",
           strengths: [
             "High Payload Capacity (up to 3,668 lbs) for a T-150.",
@@ -2190,11 +2216,12 @@ trims: [
           name: "Passenger Van XL",
           price: "$58,680",
           engine: "3.5L PFDi V6",
+          engineOptions: "3.5L EcoBoost V6",
           horsepower: "275 hp",
           torque: "262 lb-ft",
           transmission: "10-speed Automatic",
-          transmissionOptions: "3.5L EcoBoost V6",
-          towing: "5,100 lbs", // Estimated passenger towing max
+          transmissionOptions: "None",
+          towing: "5,100 lbs",
           suspension: "Heavy Duty",
           groundClearance: "6.0 in",
           bedSize: "N/A",
@@ -2206,7 +2233,7 @@ trims: [
           other: "50/50 Hinged Rear Door, Standard SYNC 4 with 12\" Center Display",
           competitors:
             "Competitors: Ram ProMaster Passenger Van, Mercedes-Benz Sprinter Passenger. Transit Passenger Van XL offers the option of a 3.5L EcoBoost V6 and a standard 10-speed automatic, providing better overall performance than the Ram ProMaster.",
-          image: "./images/Transit_CargoVan.jpg", // Using Cargo Van placeholder image for now
+          image: "./images/Transit_CargoVan.jpg",
           useTitle: "Base Passenger Hauler",
           strengths: [
             "Powerful standard V6 engine and 10-speed auto.",
@@ -2227,10 +2254,11 @@ trims: [
           name: "Passenger Van XLT",
           price: "$61,665",
           engine: "3.5L PFDi V6",
+          engineOptions: "3.5L EcoBoost V6",
           horsepower: "275 hp",
           torque: "262 lb-ft",
           transmission: "10-speed Automatic",
-          transmissionOptions: "3.5L EcoBoost V6",
+          transmissionOptions: "None",
           towing: "5,100 lbs",
           suspension: "Heavy Duty",
           groundClearance: "6.0 in",
@@ -2243,7 +2271,7 @@ trims: [
           other: "Large Center Console, Standard SYNC 4 with 12\" Center Display",
           competitors:
             "Competitors: Ram ProMaster Passenger Van, Mercedes-Benz Sprinter Passenger. Transit Passenger Van XLT includes a large center console and more utility options, giving it a comfort advantage over base competitors.",
-          image: "./images/Transit_XLT.jpg", // Using Cargo Van placeholder image for now
+          image: "./images/Transit_XLT.jpg",
           useTitle: "Comfort Passenger Hauler",
           strengths: [
             "Adds comfort and convenience features like a large center console.",
@@ -2747,7 +2775,7 @@ function renderCompetitorText(competitors) {
     // Fallback: Display the whole string if it doesn't match the expected format
     return React.createElement(
       "div",
-      { style: { margin: "2px 0 0 0", fontSize: "12px", textAlign: "left" } }, // Changed margin-top to 0; space comes from HR margin
+      { style: { margin: "2px 0 0 0", fontSize: "12px", textAlign: "left" } },
       competitors
     );
   }
@@ -2758,7 +2786,7 @@ function renderCompetitorText(competitors) {
 
   return React.createElement(
     "div",
-    { style: { margin: "10px 0 0 0", fontSize: "12px", textAlign: "left" } }, // Change 1: Added 10px top margin for space
+    { style: { margin: "10px 0 0 0", fontSize: "12px", textAlign: "left" } },
     React.createElement("span", null, competitorLabel),
     React.createElement("span", null, competitorList),
     " ",
@@ -2766,15 +2794,10 @@ function renderCompetitorText(competitors) {
   );
 }
 
-// NEW FLASHCARD COMPONENT - REVISED FOR DYNAMIC HEIGHT FIX
-// ----------------------------------------------------------------------
-
 // --- THE SMARTER FOOTNOTE DETECTIVE ---
-// This function checks the text on the back of the card (Strengths/Usage) for technical words
-// and generates the corresponding footnotes and tags.
 function getFootnoteText(trimData) {
-  const footnotes = []; // To hold the collected footnote strings
-  const taggedTermMap = {}; // To map the term (e.g., "FlexBed") to its superscript number (e.g., '¹')
+  const footnotes = [];
+  const taggedTermMap = {};
   
   // 1. COMBINE ALL TEXT FROM THE BACK OF THE CARD
   const allBackText = [
@@ -2795,22 +2818,167 @@ function getFootnoteText(trimData) {
 
   // 2. SEARCH THE TEXT AND COLLECT FOOTNOTES
   definitions.forEach((def) => {
-      // Check if the technical term exists in the back-of-card text (case-insensitive search)
       if (allBackText.toLowerCase().includes(def.term.toLowerCase())) {
-          const superscript = footnotes.length + 1; // 1, 2, 3...
-          // Use actual superscript characters for 1 and 2, and fall back to a number+space for others
-          const superscriptChar = superscript === 1 ? '¹' : superscript === 2 ? '²' : (superscript + ' '); 
+          const superscript = footnotes.length + 1;
+          const superscriptChar = superscript === 1 ? '¹' : superscript === 2 ? '²' : (superscript + ' ');
           
-          // Add the footnote string, starting with the correct superscript.
           footnotes.push(`${superscriptChar} ${def.note}`);
           
-          // Store the term and its superscript for tagging the list items
           taggedTermMap[def.term] = superscriptChar;
       }
   });
 
   return { footnotes, taggedTermMap };
 }
+
+// --- TRANSIT CONFIG CARD COMPONENT (UPDATED) ---
+
+function TransitConfigCard({ vehicleSpecs }) {
+  const cardStyle = {
+    display: 'inline-block',
+    border: '1px solid #004d40', 
+    margin: '5px',
+    padding: '15px',
+    background: '#e8f5e9', // Light green background
+    borderRadius: '10px',
+    verticalAlign: 'top',
+    width: '100%',
+    maxWidth: '450px',
+    boxSizing: 'border-box',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    textAlign: 'center'
+  };
+
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginBottom: '10px',
+    fontSize: '11px',
+    backgroundColor: 'white',
+    border: '1px solid #a5d6a7'
+  };
+
+  const thStyle = {
+    border: '1px solid #a5d6a7',
+    padding: '8px 4px',
+    textAlign: 'center',
+    backgroundColor: '#c8e6c9', // Header background
+    fontWeight: 'bold',
+    color: '#004d40'
+  };
+
+  const tdStyle = {
+    border: '1px solid #a5d6a7',
+    padding: '6px 4px',
+    textAlign: 'center'
+  };
+  
+  const h4Style = {
+      color: '#004d40', 
+      marginBottom: '10px', 
+      fontWeight: 'bold', 
+      borderBottom: '2px solid #a5d6a7', 
+      paddingBottom: '5px'
+  };
+
+  return React.createElement(
+    "div",
+    { style: cardStyle },
+    
+    // Title Section
+    React.createElement("h3", { style: { color: '#004d40', marginBottom: '5px' } }, "Transit Configuration Guide"),
+    React.createElement("p", { style: { fontSize: '12px', color: '#388e3c', marginTop: '0', fontWeight: 'bold' } }, "Quick Reference for Dimensions & Models"),
+    
+    // Identity Matrix Table
+    React.createElement("h4", { style: h4Style }, "Model & Configuration Matrix"),
+    React.createElement(
+      "table",
+      { style: tableStyle },
+      
+      // Table Header
+      React.createElement(
+        "thead",
+        null,
+        React.createElement(
+          "tr",
+          null,
+          React.createElement("th", { style: thStyle }, "Transit Model"),
+          React.createElement("th", { style: thStyle }, "Wheelbase"),
+          React.createElement("th", { style: thStyle }, "Roof"),
+          React.createElement("th", { style: thStyle }, "Body Length")
+        )
+      ),
+      
+      // Table Body (Data from identityMatrix)
+      React.createElement(
+        "tbody",
+        null,
+        vehicleSpecs.identityMatrix.map((item, index) =>
+          React.createElement(
+            "tr",
+            { key: index },
+            React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold' } }, item.name),
+            React.createElement("td", { style: tdStyle }, item.wheelbase.join(" / ")),
+            React.createElement("td", { style: tdStyle }, item.roof.join(" / ")),
+            React.createElement("td", { style: tdStyle }, item.bodyLength.join(" / "))
+          )
+        )
+      )
+    ),
+
+    // Key Dimensions Section
+    React.createElement("h4", { style: h4Style }, "Key Dimensions"),
+    
+    // IMAGE ADDED HERE
+    React.createElement("img", {
+      src: "./images/transit_height_visual.jpg", // <--- USE THIS FILENAME
+      alt: "Ford Transit Height Dimensions: Low, Medium, and High Roofs",
+      style: { 
+        width: "100%", 
+        height: "auto", 
+        border: "1px solid black", // Added border as requested
+        borderRadius: "5px", 
+        marginBottom: "10px" 
+      }
+    }),
+    
+    React.createElement(
+      "ul",
+      { style: { listStyleType: 'none', padding: '0', fontSize: '12px', textAlign: 'left' } },
+      
+      // DELETED: Low Roof Height
+      // DELETED: Medium Roof Height
+      // DELETED: High Roof Height
+      
+      React.createElement("li", { style: { marginBottom: '5px' } }, 
+          React.createElement("b", { style: { color: '#00796b' } }, "Regular Length: "), vehicleSpecs.dimensions.regularLength),
+          
+      React.createElement("li", { style: { marginBottom: '5px' } }, 
+          React.createElement("b", { style: { color: '#00796b' } }, "Extended Length (EL): "), vehicleSpecs.dimensions.extendedLength),
+          
+      React.createElement("li", { style: { marginBottom: '10px' } }, 
+          React.createElement("b", { style: { color: '#00796b' } }, "Wheelbases: "), vehicleSpecs.dimensions.wheelbases.join(" & ")),
+    ),
+    
+    // Cargo Volume Section
+    React.createElement("h4", { style: h4Style }, "Max Cargo Volume (High Roof, Extended)"),
+    React.createElement(
+      "ul",
+      { style: { listStyleType: 'none', padding: '0', fontSize: '12px', textAlign: 'left' } },
+      
+      React.createElement("li", { style: { marginBottom: '5px' } }, 
+          React.createElement("b", { style: { color: '#00796b' } }, "Cargo Van: "), vehicleSpecs.maxCapacities.cargoVanVolume),
+      
+      React.createElement("li", { style: { marginBottom: '5px' } }, 
+          React.createElement("b", { style: { color: '#00796b' } }, "Passenger Van: "), vehicleSpecs.maxCapacities.passengerVanVolume),
+    ),
+    
+    // Unique Identifier
+    React.createElement("p", { style: { fontSize: '10px', color: 'red', marginTop: '15px', fontWeight: 'bold', borderTop: '1px dashed #a5d6a7', paddingTop: '5px' } }, vehicleSpecs.uniqueIdentifier)
+  );
+}
+
+// --- END OF TRANSIT CONFIG CARD COMPONENT ---
 
 function FlashCard({ trimData }) {
   const [isFlipped, setIsFlipped] = React.useState(false);
@@ -2828,13 +2996,12 @@ function FlashCard({ trimData }) {
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'column',
-    // The parent of the inner flip container, which adapts its height
   };
 
   const innerStyle = {
     position: 'relative',
     width: '100%',
-    height: 'auto', // Auto height is key for the dynamic adjustment
+    height: 'auto',
     textAlign: 'center',
     transition: 'transform 0.6s',
     transformStyle: 'preserve-3d',
@@ -2853,12 +3020,11 @@ function FlashCard({ trimData }) {
     borderRadius: '6px',
     padding: '10px',
     boxSizing: 'border-box',
-    // Must always be a flex container to make content expand vertically
     flexDirection: 'column',
     flexGrow: 1, 
     top: 0, 
     left: 0,
-    background: isFlipped ? '#e0f7fa' : '#f9f9f9', // Change color based on side
+    background: isFlipped ? '#e0f7fa' : '#f9f9f9',
   };
 
   const listItemStyle = {
@@ -2866,16 +3032,14 @@ function FlashCard({ trimData }) {
     listStyleType: 'disc', 
     marginLeft: '5px', 
     marginBottom: '10px',
-    // --- 1. CHANGE: Align the text content within the list item to the left ---
     textAlign: 'left' 
-    // This ensures the content starts at the left edge of the list marker's position.
   };
 
   const categoryTitleStyle = {
     color: '#388e3c', 
     marginTop: '15px', 
     marginBottom: '0px',
-    textAlign: 'left' // Ensure the subheadings are also left-aligned
+    textAlign: 'left'
   };
   
   const backContentStyle = { 
@@ -2884,14 +3048,12 @@ function FlashCard({ trimData }) {
     position: 'relative', 
   };
   
-  // --- 2. NEW STYLE: For the horizontal grey line on the back of the card ---
   const backDividerStyle = {
       border: "0", 
       borderTop: "1px solid #aaa", 
-      margin: "10px 5px 10px 5px" // 10px top/bottom margin for separation
+      margin: "10px 5px 10px 5px" 
   };
 
-  // --- 🔑 STEP 1: ADD THE TAGGING HELPER (HIGHLIGHITER) ---
   const tagTextWithSuperscript = (text, taggedTermMap) => {
     let resultText = text;
     
@@ -2899,13 +3061,11 @@ function FlashCard({ trimData }) {
       const superscript = taggedTermMap[term];
       const regex = new RegExp(`\\b(${term})\\b`, 'gi');
       
-      // Replaces the matched word with the word plus the superscript
       resultText = resultText.replace(regex, (match) => `${match}${superscript}`);
     }
     return resultText;
   };
   
-  // 🔑 STEP 2A: Run the detective and get the results BEFORE defining backContent
   const { footnotes, taggedTermMap } = getFootnoteText(trimData); 
 
 
@@ -2932,7 +3092,6 @@ function FlashCard({ trimData }) {
           fontSize: '10px',
           display: 'inline-block' 
         }},
-        // The logic to clean the title and add the prefix
         (() => {
           let title = trimData.useTitle.trim();
           const lowerTitle = title.toLowerCase();
@@ -2955,15 +3114,13 @@ function FlashCard({ trimData }) {
     React.createElement(
       'h4',
       { style: { color: '#004d40', marginBottom: '10px', textAlign: 'center' } },
-      trimData.name // <-- We removed the concatenation
+      trimData.name
     ),
     // Strengths
     React.createElement('h5', { style: categoryTitleStyle }, "Strengths & Trade-offs"),
     React.createElement(
-      // Ensure the UL container itself is left aligned
       'ul',
       { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
-      // 🔑 CHANGE 1: Apply the tagTextWithSuperscript helper
       trimData.strengths.map((s, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(s, taggedTermMap)))
     ),
     // Usage
@@ -2971,7 +3128,6 @@ function FlashCard({ trimData }) {
     React.createElement(
       'ul',
       { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
-      // 🔑 CHANGE 2: Apply the tagTextWithSuperscript helper
       trimData.usage.map((t, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(t, taggedTermMap)))
     ),
     // Target Demographic
@@ -2979,17 +3135,13 @@ function FlashCard({ trimData }) {
     trimData.demographic && React.createElement(
       'ul',
       { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
-      // 🔑 CHANGE 3: Apply the tagTextWithSuperscript helper
       trimData.demographic.map((d, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(d, taggedTermMap)))
     ),
 
-    // --- 2. CHANGE: ADD THE GREY HORIZONTAL LINE HERE ---
     React.createElement("hr", { style: backDividerStyle }),
 
-    // --- 🔑 STEP 3C: DYNAMICALLY RENDER FOOTNOTES ---
-    // If we have any footnotes collected (footnotes.length > 0)
+    // DYNAMICALLY RENDER FOOTNOTES
     footnotes.length > 0 ? (
-        // Map over the footnotes array and create a new paragraph for each one
         footnotes.map((text, index) => 
             React.createElement(
                 "p", 
@@ -3007,7 +3159,6 @@ function FlashCard({ trimData }) {
             )
         )
     ) : null
-    // --- END DYNAMIC FOOTNOTE LOGIC ---
   );
 
   const frontSide = React.createElement(
@@ -3016,15 +3167,13 @@ function FlashCard({ trimData }) {
       key: 'front-content', 
       style: { 
         ...sideStyle, 
-        // 🔑 FIX: When front is visible (isFlipped: false), use 'relative' and 'flex' 
-        // so it dictates the height of the parent 'innerStyle' container.
-        position: isFlipped ? 'absolute' : 'relative', // 'absolute' removes it from height calculation when flipped
-        display: isFlipped ? 'none' : 'flex', // 'none' hides it and removes it from layout
-        transform: 'rotateY(0deg)', // Keep transform at 0deg on this face
+        position: isFlipped ? 'absolute' : 'relative',
+        display: isFlipped ? 'none' : 'flex',
+        transform: 'rotateY(0deg)',
         zIndex: isFlipped ? 1 : 2, 
       } 
     },
-    // Front Content JSX (Original Card Details - UNCHANGED)
+    // Front Content JSX
     React.createElement(
       'div', 
       { style: { flexGrow: 1, display: 'flex', flexDirection: 'column', paddingBottom: '20px' } }, 
@@ -3046,7 +3195,12 @@ function FlashCard({ trimData }) {
       React.createElement(
         "ul",
         { style: { fontSize: "12px", paddingLeft: "16px", flexGrow: 1, textAlign: 'left', marginBottom: '0px' } },
+        
+        // 🔑 ENGINE AND OPTIONS FIX FOR FLASHCARD - UNBOLDED
         React.createElement("li", {style: {marginBottom: '2px'}}, "Engine: " + trimData.engine),
+        trimData.engineOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Engine Options: " + trimData.engineOptions) : null,
+        // ------------------------------------
+        
         React.createElement("li", {style: {marginBottom: '2px'}}, "Horsepower: " + trimData.horsepower),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Torque: " + trimData.torque),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission: " + trimData.transmission),
@@ -3080,11 +3234,9 @@ function FlashCard({ trimData }) {
       key: 'back-content', 
       style: { 
         ...sideStyle, 
-        // 🔑 FIX: When back is visible (isFlipped: true), use 'relative' and 'flex'
-        // so it dictates the height of the parent 'innerStyle' container.
-        position: isFlipped ? 'relative' : 'absolute', // 'absolute' removes it from height calculation when rotating away
-        display: isFlipped ? 'flex' : 'none', // 'none' hides it and removes it from layout
-        transform: 'rotateY(180deg)', // Ensures the back side is facing forward after rotation
+        position: isFlipped ? 'relative' : 'absolute',
+        display: isFlipped ? 'flex' : 'none',
+        transform: 'rotateY(180deg)',
         zIndex: isFlipped ? 2 : 1, 
       } 
     },
@@ -3112,7 +3264,7 @@ function FlashCard({ trimData }) {
 }
 
 // ----------------------------------------------------------------------
-// STANDARD TRIM CARD COMPONENT (No Change)
+// STANDARD TRIM CARD COMPONENT 
 // ----------------------------------------------------------------------
 
 function StandardTrimCard({ trimData }) {
@@ -3155,7 +3307,12 @@ function StandardTrimCard({ trimData }) {
       React.createElement(
         "ul",
         { style: { fontSize: "12px", paddingLeft: "16px", textAlign: 'left', flexGrow: 1, marginBottom: '0px' } }, 
+        
+        // 🔑 ENGINE AND OPTIONS FIX FOR STANDARD CARD - UNBOLDED
         React.createElement("li", {style: {marginBottom: '2px'}}, "Engine: " + trimData.engine),
+        trimData.engineOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Engine Options: " + trimData.engineOptions) : null,
+        // ------------------------------------------
+
         React.createElement("li", {style: {marginBottom: '2px'}}, "Horsepower: " + trimData.horsepower),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Torque: " + trimData.torque),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission: " + trimData.transmission),
@@ -3172,8 +3329,7 @@ function StandardTrimCard({ trimData }) {
         React.createElement("li", {style: {marginBottom: '2px'}}, "Other: " + trimData.other)
       ),
     ),
-    React.createElement("hr", { style: { border: "0", borderTop: "1px solid #aaa", margin: "10px 5px 0 5px" } }), // Change 1: Added 10px top margin to HR
-    // Competitor text gets its top margin from the renderCompetitorText function (10px)
+    React.createElement("hr", { style: { border: "0", borderTop: "1px solid #aaa", margin: "10px 5px 0 5px" } }),
     renderCompetitorText(trimData.competitors)
   );
 }
@@ -3230,9 +3386,36 @@ function CategoryPage({ category, onSelectVehicle }) {
   );
 }
 
-// Vehicle Page Component (No Change)
+// Vehicle Page Component (UPDATED FOR LANDSCAPE TRANSIT LAYOUT)
 function VehiclePage({ vehicle, onBack, onHome }) {
   const isPortrait = window.innerWidth < window.innerHeight;
+  const isTransit = vehicle.name === "Transit"; // Flag for conditional rendering
+  
+  // Layout direction is always column for Transit now (to stack the Config Card above trims)
+  const flexContainerDirection = "column";
+
+  // Center the main flex container
+  const mainFlexStyle = {
+    marginTop: "10px",
+    display: "flex",
+    justifyContent: "center", // This centers the elements within the column
+    alignItems: "center", // This centers the config card horizontally
+    flexDirection: flexContainerDirection,
+    gap: "20px"
+  };
+
+  // Trims container should still allow wrapping and horizontal flow
+  const trimsContainerStyle = {
+    display: "flex",
+    justifyContent: "center", // Center the group of trim cards
+    flexWrap: "wrap",
+    flexDirection: "row", 
+    alignItems: "flex-start",
+    width: "100%", // Take full width available
+    minWidth: '250px' 
+  };
+
+
   return React.createElement(
     "div",
     { className: "vehicle-detail" },
@@ -3252,28 +3435,29 @@ function VehiclePage({ vehicle, onBack, onHome }) {
         style: { width: "100%", maxWidth: "600px", borderRadius: "10px" }
       })
     ),
+    
+    // NEW FLEX CONTAINER: Wraps the config card and the trim cards
     React.createElement(
       "div",
-      {
-        style: {
-          marginTop: "10px",
-          display: "flex",
-          justifyContent: "space-evenly",
-          flexWrap: isPortrait ? "wrap" : "nowrap",
-          flexDirection: isPortrait ? "column" : "row",
-          alignItems: isPortrait ? "center" : "flex-start",
-          minHeight: isPortrait ? "80vh" : "auto"
-        }
-      },
-      vehicle.trims.map((trim) => {
-        // Condition to use the FlashCard
-        if (trim.strengths) { 
-          return React.createElement(FlashCard, { key: trim.name, trimData: trim });
-        }
-        // Use the standard card for all other trims
-        return React.createElement(StandardTrimCard, { key: trim.name, trimData: trim });
-      })
-    )
+      { style: mainFlexStyle },
+      
+      // 1. Transit Config Card (Only appears for Transit, centered by mainFlexStyle)
+      isTransit && vehicle.specs && React.createElement(TransitConfigCard, { vehicleSpecs: vehicle.specs }),
+      
+      // 2. Trim Cards Container (Used for all vehicles)
+      React.createElement(
+        "div",
+        { style: trimsContainerStyle },
+        vehicle.trims.map((trim) => {
+          // Condition to use the FlashCard
+          if (trim.strengths) { 
+            return React.createElement(FlashCard, { key: trim.name, trimData: trim });
+          }
+          // Use the standard card for all other trims
+          return React.createElement(StandardTrimCard, { key: trim.name, trimData: trim });
+        })
+      )
+    ) // End of New Flex Container
   );
 }
 
@@ -3304,7 +3488,7 @@ function App() {
     });
   }
 
-  const isPortrait = windowSize.width < windowSize.height;
+  const isPortrait = windowSize.width < window.innerHeight;
 
   return React.createElement(
     "div",
