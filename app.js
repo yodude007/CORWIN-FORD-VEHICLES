@@ -4058,7 +4058,7 @@ function VehiclePage({ vehicle, onBack, onHome }) {
     // LANDSCAPE MODE: Single row, horizontally scrollable.
     trimsContainerStyle = {
       display: "flex",
-      justifyContent: "flex-start", // Start from the left
+      justifyContent: "center", // Start from the left
       flexWrap: "nowrap", // Crucial: Keeps all cards in one row
       flexDirection: "row", 
       alignItems: "flex-start",
