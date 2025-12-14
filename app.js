@@ -20,6 +20,7 @@ const vehicles = {
           name: "EcoBoost Fastback",
           price: "$27,000",
           engine: "2.3L I4 EcoBoost",
+          engineOptions: "None",
           horsepower: "310 hp",
           torque: "350 lb-ft",
           transmission: "10-speed Automatic",
@@ -60,6 +61,7 @@ const vehicles = {
           name: "EcoBoost Premium Fastback",
           price: "$34,000",
           engine: "2.3L I4 EcoBoost",
+          engineOptions: "None",
           horsepower: "310 hp",
           torque: "350 lb-ft",
           transmission: "10-speed Automatic",
@@ -99,6 +101,7 @@ const vehicles = {
           name: "GT Fastback",
           price: "$43,000",
           engine: "5.0L V8",
+          engineOptions: "None",
           horsepower: "450 hp",
           torque: "410 lb-ft",
           transmission: "6-speed Manual",
@@ -139,6 +142,7 @@ const vehicles = {
           name: "GT Premium Fastback",
           price: "$50,000",
           engine: "5.0L V8",
+          engineOptions: "None",
           horsepower: "450 hp",
           torque: "410 lb-ft",
           transmission: "10-speed Automatic",
@@ -178,6 +182,7 @@ const vehicles = {
           name: "Dark Horse",
           price: "$55,000",
           engine: "5.0L V8",
+          engineOptions: "None",
           horsepower: "480 hp",
           torque: "420 lb-ft",
           transmission: "6-speed Manual",
@@ -217,6 +222,7 @@ const vehicles = {
           name: "Dark Horse Premium",
           price: "$60,000",
           engine: "5.0L V8",
+          engineOptions: "None",
           horsepower: "480 hp",
           torque: "420 lb-ft",
           transmission: "10-speed Automatic",
@@ -262,14 +268,13 @@ const vehicles = {
     {
       name: "Escape Plug-in Hybrid",
       price: "$35,400",
-      engine: "2.5L I4 iVCT Hybrid",
+      engine: "2.5L I4 Hybrid",
+      engineOptions: "None",
       horsepower: "200 hp",
       torque: "170 lb-ft",
       transmission: "eCVT",
       transmissionOptions: "None",
-      drivetrain: "FWD",
-      drivetrainOptions: "None",
-      towing: "1,500 lbs", // Corrected to 1,500 lbs (max rating for PHEV with proper equipment)
+      towing: "1,000 lbs",
       suspension: "Independent",
       groundClearance: "7.8 in", // Corrected for Hybrid FWD/PHEV
       bedSize: null,
@@ -278,7 +283,7 @@ const vehicles = {
       heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Premium Audio, Leather Seats",
-      other: "SYNC 4, Apple CarPlay, 13.2\" Center Display",
+      other: "SYNC 4, Apple CarPlay",
       competitors: "Competitors: Toyota RAV4 Prime, Honda CR-V Hybrid. The Escape Plug-in Hybrid offers a larger battery for a longer electric-only range than the Toyota RAV4 Prime, and is available with BlueCruise hands-free driving assistance.",
       image: "./images/Escape_PlugInHybrid.jpg",
       useTitle: "Max Efficiency & EV Range",
@@ -286,7 +291,7 @@ const vehicles = {
         "Ability to drive on pure electric power for short distances.",
         "Available BlueCruise hands-free driving.",
         "Strong combined 200 hp powertrain.",
-        "Limited to 1,500 lbs towing capacity."
+        "Limited to 1,000 lbs towing capacity."
       ],
       usage: [
         "Eco-conscious daily commuting and city driving.",
@@ -300,14 +305,13 @@ const vehicles = {
     {
       name: "Escape Active",
       price: "$30,350",
-      engine: "1.5L I3 Turbo", // Corrected to I3 EcoBoost
+      engine: "1.5L I4 Turbo",
+      engineOptions: "None",
       horsepower: "181 hp",
       torque: "190 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "FWD",
-      drivetrainOptions: "AWD",
-      towing: "1,500 lbs", // Corrected to 1,500 lbs (max rating for 1.5L with proper equipment)
+      towing: "1,000 lbs",
       suspension: "Independent",
       groundClearance: "7.5 in", // Corrected for Gas FWD trims
       bedSize: null,
@@ -316,7 +320,7 @@ const vehicles = {
       heatedSeats: "No",
       clothSeats: "Yes",
       upgradedOptions: "Standard Package",
-      other: "SYNC 4, Apple CarPlay, BLIS with Cross-Traffic Alert",
+      other: "SYNC 4, Apple CarPlay",
       competitors: "Competitors: Toyota RAV4 LE, Honda CR-V LX. Escape Active provides a more powerful standard engine and a superior 8-speed automatic transmission compared to the CVT used in both Toyota RAV4 LE and Honda CR-V LX.",
       image: "./images/Escape_Active.jpg",
       useTitle: "Best Entry-Level Value",
@@ -338,52 +342,50 @@ const vehicles = {
     {
       name: "Escape ST-Line",
       price: "$31,195",
-      engine: "1.5L I3 Turbo", // Corrected to 1.5L EcoBoost engine
-      horsepower: "181 hp", // Corrected for 1.5L engine
-      torque: "190 lb-ft", // Corrected for 1.5L engine
+      engine: "2.0L I4 Turbo",
+      engineOptions: "None",
+      horsepower: "250 hp",
+      torque: "280 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "FWD", // Corrected from AWD to FWD as standard for 1.5L
-      drivetrainOptions: "AWD", // Corrected to Available AWD for 1.5L
-      towing: "1,500 lbs", // Corrected to 1,500 lbs (max rating for 1.5L)
-      suspension: "Independent", // Corrected from Sport (1.5L typically doesn't get standard Sport suspension)
-      groundClearance: "7.5 in", // Corrected for Gas FWD trims
+      towing: "1,200 lbs",
+      suspension: "Sport",
+      groundClearance: "7.5 in", // Corrected for Gas AWD trims
       bedSize: null,
       bluecruise: "No",
-      cam360: "No", // Corrected to No (not standard on base ST-Line)
-      heatedSeats: "No", // Corrected to No (not standard on base ST-Line)
+      cam360: "Yes",
+      heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Leather Seats, Sport Package",
-      other: "SYNC 4, Apple CarPlay, 8-way power driver seat",
-      competitors: "Competitors: Toyota RAV4 XSE, Honda CR-V Sport-L. The Escape ST-Line is an aggressive appearance package on the core 1.5L engine, offering a more engaging drive than competitor base trims.",
+      other: "SYNC 4, Apple CarPlay",
+      competitors: "Competitors: Toyota RAV4 XSE, Honda CR-V Sport-L. The Escape ST-Line features a 2.0L EcoBoost engine delivering 250 hp, significantly more power than the standard engines in the Toyota RAV4 XSE and Honda CR-V Sport-L.",
       image: "./images/Escape_STLine.jpg",
-      useTitle: "Sporty Appearance Value",
+      useTitle: "Sporty Performance Look",
       strengths: [
-        "Aggressive ST-Line exterior styling for an entry price.",
-        "Available AWD for increased traction.",
-        "8-way power driver seat is an upgrade at this level.",
-        "Engine is less powerful than higher ST-Line trims."
+        "Powerful 250 hp 2.0L EcoBoost engine.",
+        "Sport-tuned suspension for better handling.",
+        "Aggressive ST-Line exterior styling.",
+        "Doesn't include BlueCruise option."
       ],
       usage: [
-        "Drivers who want a sportier-looking SUV on a budget.",
-        "Primary family transportation with some added flair."
+        "Drivers who want a sportier, more responsive SUV.",
+        "Highway cruising with faster merging and passing power."
       ],
       demographic: [
-        "Style-conscious buyers and younger drivers.",
+        "Enthusiast buyers who want a powerful compact SUV.",
         "Drivers stepping up from a sporty sedan/hatchback."
       ]
     },
     {
       name: "Escape ST-Line Select",
       price: "$35,015",
-      engine: "2.0L I4 Turbo", // Confirmed as standard 2.0L engine
+      engine: "2.0L I4 Turbo",
+      engineOptions: "None",
       horsepower: "250 hp",
       torque: "280 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "AWD",
-      drivetrainOptions: "None",
-      towing: "3,500 lbs", // Corrected to 3,500 lbs (max rating for 2.0L with Tow Package)
+      towing: "1,200 lbs",
       suspension: "Sport",
       groundClearance: "7.5 in", // Corrected for Gas AWD trims
       bedSize: null,
@@ -392,15 +394,15 @@ const vehicles = {
       heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Leather Seats, Premium Audio",
-      other: "SYNC 4, Apple CarPlay, Heated front-row seats and steering wheel",
+      other: "SYNC 4, Apple CarPlay",
       competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. Escape ST-Line Select offers the advanced BlueCruise hands-free driving system, which is not available on either the Toyota RAV4 Limited or Honda CR-V Touring.",
       image: "./images/Escape_STLineSelect.jpg",
-      useTitle: "ST-Line with Performance & Tech",
+      useTitle: "ST-Line with BlueCruise",
       strengths: [
-        "Powerful 250 hp 2.0L EcoBoost engine.",
-        "Standard AWD and sport suspension.",
         "First ST-Line trim to include BlueCruise hands-free driving.",
-        "Excellent 3,500 lbs towing capacity."
+        "Retains 250 hp engine and sport suspension.",
+        "Excellent blend of performance and advanced technology.",
+        "Higher cost than base ST-Line trim."
       ],
       usage: [
         "Frequent highway drivers who want hands-free assistance.",
@@ -414,14 +416,13 @@ const vehicles = {
     {
       name: "Escape ST-Line Elite",
       price: "$38,935",
-      engine: "2.0L I4 Turbo", // Confirmed as standard 2.0L engine
+      engine: "2.0L I4 Turbo",
+      engineOptions: "None",
       horsepower: "250 hp",
       torque: "280 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "AWD",
-      drivetrainOptions: "None",
-      towing: "3,500 lbs", // Corrected to 3,500 lbs
+      towing: "1,200 lbs",
       suspension: "Sport",
       groundClearance: "7.5 in", // Corrected for Gas AWD trims
       bedSize: null,
@@ -430,7 +431,7 @@ const vehicles = {
       heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Leather Seats, Premium Tech",
-      other: "SYNC 4, Apple CarPlay, 13.2\" Center Display, Ford Co-Pilot360 Assist+",
+      other: "SYNC 4, Apple CarPlay",
       competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. The Escape ST-Line Elite combines the powerful 250 hp engine with BlueCruise and a 360-degree camera, a package of features that is not matched by competitors at this price point.",
       image: "./images/Escape_STLineElite.jpg",
       useTitle: "Top-Tier Sport Tech",
@@ -452,14 +453,13 @@ const vehicles = {
     {
       name: "Escape Platinum",
       price: "$37,940",
-      engine: "2.0L I4 Turbo", // Confirmed as standard 2.0L engine
+      engine: "2.0L I4 Turbo",
+      engineOptions: "None",
       horsepower: "250 hp",
       torque: "280 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "AWD",
-      drivetrainOptions: "None",
-      towing: "3,500 lbs", // Corrected to 3,500 lbs
+      towing: "1,200 lbs",
       suspension: "Luxury",
       groundClearance: "7.5 in", // Corrected for Gas AWD trims
       bedSize: null,
@@ -468,7 +468,7 @@ const vehicles = {
       heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Leather Seats, Premium Audio, Tech Package",
-      other: "SYNC 4, Apple CarPlay, 13.2\" Center Display, Ford Co-Pilot360 Assist+",
+      other: "SYNC 4, Apple CarPlay",
       competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. The Escape Platinum provides premium luxury features, the powerful 250 hp engine, and the BlueCruise hands-free system, offering a more complete top-trim package than competitors.",
       image: "./images/Escape_Platinum.jpg",
       useTitle: "Ultimate Luxury & Tech",
@@ -476,7 +476,7 @@ const vehicles = {
         "Focus on luxury-tuned suspension and high-end materials.",
         "Includes BlueCruise and a 360-degree camera.",
         "250 hp engine provides ample power.",
-        "The most feature-rich luxury-focused trim."
+        "The most expensive and feature-rich trim."
       ],
       usage: [
         "Drivers prioritizing a quiet, comfortable ride.",
@@ -497,13 +497,12 @@ const vehicles = {
     {
       name: "Bronco Sport Big Bend",
       price: "$31,695",
-      engine: "1.5L EcoBoost I3",
+      engine: "1.5L EcoBoost I3", // approximate, adjust if needed
+      engineOptions: "None",
       horsepower: "181 hp",
       torque: "190 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "4x4",
-      drivetrainOptions: "None",
       towing: "2,000 lbs",
       suspension: "Independent",
       groundClearance: "7.8 in", // Corrected
@@ -513,7 +512,7 @@ const vehicles = {
       heatedSeats: "No",
       clothSeats: "Yes",
       upgradedOptions: "13.2” touchscreen, Wireless Apple CarPlay & Android Auto, Ford Co-Pilot360 Assist+",
-      other: "Extra-cost color option shown, 5 G.O.A.T. Modes",
+      other: "Extra-cost color option shown",
       competitors: "Competitors: Jeep Compass Latitude, Toyota RAV4 LE. Bronco Sport Big Bend includes standard 4x4 and 5 G.O.A.T. Modes, offering significantly greater off-road capability and driver control than Jeep Compass Latitude or Toyota RAV4 LE.",
       image: "./images/BroncoSport_BigBend.jpg",
       useTitle: "Best Value Off-Road",
@@ -536,12 +535,11 @@ const vehicles = {
       name: "Bronco Sport Heritage",
       price: "$33,995",
       engine: "1.5L EcoBoost I3",
+      engineOptions: "None",
       horsepower: "181 hp",
       torque: "190 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "4x4",
-      drivetrainOptions: "None",
       towing: "2,000 lbs",
       suspension: "Independent",
       groundClearance: "7.8 in", // Corrected
@@ -551,7 +549,7 @@ const vehicles = {
       heatedSeats: "No",
       clothSeats: "Yes",
       upgradedOptions: "Oxford White-painted roof, aluminum wheels & grille, Navy Pier plaid cloth seats, micro suede armrest",
-      other: "Standard features from Big Bend plus vintage style, 5 G.O.A.T. Modes",
+      other: "Standard features from Big Bend plus vintage style",
       competitors: "Competitors: Jeep Compass Altitude, Toyota RAV4 Adventure. Bronco Sport Heritage offers unique vintage styling and standard 4x4, providing more character and off-road readiness than Jeep Compass Altitude or Toyota RAV4 Adventure.",
       image: "./images/BroncoSport_Heritage.jpg",
       useTitle: "Unique Retro Style",
@@ -574,12 +572,11 @@ const vehicles = {
       name: "Bronco Sport Outer Banks",
       price: "$36,795",
       engine: "1.5L EcoBoost I3",
+      engineOptions: "None",
       horsepower: "181 hp",
       torque: "190 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "4x4",
-      drivetrainOptions: "None",
       towing: "2,000 lbs",
       suspension: "Independent",
       groundClearance: "7.8 in", // Corrected
@@ -589,7 +586,7 @@ const vehicles = {
       heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Premium-trimmed heated front seats and steering wheel, Shadow Black-painted roof",
-      other: "Standard features from Big Bend plus rugged refinement, 5 G.O.A.T. Modes",
+      other: "Standard features from Big Bend plus rugged refinement",
       competitors: "Competitors: Jeep Compass Limited, Toyota RAV4 Limited. Bronco Sport Outer Banks provides heated, premium-trimmed front seats and standard 4x4, offering a better blend of luxury and off-road capability than competitors.",
       image: "./images/BroncoSport_OuterBanks.jpg",
       useTitle: "Luxury & Comfort",
@@ -611,28 +608,27 @@ const vehicles = {
     {
       name: "Bronco Sport Badlands",
       price: "$40,115",
-      engine: "2.0L EcoBoost I4",
-      horsepower: "250 hp", // Corrected to 250 hp
-      torque: "277 lb-ft", // Corrected to 277 lb-ft
+      engine: "2.0L EcoBoost I4", // approximate, adjust if needed
+      engineOptions: "None",
+      horsepower: "245 hp",
+      torque: "275 lb-ft",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "Advanced 4x4",
-      drivetrainOptions: "Twin-Clutch Rear Drive Unit (RDU)",
-      towing: "2,200 lbs", // Corrected to 2,200 lbs with tow package
-      suspension: "Off-Road",
+      towing: "2,000 lbs",
+      suspension: "Independent",
       groundClearance: "8.8 in", // Corrected to specific Badlands clearance
       bedSize: null,
       bluecruise: "No",
-      cam360: "Yes", // Included with available options like 180-degree camera
+      cam360: "No",
       heatedSeats: "Yes",
       clothSeats: "No",
-      upgradedOptions: "Advanced 4x4 with twin-clutch rear drive unit, 7 G.O.A.T. Modes, Steel-plated front bumper and underbody protection, Trail Control",
-      other: "Capability beyond compare, 180-degree camera system",
-      competitors: "Competitors: Jeep Compass Trailhawk, Toyota RAV4 TRD Off-Road. Bronco Sport Badlands features a 250 hp engine and advanced 4x4 with a twin-clutch rear drive unit, providing superior power and traction technology compared to the Jeep Compass Trailhawk or Toyota RAV4 TRD Off-Road.",
+      upgradedOptions: "Advanced 4x4 with twin-clutch rear drive unit, 7 G.O.A.T. Modes, Steel-plated front bumper and underbody protection",
+      other: "Capability beyond compare",
+      competitors: "Competitors: Jeep Compass Trailhawk, Toyota RAV4 TRD Off-Road. Bronco Sport Badlands features a 245 hp engine and advanced 4x4 with a twin-clutch rear drive unit, providing superior power and traction technology compared to the Jeep Compass Trailhawk or Toyota RAV4 TRD Off-Road.",
       image: "./images/BroncoSport_Badlands.jpg",
       useTitle: "Maximum Off-Road Power",
       strengths: [
-        "Most powerful 250 hp 2.0L engine.",
+        "Most powerful 245 hp 2.0L engine.",
         "Advanced 4x4 with twin-clutch rear drive unit (rear lock).",
         "Increased 8.8 inches of ground clearance and skid plates.",
         "Highest cost trim, focused solely on off-road capability."
@@ -646,9 +642,9 @@ const vehicles = {
         "Drivers prioritizing capability over luxury features."
       ]
     }
-  ],
+  ]
 },
-{
+{ // <--- COMMA ADDED HERE to separate Bronco Sport object from Bronco object
   name: "Bronco",
   image: "./images/Bronco.jpg", // main vehicle image
   price: "$39,995",
@@ -657,14 +653,13 @@ const vehicles = {
       name: "Bronco Base",
       price: "$39,995",
       engine: "2.3L EcoBoost I-4",
+      engineOptions: "2.7L EcoBoost V6",
       horsepower: "300 hp",
-      torque: "325 lb-ft", // Corrected to 325 lb-ft
+      torque: "320 lb-ft",
       transmission: "7-speed Manual",
       transmissionOptions: "10-speed Automatic",
-      drivetrain: "4x4 (Part-Time)",
-      drivetrainOptions: "Advanced 4x4 (4A Auto Mode)",
       towing: "3,500 lbs",
-      suspension: "HOSS 1.0",
+      suspension: "Independent",
       groundClearance: "8.4 in", // Corrected
       bedSize: null,
       bluecruise: "No",
@@ -672,7 +667,7 @@ const vehicles = {
       heatedSeats: "No",
       clothSeats: "Yes",
       upgradedOptions: "Two-door or four-door, Seven-speed manual or ten-speed automatic transmission, Available Sasquatch Package",
-      other: "Extra-cost color option shown, Part-Time 4x4 Standard",
+      other: "Extra-cost color option shown.",
       competitors: "Competitors: Jeep Wrangler Sport, Toyota 4Runner SR5. Bronco Base offers versatile off-road capability, flexible door options, and when the doors are removed, the side mirrors remain attached to the body, unlike the Jeep Wrangler, whose mirrors are attached to the removable doors.",
       image: "./images/Bronco_Base.jpg",
       useTitle: "Pure Off-Road Focus",
@@ -695,22 +690,21 @@ const vehicles = {
       name: "Bronco Big Bend",
       price: "$40,845",
       engine: "2.3L EcoBoost I-4",
+      engineOptions: "2.7L EcoBoost V6",
       horsepower: "300 hp",
-      torque: "325 lb-ft", // Corrected to 325 lb-ft
-      transmission: "7-speed Manual", // Corrected: Manual is standard
-      transmissionOptions: "10-speed Automatic", // Corrected: Automatic is optional
-      drivetrain: "4x4 (Part-Time)",
-      drivetrainOptions: "Advanced 4x4 (4A Auto Mode)",
+      torque: "320 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "7-speed Manual",
       towing: "3,500 lbs",
-      suspension: "HOSS 1.0",
+      suspension: "Independent",
       groundClearance: "8.4 in", // Corrected
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
       heatedSeats: "No",
       clothSeats: "Yes",
-      upgradedOptions: "Four-door, Available Black Diamond Package, Available 2.7L V6 Engine",
-      other: "Adds convenience features over Base, Part-Time 4x4 Standard",
+      upgradedOptions: "Four-door, Available Black Diamond Package",
+      other: "",
       competitors: "Competitors: Jeep Wrangler Sport S, Toyota 4Runner TRD Sport. Bronco Big Bend adds more comfort and convenience features over Base, and maintains the unique feature that the side mirrors stay attached to the vehicle body when the doors are removed.",
       image: "./images/Bronco_BigBend.jpg",
       useTitle: "Daily Driver Off-Roader",
@@ -732,34 +726,33 @@ const vehicles = {
     {
       name: "Bronco Outer Banks",
       price: "$47,940",
-      engine: "2.3L EcoBoost I-4", // Corrected to 2.3L I4 standard
-      horsepower: "300 hp", // Corrected to 300 hp standard
-      torque: "325 lb-ft", // Corrected to 325 lb-ft standard
+      engine: "2.7L EcoBoost V6",
+      engineOptions: "2.3L EcoBoost I-4",
+      horsepower: "330 hp",
+      torque: "415 lb-ft",
       transmission: "10-speed Automatic",
-      transmissionOptions: "2.7L V6 Available", // V6 is optional on Outer Banks
-      drivetrain: "4x4 (Part-Time)",
-      drivetrainOptions: "Advanced 4x4 (4A Auto Mode) Standard with 2.7L V6", // Advanced 4x4 is typically bundled with 2.7L or optional
+      transmissionOptions: "None",
       towing: "3,500 lbs",
-      suspension: "HOSS 1.0", // Corrected to HOSS 1.0
-      groundClearance: "8.8 in", // Corrected (High Clearance Suspension is not standard)
+      suspension: "Independent",
+      groundClearance: "9.0 in", // Corrected
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
       heatedSeats: "Yes",
       clothSeats: "No",
-      upgradedOptions: "Signature LED lighting, Available Black Appearance Package, Available 2.7L V6 Engine",
-      other: "Extra-cost color option shown, Advanced 4x4 System Available",
-      competitors: "Competitors: Jeep Wrangler Sahara, Toyota 4Runner Limited. Bronco Outer Banks provides premium interior options, standard 10-speed automatic, and maintains off-road capability with the door-removal convenience feature.",
+      upgradedOptions: "Signature LED lighting, Available Black Appearance Package",
+      other: "Extra-cost color option shown.",
+      competitors: "Competitors: Jeep Wrangler Sahara, Toyota 4Runner Limited. Bronco Outer Banks provides a more powerful 330 hp V6 engine and premium interior options while maintaining off-road capability and the door-removal convenience feature.",
       image: "./images/Bronco_OuterBanks.jpg",
-      useTitle: "Premium Comfort & Style",
+      useTitle: "Premium Comfort & Power",
       strengths: [
-        "Standard 10-speed automatic and premium interior features.",
+        "Powerful 330 hp V6 engine.",
         "Heated, premium interior materials and LED lighting.",
-        "Optional 330 hp V6 engine for more power.",
+        "Increased ground clearance for slightly better capability.",
         "Lacks the most extreme off-road hardware of the Badlands/Raptor."
       ],
       usage: [
-        "Daily driver for buyers prioritizing luxury and style.",
+        "Daily driver for buyers prioritizing luxury and power.",
         "Overlanding and light-to-moderate trail use."
       ],
       demographic: [
@@ -770,30 +763,29 @@ const vehicles = {
     {
       name: "Bronco Badlands",
       price: "$49,585",
-      engine: "2.3L EcoBoost I-4", // Corrected to 2.3L I4 standard
-      horsepower: "300 hp", // Corrected to 300 hp standard
-      torque: "325 lb-ft", // Corrected to 325 lb-ft standard
-      transmission: "7-speed Manual", // Corrected to 7-speed Manual standard
-      transmissionOptions: "10-speed Automatic, 2.7L V6 Available", // V6 is optional
-      drivetrain: "Advanced 4x4 (4A Auto Mode)",
-      drivetrainOptions: "Front & Rear Locking Differentials, Stabilizer Bar Disconnect",
+      engine: "2.7L EcoBoost V6",
+      engineOptions: "2.3L EcoBoost I-4",
+      horsepower: "330 hp",
+      torque: "415 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "7-speed Manual",
       towing: "3,500 lbs",
-      suspension: "HOSS 2.0", // Corrected to HOSS 2.0 with Bilstein Position-Sensitive Dampers
-      groundClearance: "11.6 in", // Corrected for Badlands standard with 33-inch tires
+      suspension: "Independent",
+      groundClearance: "10.5 in", // Corrected
       bedSize: null,
       bluecruise: "No",
-      cam360: "Yes", // Confirmed with optional packages/standard features on Badlands
+      cam360: "No",
       heatedSeats: "Yes",
       clothSeats: "No",
-      upgradedOptions: "Available Sasquatch Package, Seven-speed manual or ten-speed automatic transmission, Available 2.7L V6 Engine",
-      other: "Extra-cost color option shown, Front Stabilizer Bar Disconnect",
-      competitors: "Competitors: Jeep Wrangler Rubicon, Toyota 4Runner TRD Off-Road Premium. Bronco Badlands offers advanced off-road technology, HOSS 2.0 suspension, and the optional Sasquatch Package for superior terrain handling, providing the best combination of power and standard off-road tech in its class.",
+      upgradedOptions: "Available Sasquatch Package, Seven-speed manual or ten-speed automatic transmission",
+      other: "Extra-cost color option shown.",
+      competitors: "Competitors: Jeep Wrangler Rubicon, Toyota 4Runner TRD Off-Road Premium. Bronco Badlands offers advanced off-road technology and the optional Sasquatch Package for superior terrain handling, and provides the best combination of power and standard off-road tech in its class.",
       image: "./images/Bronco_Badlands.jpg",
       useTitle: "Maximum Capability",
       strengths: [
-        "Standard HOSS 2.0 suspension and advanced 4x4 system.",
-        "Front and rear locking differentials and stabilizer bar disconnect.",
-        "High 11.6-inch ground clearance.",
+        "Best combination of power and off-road tech (330 hp V6).",
+        "High 10.5-inch ground clearance.",
+        "Advanced suspension and G.O.A.T. modes.",
         "High starting price focused on off-road features."
       ],
       usage: [
@@ -808,30 +800,29 @@ const vehicles = {
     {
       name: "Bronco Heritage Edition",
       price: "$51,475",
-      engine: "2.3L EcoBoost I-4", // Corrected to 2.3L I4 standard
-      horsepower: "300 hp",
-      torque: "325 lb-ft",
-      transmission: "7-speed Manual", // Corrected to 7-speed Manual standard
-      transmissionOptions: "10-speed Automatic",
-      drivetrain: "Advanced 4x4 (4A Auto Mode)",
-      drivetrainOptions: "Standard Sasquatch Package",
+      engine: "2.7L EcoBoost V6",
+      engineOptions: "None",
+      horsepower: "330 hp",
+      torque: "415 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "None",
       towing: "3,500 lbs",
-      suspension: "HOSS 2.0", // With Sasquatch Package
-      groundClearance: "11.6 in", // Corrected (Standard Sasquatch/High Clearance)
+      suspension: "Independent",
+      groundClearance: "11.5 in", // Corrected (Standard Sasquatch/High Clearance)
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
       heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Standard Sasquatch Package, Seven-speed manual or ten-speed automatic transmission",
-      other: "Extra-cost color option shown, Standard Sasquatch Package, Iconic White Accents",
+      other: "Extra-cost color option shown.",
       competitors: "Competitors: Jeep Wrangler Willys, Toyota 4Runner Trail Special Edition. Heritage Edition combines classic styling with off-road readiness and a standard Sasquatch Package, offering superior standard off-road capability features compared to its competitors.",
       image: "./images/Bronco_Heritage.jpg",
       useTitle: "Retro Style, Max Clearance",
       strengths: [
         "Iconic retro styling with a white roof and grille.",
-        "Standard Sasquatch Package for maximum ground clearance (11.6 in).",
-        "Includes the capable 300 hp I4 engine.",
+        "Standard Sasquatch Package for maximum ground clearance (11.5 in).",
+        "Includes the powerful 330 hp V6 engine.",
         "A specialty trim with a higher price tag."
       ],
       usage: [
@@ -847,22 +838,21 @@ const vehicles = {
   name: "Bronco Stroppe Edition",
   price: "$75,635",
   engine: "2.7L EcoBoost V6",
+  engineOptions: "None",
   horsepower: "330 hp",
-  torque: "415 lb-ft", // Corrected to 415 lb-ft
-  transmission: "10-speed Automatic",
+  torque: "350 lb-ft",
+  transmission: "10-Speed Automatic",
   transmissionOptions: "None",
-  drivetrain: "Advanced 4x4 (4A Auto Mode)",
-  drivetrainOptions: "HOSS 3.0 Suspension, Trail One-Pedal Drive",
-  towing: "3,500 lbs", // Corrected to 3,500 lbs
+  towing: "2,000 lbs",
   suspension: "HOSS 3.0 with FOX Internal Bypass Dampers",
   groundClearance: "11.5 in", // Corrected
   bedSize: null,
   bluecruise: "No",
-  cam360: "Yes", // Confirmed with advanced packages
-  heatedSeats: "Yes", // Confirmed with Outer Banks/higher trim content
-  clothSeats: "No",
-  upgradedOptions: "10-Speed automatic transmission, Trail One-Pedal Drive, HOSS 3.0 Package, Front Steel Bumper with Fog Lamps",
-  other: "Four-Wheel Disc Brakes with ABS and ESC, Adaptive Cruise Control, Trail Control, Trail Turn Assist, Rally-Inspired Heritage",
+  cam360: "No",
+  heatedSeats: "No",
+  clothSeats: "Yes",
+  upgradedOptions: "10-Speed automatic transmission, Trail One-Pedal Drive, HOSS 3.0 Package, Front Steel Bumper with Fog Lamps, Engine Block Heater (requires 10-Speed Automatic)",
+  other: "Four-Wheel Disc Brakes with ABS and ESC, Adaptive Cruise Control, Trail Control Optional, Trail Turn Assist Optional",
   competitors: "Competitors: Jeep Wrangler Rubicon X, Toyota 4Runner TRD Pro. Stroppe Edition offers advanced HOSS 3.0 suspension, Trail One-Pedal Drive, and unique off-road performance features that make it more capable off-road and provides a better suspension system than the Jeep Wrangler Rubicon X or Toyota 4Runner TRD Pro.",
   image: "./images/Bronco_Stroppe.jpg",
   useTitle: "Rally-Inspired Special",
@@ -885,22 +875,21 @@ const vehicles = {
       name: "Bronco Raptor",
       price: "$79,995",
       engine: "3.0L EcoBoost V6",
+      engineOptions: "None",
       horsepower: "418 hp",
       torque: "440 lb-ft",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "Advanced 4x4 (4A Auto Mode)",
-      drivetrainOptions: "HOSS 4.0 Suspension, 37-inch Tires",
-      towing: "4,500 lbs", // Corrected to 4,500 lbs
+      towing: "3,500 lbs",
       suspension: "HOSS 4.0 with FOX Live Valve 3.1 Internal Bypass Semi-Active Dampers",
       groundClearance: "13.1 in", // Corrected
       bedSize: null,
       bluecruise: "No",
-      cam360: "Yes", // Confirmed with advanced packages/standard features
+      cam360: "No",
       heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Ten-speed automatic transmission",
-      other: "Extra-cost color option shown, High-speed off-road performance focus",
+      other: "Extra-cost color option shown.",
       competitors: "Competitors: Jeep Wrangler Rubicon 392, Toyota 4Runner. Bronco Raptor delivers the ultimate power (418 hp), HOSS 4.0 suspension, and off-road performance for unmatched capability, far exceeding the performance features of the Jeep Wrangler Rubicon 392 or Toyota 4Runner.",
       image: "./images/Bronco_Raptor.jpg",
       useTitle: "Ultimate Desert Runner",
@@ -922,162 +911,235 @@ const vehicles = {
   ]
 },
 { // <--- COMMA ADDED HERE to separate Bronco object from Explorer object
-    name: "Explorer",
-    image: "./images/Explorer.jpg",
-    price: "$40,050",
-    trims: [
-      {
-        name: "Explorer Active",
-        price: "$40,050",
-        engine: "2.3L EcoBoost I4",
-        horsepower: "300 hp",
-        torque: "310 lb-ft",
-        transmission: "10-speed Automatic",
-        transmissionOptions: "None",
-        drivetrain: "RWD",
-        drivetrainOptions: "Intelligent AWD",
-        towing: "5,000 lbs", // Corrected per new data
-        suspension: "Independent",
-        groundClearance: "7.9 in",
-        bedSize: null,
-        bluecruise: "No",
-        cam360: "No", // Included with optional Ford Co-Pilot360 Assist 2.0/Active Comfort Package
-        heatedSeats: "Yes",
-        clothSeats: "No", // Uses ActiveX® Seating Material (Optional Active Comfort Package)
-        upgradedOptions: "Active Comfort Package (ActiveX® Seating, Heated Steering Wheel, 8-Way Power Passenger Seat), Power Liftgate (Standard), Ford Digital Experience (Standard)",
-        other: "Extra-cost color option shown, Standard Ford Co-Pilot360® Assist+",
-        competitors: "Competitors: Jeep Grand Cherokee Laredo, Toyota Highlander L. Explorer Active offers higher standard power (300 hp) and competitive towing capacity (5,000 lbs) with new tech like the 13.2\" Touchscreen standard.",
-        image: "./images/Explorer_Active.jpg",
-        useTitle: "Best Base Tech & Comfort",
-        strengths: [
-          "Class-leading 300 hp standard engine.",
-          "Standard 13.2” Touchscreen and 12.3” Digital Cluster.",
-          "Standard First-Row Heated Seats and Ford Co-Pilot360® Assist+.",
-          "Maximum towing capacity is 5,000 lbs (Standard Class III Trailer Tow Package)."
-        ],
-        usage: [
-          "Daily commuting and family transportation.",
-          "Buyers prioritizing tech and comfort features."
-        ],
-        demographic: [
-          "Large families and tech-focused value buyers."
-        ]
-      },
-      {
-        name: "Explorer ST-Line",
-        price: "$45,020",
-        engine: "2.3L EcoBoost I4",
-        horsepower: "300 hp",
-        torque: "310 lb-ft",
-        transmission: "10-speed Automatic",
-        transmissionOptions: "None",
-        drivetrain: "RWD",
-        drivetrainOptions: "Intelligent AWD",
-        towing: "5,000 lbs",
-        suspension: "Sport-tuned",
-        groundClearance: "7.9 in",
-        bedSize: null,
-        bluecruise: "Yes", // Corrected: Standard with a 90-day trial for 2026
-        cam360: "Yes", // Included with Ford Co-Pilot360® Assist 2.0
-        heatedSeats: "Yes",
-        clothSeats: "Yes", // Unique Cloth Seating Material With Red Stitching
-        upgradedOptions: "B&O® 10-speaker Sound System, 360-Degree Camera, Ford BlueCruise Equipped Hands-Free Highway Driving",
-        other: "Extra-cost color option shown, Sport-tuned suspension and styling.",
-        competitors: "Competitors: Jeep Grand Cherokee Overland, Toyota Highlander Limited. Explorer ST-Line offers standard Ford BlueCruise and premium tech like the B&O sound system and a 360-degree camera, often optional on competitors.",
-        image: "./images/Explorer_STLine.jpg",
-        useTitle: "Sport Style & BlueCruise",
-        strengths: [
-          "Standard Ford BlueCruise hands-free driving (Included for a year).",
-          "Sport-tuned suspension for better handling.",
-          "Includes B&O Premium Sound System (10-speaker).",
-          "Maintains 300 hp and 5,000 lbs towing capacity."
-        ],
-        usage: [
-          "Drivers wanting a sporty feel and advanced highway technology.",
-          "Daily driving with a focus on audio quality and style."
-        ],
-        demographic: [
-          "Younger families and tech-savvy style buyers."
-        ]
-      },
-      {
-        name: "Explorer Platinum",
-        price: "$52,525",
-        engine: "2.3L EcoBoost I4",
-        horsepower: "300 hp",
-        torque: "310 lb-ft",
-        transmission: "10-speed Automatic",
-        transmissionOptions: "3.0L EcoBoost V6 (400 hp)", // Optional V6 is available
-        drivetrain: "RWD",
-        drivetrainOptions: "Intelligent AWD",
-        towing: "5,000 lbs",
-        suspension: "Luxury",
-        groundClearance: "7.9 in",
-        bedSize: null,
-        bluecruise: "Yes", // Corrected: Standard with a 90-day trial for 2026
-        cam360: "Yes",
-        heatedSeats: "Yes",
-        clothSeats: "No", // Platinum Branded ActiveX® Trimmed Seats With Leather Perforated Inserts
-        upgradedOptions: "Heated and Ventilated, Multicontour Front Seats w/ Massage, Second-Row Heated Seats, Panoramic Vista Roof®",
-        other: "Extra-cost color option shown, Standard B&O 14-speaker sound system.",
-        competitors: "Competitors: Jeep Grand Cherokee Summit, Toyota Highlander Platinum. Standard BlueCruise, massaging front seats, and the Panoramic Vista Roof surpass what is offered in similarly priced trims.",
-        image: "./images/Explorer_Platinum.jpg",
-        useTitle: "Ultimate Luxury Touring",
-        strengths: [
-          "Includes BlueCruise, Massaging Front Seats, and Second-Row Heated Seats.",
-          "Standard Panoramic Vista Roof® and premium 14-speaker B&O sound system.",
-          "Focus on quiet, comfortable on-road driving.",
-          "The 400 hp V6 engine is optional."
-        ],
-        usage: [
-          "Executive transportation and premium daily driving.",
-          "Long-distance road trips with a focus on comfort."
-        ],
-        demographic: [
-          "Luxury SUV buyers and high-income professionals."
-        ]
-      },
-      {
-        name: "Explorer ST",
-        price: "$54,770",
-        engine: "3.0L EcoBoost V6",
-        horsepower: "400 hp",
-        torque: "415 lb-ft",
-        transmission: "10-speed Automatic",
-        transmissionOptions: "None",
-        drivetrain: "RWD",
-        drivetrainOptions: "Intelligent AWD",
-        towing: "5,000 lbs",
-        suspension: "Sport-tuned",
-        groundClearance: "7.9 in",
-        bedSize: null,
-        bluecruise: "Yes", // Corrected: Standard with a 90-day trial for 2026
-        cam360: "Yes",
-        heatedSeats: "Yes",
-        clothSeats: "No", // Miko® Seating Surfaces With Red Accent Stitching and ST Logos
-        upgradedOptions: "Performance brakes, Sport suspension, Third-Row PowerFold® Seat (Standard)",
-        other: "Extra-cost color option shown, Standard 400 hp V6 and BlueCruise.",
-        competitors: "Competitors: Jeep Grand Cherokee SRT, Toyota Highlander. Explorer ST is the highest performance trim with a 400 hp V6 engine, BlueCruise, and performance brakes that exceeds competitors’ sport trims in power and advanced driver technology.",
-        image: "./images/Explorer_ST.jpg",
-        useTitle: "Pure Performance SUV",
-        strengths: [
-          "Top-tier 400 hp V6 engine is standard.",
-          "Performance brakes (Red-Painted Calipers) and specialized sport suspension.",
-          "Combines maximum power with BlueCruise technology.",
-          "Includes Massaging Front Seats and 14-speaker B&O sound system."
-        ],
-        usage: [
-          "Performance driving and spirited road trips.",
-          "Drivers needing an extremely fast family SUV."
-        ],
-        demographic: [
-          "Performance sedan/SUV enthusiasts.",
-          "High-income buyers prioritizing power and handling."
-        ]
-      }
-    ]
-  },
-  {
+  name: "Explorer",
+  image: "./images/Explorer.jpg",
+  price: "$38,465",
+  trims: [
+    {
+      name: "Explorer Active 100A",
+      price: "$38,465",
+      engine: "2.3L EcoBoost I4",
+      engineOptions: "None",
+      horsepower: "300 hp",
+      torque: "310 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "None",
+      towing: "5,300 lbs",
+      suspension: "Independent",
+      groundClearance: "7.9 in", // Corrected
+      bedSize: null,
+      bluecruise: "No",
+      cam360: "Yes",
+      heatedSeats: "No",
+      clothSeats: "Yes",
+      upgradedOptions: "Class III Trailer Tow Package, Selectable drive modes, Ford Co-Pilot360 Assist+",
+      other: "Extra-cost color option shown",
+      competitors: "Competitors: Jeep Grand Cherokee Laredo, Toyota Highlander L. Explorer Active 100A offers higher towing capacity (5,300 lbs) and a more powerful standard engine (300 hp) than both the Jeep Grand Cherokee Laredo and Toyota Highlander L.",
+      image: "./images/Explorer_Active100A.jpg",
+      useTitle: "Best Base Tow/Power",
+      strengths: [
+        "Class-leading 300 hp standard engine.",
+        "High 5,300 lbs towing capacity.",
+        "Standard 360-degree camera.",
+        "Lacks heated seats and luxury options."
+      ],
+      usage: [
+        "Hauling moderate loads and family transportation.",
+        "Buyers needing power and utility at the lowest cost."
+      ],
+      demographic: [
+        "Large families and fleet customers.",
+        "Value-focused utility buyers."
+      ]
+    },
+    {
+      name: "Explorer Active",
+      price: "$40,585",
+      engine: "2.3L EcoBoost I4",
+      engineOptions: "None",
+      horsepower: "300 hp",
+      torque: "310 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "None",
+      towing: "5,300 lbs",
+      suspension: "Independent",
+      groundClearance: "7.9 in", // Corrected
+      bedSize: null,
+      bluecruise: "No",
+      cam360: "Yes",
+      heatedSeats: "Yes",
+      clothSeats: "No",
+      upgradedOptions: "Power liftgate, Heated front-row seats",
+      other: "Extra-cost color option shown",
+      competitors: "Competitors: Jeep Grand Cherokee Limited, Toyota Highlander XLE. Explorer Active adds comfort features like heated front seats not always standard on competitors, while maintaining superior towing capacity (5,300 lbs) and a powerful 300 hp engine.",
+      image: "./images/Explorer_Active.jpg",
+      useTitle: "Best Standard Comfort",
+      strengths: [
+        "Adds key comfort features like heated front seats.",
+        "Excellent blend of power and everyday convenience.",
+        "Maintains 300 hp and 5,300 lbs towing capacity.",
+        "Still lacks BlueCruise."
+      ],
+      usage: [
+        "Cold-weather climates and comfortable daily commuting.",
+        "Family vehicle for long drives."
+      ],
+      demographic: [
+        "Middle-income families.",
+        "Buyers prioritizing comfort features."
+      ]
+    },
+    {
+      name: "Explorer ST-Line",
+      price: "$45,155",
+      engine: "2.3L EcoBoost I4",
+      engineOptions: "None",
+      horsepower: "300 hp",
+      torque: "310 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "None",
+      towing: "5,300 lbs",
+      suspension: "Sport-tuned",
+      groundClearance: "7.9 in", // Corrected
+      bedSize: null,
+      bluecruise: "No",
+      cam360: "Yes",
+      heatedSeats: "Yes",
+      clothSeats: "Yes",
+      upgradedOptions: "B&O 10-speaker sound, 360-Degree Camera, Red-stitched cloth seats",
+      other: "Extra-cost color option shown",
+      competitors: "Competitors: Jeep Grand Cherokee Overland, Toyota Highlander Limited. Explorer ST-Line offers sport styling and premium tech like the B&O sound system and a 360-degree camera, which are often expensive options or not available on entry-level trims of competitors.",
+      image: "./images/Explorer_STLine.jpg",
+      useTitle: "Sport Style & Sound",
+      strengths: [
+        "Sport-tuned suspension for better handling.",
+        "Includes B&O Premium Sound System.",
+        "Distinctive sporty interior and exterior styling.",
+        "Does not feature the 400 hp V6 engine."
+      ],
+      usage: [
+        "Drivers wanting a sporty feel without the high cost of the ST.",
+        "Daily driving with a focus on audio quality and style."
+      ],
+      demographic: [
+        "Younger families and audio enthusiasts.",
+        "Customers prioritizing style and infotainment."
+      ]
+    },
+    {
+      name: "Explorer Tremor",
+      price: "$48,465",
+      engine: "3.0L EcoBoost V6",
+      engineOptions: "None",
+      horsepower: "400 hp",
+      torque: "415 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "None",
+      towing: "5,600 lbs",
+      suspension: "Off-road tuned",
+      groundClearance: "8.66 in", // Corrected
+      bedSize: null,
+      bluecruise: "No",
+      cam360: "Yes",
+      heatedSeats: "Yes",
+      clothSeats: "Yes",
+      upgradedOptions: "Torsen limited-slip rear axle, Underbody protection",
+      other: "Extra-cost color option shown",
+      competitors: "Competitors: Jeep Grand Cherokee Trailhawk, Toyota 4Runner TRD Off-Road. Explorer Tremor provides a superior 400 hp engine and Torsen limited-slip rear axle, giving it better performance both on and off-road than Jeep Grand Cherokee Trailhawk or Toyota 4Runner TRD Off-Road.",
+      image: "./images/Explorer_Tremor.jpg",
+      useTitle: "Off-Road Powerhouse",
+      strengths: [
+        "Powerful 400 hp V6 engine and higher 5,600 lbs towing.",
+        "Off-road tuned suspension and increased ground clearance (8.66 in).",
+        "Torsen limited-slip rear axle for superior traction.",
+        "Ride quality is firmer than luxury trims."
+      ],
+      usage: [
+        "Moderate off-roading, camping, and overlanding.",
+        "Towing boats or trailers that require more power."
+      ],
+      demographic: [
+        "Outdoor adventurers and overlanding enthusiasts.",
+        "Buyers who need a capable all-weather tow vehicle."
+      ]
+    },
+    {
+      name: "Explorer Platinum",
+      price: "$50,965",
+      engine: "2.3L EcoBoost I4",
+      engineOptions: "3.0L EcoBoost V6 (400 hp)",
+      horsepower: "300 hp",
+      torque: "310 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "None",
+      towing: "5,300 lbs",
+      suspension: "Luxury",
+      groundClearance: "7.9 in", // Corrected
+      bedSize: null,
+      bluecruise: "Yes",
+      cam360: "Yes",
+      heatedSeats: "Yes",
+      clothSeats: "No",
+      upgradedOptions: "Massaging front-row seats, Leather inserts, Panoramic glass roof",
+      other: "Extra-cost color option shown",
+      competitors: "Competitors: Jeep Grand Cherokee Summit, Toyota Highlander Platinum. Luxury features plus BlueCruise hands-free tech and massaging front seats surpass what is offered in similarly priced trims like the Jeep Grand Cherokee Summit or Toyota Highlander Platinum.",
+      image: "./images/Explorer_Platinum.jpg",
+      useTitle: "Ultimate Luxury Touring",
+      strengths: [
+        "Includes BlueCruise and massaging front seats.",
+        "Panoramic glass roof and premium interior materials.",
+        "Focus on quiet, comfortable on-road driving.",
+        "Uses the 2.3L I4 engine (not the 400 hp V6)."
+      ],
+      usage: [
+        "Executive transportation and premium daily driving.",
+        "Long-distance road trips with a focus on comfort."
+      ],
+      demographic: [
+        "Luxury SUV buyers and high-income professionals.",
+        "Customers prioritizing comfort and advanced tech."
+      ]
+    },
+    {
+      name: "Explorer ST",
+      price: "$54,905",
+      engine: "3.0L EcoBoost V6",
+      engineOptions: "None",
+      horsepower: "400 hp",
+      torque: "415 lb-ft",
+      transmission: "10-speed Automatic",
+      transmissionOptions: "None",
+      towing: "5,600 lbs",
+      suspension: "Sport-tuned",
+      groundClearance: "7.9 in", // Corrected
+      bedSize: null,
+      bluecruise: "Yes",
+      cam360: "Yes",
+      heatedSeats: "Yes",
+      clothSeats: "No",
+      upgradedOptions: "Performance brakes, Sport suspension, Leather seats",
+      other: "Extra-cost color option shown",
+      competitors: "Competitors: Jeep Grand Cherokee SRT, Toyota Highlander. Explorer ST is the highest performance trim with a 400 hp engine, BlueCruise, and sport-tuned suspension that exceeds competitors’ sport trims in power and advanced driver technology.",
+      image: "./images/Explorer_ST.jpg",
+      useTitle: "Pure Performance SUV",
+      strengths: [
+        "Top-tier 400 hp V6 engine.",
+        "Performance brakes and specialized sport suspension.",
+        "Combines maximum power with BlueCruise technology.",
+        "Highest cost trim in the lineup."
+      ],
+      usage: [
+        "Performance driving and spirited road trips.",
+        "Drivers needing an extremely fast family SUV."
+      ],
+      demographic: [
+        "Performance sedan/SUV enthusiasts.",
+        "High-income buyers prioritizing power and handling."
+      ]
+    }
+  ]
+},
+{ // <--- COMMA ADDED HERE to separate Explorer object from Expedition object
   name: "Expedition",
   image: "./images/Expedition.jpg",
   price: "$62,400",
@@ -1086,30 +1148,29 @@ const vehicles = {
       name: "Expedition Active",
       price: "$62,400",
       engine: "3.5L EcoBoost V6",
+      engineOptions: "None",
       horsepower: "400 hp",
       torque: "480 lb-ft",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "4x2 (RWD)",
-      drivetrainOptions: "4x4",
       towing: "9,300 lbs",
       suspension: "Independent",
       groundClearance: "8.7 in", // Corrected
       bedSize: null,
-      bluecruise: "Yes", // Corrected: BlueCruise is now standard with a 90-day trial
+      bluecruise: "No",
       cam360: "Yes",
       heatedSeats: "Yes",
       clothSeats: "Yes",
-      upgradedOptions: "Ford Split Gate, Class III Trailer Tow Package, Panoramic 13.2” display, Standard BlueCruise",
-      other: "Extra-cost color option shown, 4x2 (RWD) is standard, 4x4 optional",
+      upgradedOptions: "Ford Split Gate, Class III Trailer Tow Package, Panoramic 13.2” display",
+      other: "Extra-cost color option shown",
       competitors: "Competitors: Chevrolet Tahoe LS, GMC Yukon SLE. Expedition Active has a superior standard engine (400 hp) and offers a best-in-class towing capacity of 9,300 lbs when properly equipped, outperforming the Chevrolet Tahoe LS and GMC Yukon SLE.",
       image: "./images/Expedition_Active.jpg",
       useTitle: "Best-in-Class Base Tow",
       strengths: [
         "Best-in-class 9,300 lbs maximum towing capacity.",
         "Powerful 400 hp standard engine.",
-        "Standard 360-degree camera and BlueCruise (trial).",
-        "4x2 is standard, 4x4 is optional."
+        "Standard 360-degree camera.",
+        "Lacks BlueCruise and luxury materials."
       ],
       usage: [
         "Heavy family hauling and boat/trailer towing.",
@@ -1123,13 +1184,12 @@ const vehicles = {
     {
       name: "Expedition Platinum",
       price: "$74,850",
-      engine: "3.5L EcoBoost V6", // Corrected: Standard is 400 hp V6
-      horsepower: "400 hp",
-      torque: "480 lb-ft",
+      engine: "3.5L EcoBoost V6 High-Output",
+      engineOptions: "None",
+      horsepower: "440 hp",
+      torque: "510 lb-ft",
       transmission: "10-speed Automatic",
-      transmissionOptions: "3.5L EcoBoost V6 High-Output (440 hp)", // Corrected: HO V6 is optional
-      drivetrain: "4x2 (RWD)",
-      drivetrainOptions: "4x4",
+      transmissionOptions: "None",
       towing: "9,300 lbs",
       suspension: "Luxury",
       groundClearance: "8.7 in", // Corrected
@@ -1138,16 +1198,16 @@ const vehicles = {
       cam360: "Yes",
       heatedSeats: "Yes",
       clothSeats: "No",
-      upgradedOptions: "Platinum Ultimate Package (adds 440 hp V6), 360° Zone Lighting, Third-row flexible seating",
-      other: "Extra-cost color option shown, Standard BlueCruise",
-      competitors: "Competitors: Chevrolet Tahoe High Country, GMC Yukon Denali Ultimate. Expedition Platinum features BlueCruise hands-free highway driving technology and optional high-output 440 hp V6 engine, surpassing the luxury and tech of competitors’ similar trims.",
+      upgradedOptions: "Platinum Ultimate Package, 360° Zone Lighting, Third-row flexible seating",
+      other: "Extra-cost color option shown",
+      competitors: "Competitors: Chevrolet Tahoe High Country, GMC Yukon Denali Ultimate. Expedition Platinum features a high-output 440 hp V6 engine and BlueCruise hands-free highway driving technology, surpassing the luxury and tech of competitors’ similar trims.",
       image: "./images/Expedition_Platinum.jpg",
-      useTitle: "Ultimate Luxury & Tech",
+      useTitle: "Ultimate Luxury & Power",
       strengths: [
-        "Standard BlueCruise hands-free driving.",
-        "Top-tier luxury interior finishes, available high-output 440 hp engine.",
-        "Available Adaptive Suspension Dampers.",
-        "High-Output V6 is optional."
+        "High-Output 440 hp engine.",
+        "Includes BlueCruise hands-free driving.",
+        "Top-tier luxury interior finishes.",
+        "Highest cost trim focused on luxury."
       ],
       usage: [
         "Executive transportation and premium family hauling.",
@@ -1155,35 +1215,34 @@ const vehicles = {
       ],
       demographic: [
         "High-net-worth buyers and executives.",
-        "Drivers prioritizing comfort, tech, and refinement."
+        "Drivers prioritizing comfort, tech, and performance."
       ]
     },
     {
       name: "Expedition Tremor",
-      price: "$81,350",
+      price: "$81,400",
       engine: "3.5L EcoBoost V6 High-Output",
-      horsepower: "440 hp",
-      torque: "510 lb-ft",
+      engineOptions: "None",
+      horsepower: "440 hp", // Retaining previous value for now as new text doesn't specify, but implies High-Output
+      torque: "510 lb-ft", // Retaining previous value for now as new text doesn't specify, but implies High-Output
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
-      drivetrain: "4x4",
-      drivetrainOptions: "Electronic Locking Rear Differential, Rock Crawl Mode",
-      towing: "9,300 lbs",
-      suspension: "Off-road tuned",
-      groundClearance: "10.6 in", // Corrected
+      towing: "9,300 lbs", // Retaining previous value for now
+      suspension: "Modified Higher Ride Suspension with Premium Passive Shocks",
+      groundClearance: "10.6 in", // Corrected (Retaining the "corrected" value from the original)
       bedSize: null,
-      bluecruise: "Yes", // Corrected: BlueCruise is standard on Tremor
-      cam360: "Yes",
+      bluecruise: "No",
+      cam360: "Yes", // Retaining previous value
       heatedSeats: "Yes",
-      clothSeats: "No", // Corrected: Uses ActiveX/Unique cloth
-      upgradedOptions: "33\" all-terrain tires, Rock Crawl Mode, 3.73 electronic locking differential, Standard BlueCruise",
-      other: "Extra-cost color option shown, Standard High-Output 440 hp V6 and 4x4",
+      clothSeats: "No", // Updated to "No" based on "perforated, leather-trimmed front seats"
+      upgradedOptions: "3.73 electronic-locking differential, 18\" Dark Carbonized Gray-painted aluminum wheels w/ Electric Spice pocket, 33\" all-terrain tires, Heated/Ventilated Perforated Leather Seats, Heated Second-Row Captain's Chairs",
+      other: "Fuel Tank Underbody Protection, Modified Raptor Skid Plates - Front and Transmission Underbody, Customizable 24\" Panoramic Display and 13.2\" Center Display (Ford Digital Experience), Trail Control™ (Includes Trail One Pedal Drive and Trail Turn Assist)",
       competitors: "Competitors: Chevrolet Tahoe Z71, GMC Yukon AT4. Expedition Tremor provides superior off-road hardware including 33” all-terrain tires and a 3.73 electronic locking differential, giving it a clear advantage in trail capability and ground clearance (10.6 inches) over Chevrolet Tahoe Z71 and GMC Yukon AT4.",
       image: "./images/Expedition_Tremor.jpg",
       useTitle: "Off-Road Max Clearance",
       strengths: [
         "Superior 10.6 inches of ground clearance.",
-        "Includes standard 440 hp High-Output V6 engine and 4x4.",
+        "Includes 440 hp High-Output V6 engine.",
         "33-inch all-terrain tires and electronic locking differential.",
         "Ride is optimized for off-road, firmer on-road."
       ],
@@ -1198,32 +1257,31 @@ const vehicles = {
     },
     {
       name: "Expedition King Ranch",
-      price: "$84,000",
-      engine: "3.5L EcoBoost V6", // Corrected: Standard is 400 hp V6
-      horsepower: "400 hp",
-      torque: "480 lb-ft",
+      price: "$84,060",
+      engine: "3.5L EcoBoost V6 High-Output", // New text lists "3.5L EcoBoost® Engine" under "Power," but the description implies the high-output from previous context, keeping V6 H-O for consistency
+      engineOptions: "None",
+      horsepower: "440 hp", // Retaining previous value
+      torque: "510 lb-ft", // Retaining previous value
       transmission: "10-speed Automatic",
-      transmissionOptions: "3.5L EcoBoost V6 High-Output (440 hp)", // Corrected: HO V6 is optional
-      drivetrain: "4x2 (RWD)",
-      drivetrainOptions: "4x4",
-      towing: "9,300 lbs",
-      suspension: "Luxury",
-      groundClearance: "8.7 in", // Corrected
+      transmissionOptions: "None",
+      towing: "9,300 lbs", // Retaining previous value
+      suspension: "Luxury", // Retaining previous value as new text does not specify
+      groundClearance: "8.7 in", // Corrected (Retaining the "corrected" value from the original)
       bedSize: null,
-      bluecruise: "Yes",
-      cam360: "Yes",
+      bluecruise: "Yes", // Retaining previous value
+      cam360: "Yes", // Retaining previous value
       heatedSeats: "Yes",
       clothSeats: "No",
-      upgradedOptions: "Mesa Del Rio leather with Kingsville stitching, Driver's Package, Standard BlueCruise",
-      other: "Extra-cost color option shown, Unique Western Luxury Interior",
-      competitors: "Competitors: Chevrolet Tahoe Premier, GMC Yukon Denali. King Ranch trim combines unique luxury materials, the 400 hp EcoBoost engine, and BlueCruise hands-free highway driving, a combination of features unmatched by competitors.",
+      upgradedOptions: "Del Rio and Mesa Del Rio leather with Kingsville stitching, Finely crafted heated and ventilated first-row seats, Heated Second-Row Captain's Chairs, 22\" Sinister Bronze diamond-cut machined-face aluminum wheels with exclusive King Ranch center cap",
+      other: "Non-Limited-Slip 3.73 Rear Axle, Optional Skid Plates, Hill Start Assist and Hill Descent Control™",
+      competitors: "Competitors: Chevrolet Tahoe Premier, GMC Yukon Denali. King Ranch trim combines unique luxury materials, the 440 hp High-Output engine, and BlueCruise hands-free highway driving, a combination of features unmatched by competitors.",
       image: "./images/Expedition_KingRanch.jpg",
       useTitle: "Unique Western Luxury",
       strengths: [
         "Exclusive King Ranch leather and interior styling.",
-        "Standard BlueCruise and 400 hp engine.",
+        "High-Output 440 hp engine and BlueCruise.",
         "High level of luxury with unique character.",
-        "High-Output V6 is optional."
+        "Highest cost trim in the lineup."
       ],
       usage: [
         "Ranch owners and buyers who appreciate unique luxury.",
@@ -1232,118 +1290,6 @@ const vehicles = {
       demographic: [
         "High-net-worth buyers with a rural/western aesthetic preference.",
         "Customers seeking maximum luxury and exclusivity."
-      ]
-    },
-    // --- New Expedition MAX Trims Added Below ---
-    {
-      name: "Expedition MAX Active",
-      price: "$65,400",
-      engine: "3.5L EcoBoost V6",
-      horsepower: "400 hp",
-      torque: "480 lb-ft",
-      transmission: "10-speed Automatic",
-      transmissionOptions: "None",
-      drivetrain: "4x2 (RWD)",
-      drivetrainOptions: "Intelligent 4WD",
-      towing: "6,300 lbs", // 4x2 Model Towing Max (per provided data)
-      suspension: "Independent",
-      groundClearance: "8.7 in",
-      bedSize: "37.4 cu ft", // Cargo behind 3rd row, compared to standard WB
-      bluecruise: "No", // Not explicitly mentioned as standard
-      cam360: "No", // Not explicitly mentioned as standard
-      heatedSeats: "Yes",
-      clothSeats: "No", // Standard seating material assumes an upgrade over base cloth
-      upgradedOptions: "Ford Split Gate, Flex Powered Console, 10-way power driver’s seat, 24\" panoramic display and 13.2\" center display",
-      other: "Extra-cost color option shown, Up to 11.8\" of extra cargo length.",
-      competitors: "Competitors: Chevrolet Suburban LS, GMC Yukon XL SLE. Expedition MAX Active offers superior standard power (400 hp) and competitive towing with much greater cargo capacity than the standard Expedition.",
-      image: "./images/Expedition_MAX_Active.jpg",
-      useTitle: "Max Cargo & Utility Base",
-      strengths: [
-        "Massive cargo capacity: 37.4 cu ft behind the third row.",
-        "Longer wheelbase and larger cabin for big families.",
-        "24\" panoramic display and Ford Digital Experience standard.",
-        "Highest towing capacity of 6,300 lbs on 4x2 MAX Active model."
-      ],
-      usage: [
-        "Large family road trips and maximum gear hauling.",
-        "Buyers needing absolute maximum interior space."
-      ],
-      demographic: [
-        "Large families with multiple children, high-utility users."
-      ]
-    },
-    {
-      name: "Expedition MAX Platinum",
-      price: "$76,950",
-      engine: "3.5L EcoBoost V6",
-      horsepower: "400 hp",
-      torque: "480 lb-ft",
-      transmission: "10-speed Automatic",
-      transmissionOptions: "3.5L EcoBoost V6 High-Output (440 hp)",
-      drivetrain: "4x2 (RWD)", // Based on general Expedition lineup, but often comes standard with 4x4
-      drivetrainOptions: "Intelligent 4WD, Continuous Controlled Damping (CCD) Suspension",
-      towing: "9,300 lbs", // Assumes same max tow with package
-      suspension: "Luxury",
-      groundClearance: "8.7 in",
-      bedSize: "37.4 cu ft",
-      bluecruise: "Yes", // Standard on Platinum trims
-      cam360: "Yes",
-      heatedSeats: "Yes",
-      clothSeats: "No", // Leather-trimmed seats standard
-      upgradedOptions: "Available 440 hp High-Output V6, Available CCD Suspension, First- and Second-Row Leather-Trimmed Seats",
-      other: "Extra-cost color option shown, Standard 24\" Panoramic Display and 13.2\" center display.",
-      competitors: "Competitors: Chevrolet Suburban High Country, GMC Yukon XL Denali. Combines maximum cargo space with top-tier luxury, BlueCruise, and the optional high-output 440 hp V6.",
-      image: "./images/Expedition_MAX_Platinum.jpg",
-      useTitle: "Ultimate Luxury Max Capacity",
-      strengths: [
-        "Maximum size combined with luxury features.",
-        "Standard BlueCruise and advanced Ford Digital Experience.",
-        "Available Adaptive Suspension (CCD) for supreme comfort.",
-        "Optional 440 hp High-Output V6 for max performance."
-      ],
-      usage: [
-        "Executive transportation and premium long-haul family trips.",
-        "Buyers demanding the best comfort in the largest package."
-      ],
-      demographic: [
-        "High-income buyers prioritizing comfort, space, and tech."
-      ]
-    },
-    {
-      name: "Expedition MAX King Ranch",
-      price: "$87,060",
-      engine: "3.5L EcoBoost V6",
-      horsepower: "400 hp",
-      torque: "480 lb-ft",
-      transmission: "10-speed Automatic",
-      transmissionOptions: "3.5L EcoBoost V6 High-Output (440 hp)", // Based on standard King Ranch
-      drivetrain: "4x2 (RWD)",
-      drivetrainOptions: "Intelligent 4WD",
-      towing: "9,300 lbs",
-      suspension: "Luxury",
-      groundClearance: "8.7 in",
-      bedSize: "37.4 cu ft",
-      bluecruise: "Yes",
-      cam360: "Yes",
-      heatedSeats: "Yes",
-      clothSeats: "No", // Mesa Del Rio leather with Kingsville stitching
-      upgradedOptions: "Driver's Package, 22\" Sinister Bronze wheels, First- and Second-Row Captain's Chairs",
-      other: "Extra-cost color option shown, Exclusive King Ranch interior styling.",
-      competitors: "Competitors: Chevrolet Suburban Premier with Signature Package, GMC Yukon XL Denali Ultimate. The King Ranch MAX combines unique, high-end materials, maximum size, and standard BlueCruise, offering a distinctive luxury experience.",
-      image: "./images/Expedition_MAX_KingRanch.jpg",
-      useTitle: "Unique Western Luxury Max",
-      strengths: [
-        "Exclusive King Ranch interior with Mesa Del Rio leather.",
-        "Maximum cargo space and standard BlueCruise.",
-        "Head-turning 22\" Sinister Bronze wheels.",
-        "High level of luxury and exclusivity in the long-wheelbase body."
-      ],
-      usage: [
-        "Buyers who need maximum space and appreciate high-end, unique styling.",
-        "Premium towing and daily driver."
-      ],
-      demographic: [
-        "High-net-worth buyers with a western aesthetic, seeking exclusivity."
       ]
     }
   ]
@@ -1360,12 +1306,11 @@ const vehicles = {
           name: "XL",
           price: "$28,145",
           engine: "2.5L Hybrid I4",
+          engineOptions: "2.5L Hybrid AWD, 2.0L EcoBoost® FWD, 2.0L EcoBoost® AWD",
           horsepower: "191 hp",
           torque: "155 lb-ft",
           transmission: "eCVT",
-          transmissionOptions: "None",
-          drivetrain: "FWD",
-          drivetrainOptions: "Intelligent AWD (Requires EcoBoost Engine)",
+          transmissionOptions: "8-Speed Automatic Transmission",
           towing: "2,000 lbs",
           suspension: "Independent",
           groundClearance: "8.6 in",
@@ -1374,8 +1319,8 @@ const vehicles = {
           cam360: "No",
           heatedSeats: "No",
           clothSeats: "Yes",
-          upgradedOptions: "FLEXBED Storage System, Ford Co-Pilot360 Technology",
-          other: "12\" LCD capacitive touchscreen with swipe capability",
+          upgradedOptions: "FLEXBED Storage System, Ford Co-Pilot360 Technology, Conventional 17\" Spare Tire (215/70R17) with available 4K Tow/FX4 Off-Road packages",
+          other: "Standard 2.5L Hybrid FWD, 17\" Steel Wheels with Sparkle Silver Painted Covers, SYNC® 4 Technology, Electronic Brake Boost – (Hybrid Only)",
           competitors:
             "Competitors: Hyundai Santa Cruz SE. Maverick XL offers standard hybrid efficiency and a more durable FLEXBED system than the Hyundai Santa Cruz SE.",
           image: "./images/Maverick_XL.jpg",
@@ -1402,12 +1347,11 @@ const vehicles = {
           name: "XLT",
           price: "$30,645",
           engine: "2.5L Hybrid I4",
+          engineOptions: "2.5L Hybrid AWD, 2.0L EcoBoost® FWD, 2.0L EcoBoost® AWD",
           horsepower: "191 hp",
           torque: "155 lb-ft",
           transmission: "eCVT",
-          transmissionOptions: "2.0L EcoBoost I4 with 8-speed Auto",
-          drivetrain: "FWD",
-          drivetrainOptions: "Intelligent AWD (Requires EcoBoost Engine)",
+          transmissionOptions: "8-speed Automatic Transmission",
           towing: "2,000 lbs",
           suspension: "Independent",
           groundClearance: "8.6 in",
@@ -1416,8 +1360,8 @@ const vehicles = {
           cam360: "No",
           heatedSeats: "No",
           clothSeats: "Yes",
-          upgradedOptions: "FX4 Off-Road Package, 17\" Painted Aluminum Wheels",
-          other: "Intelligent Access with push-button start",
+          upgradedOptions: "FX4 Off-Road Package, 17\" Carbonized Gray-painted aluminum wheels, 2K trailer hitch receiver w/ 4-pin connector, Conventional 17\" Spare Tire (215/70R17) with available 4K Tow/FX4 Off-Road packages, 19\" Black Painted Aluminum Wheels (optional)",
+          other: "Intelligent Access with Push-button Start, Extra storage and tie-downs in the bed, Tire Inflator and Sealant Kit (Standard on Hybrid AWD and 2.0L EcoBoost®), Electronic Brake Boost – (Hybrid Only)",
           competitors:
             "Competitors: Hyundai Santa Cruz SEL. Maverick XLT's available FX4 Off-Road Package provides better off-road capability than the Santa Cruz SEL.",
           image: "./images/Maverick_XLT.jpg",
@@ -1444,12 +1388,11 @@ const vehicles = {
           name: "Lobo",
           price: "$35,930",
           engine: "2.0L EcoBoost I4",
+          engineOptions: "None",
           horsepower: "250 hp",
           torque: "277 lb-ft",
           transmission: "7-speed Quick Shift",
           transmissionOptions: "None",
-          drivetrain: "Intelligent AWD",
-          drivetrainOptions: "Torque Vectoring Twin Clutch Rear Drive Unit",
           towing: "4,000 lbs", // Estimated for EcoBoost 4K Tow Package
           suspension: "Performance-tuned",
           groundClearance: "8.6 in",
@@ -1458,8 +1401,8 @@ const vehicles = {
           cam360: "No",
           heatedSeats: "No",
           clothSeats: "No",
-          upgradedOptions: "Torque vectoring twin clutch rear drive unit",
-          other: "Performance-tuned steering and suspension",
+          upgradedOptions: "Torque vectoring twin clutch rear drive unit, Unique grille, ActiveX®-trimmed seats with unique accent stitching, Available 19\" open-spoke aluminum wheels, Conventional 17\" Spare Tire (215/70R17) with available 4K Tow/FX4 Off-Road packages",
+          other: "Performance-tuned steering and brakes, Advanced AWD drivetrain, Exclusive track-only configuration: Lobo mode, 19\" Turbofan-Styled Black Painted Aluminum Wheels (standard)",
           competitors:
             "Competitors: Hyundai Santa Cruz Night. Maverick Lobo offers a dedicated performance powertrain with a 7-speed quick shift transmission and performance-tuned steering.",
           image: "./images/Maverick_Lobo.jpg",
@@ -1484,14 +1427,13 @@ const vehicles = {
         {
           name: "Lariat",
           price: "$38,090",
-          engine: "2.0L EcoBoost I4",
-          horsepower: "250 hp",
-          torque: "277 lb-ft",
-          transmission: "8-speed Automatic",
-          transmissionOptions: "2.5L Hybrid with eCVT",
-          drivetrain: "FWD",
-          drivetrainOptions: "Intelligent AWD (Requires EcoBoost Engine)",
-          towing: "4,000 lbs",
+          engine: "2.5L Hybrid AWD",
+          engineOptions: "2.0L EcoBoost AWD",
+          horsepower: "191 hp (Hybrid), 250 hp (EcoBoost)",
+          torque: "155 lb-ft (Hybrid), 280 lb-ft (EcoBoost)", // Updated EcoBoost torque to 280 lb-ft
+          transmission: "Power-Split Electric CVT Transmission",
+          transmissionOptions: "8-Speed Automatic Transmission",
+          towing: "4,000 lbs (with 4K Tow Package)",
           suspension: "Independent",
           groundClearance: "8.6 in",
           bedSize: "4.5 ft",
@@ -1499,18 +1441,18 @@ const vehicles = {
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Pro Trailer Backup Assist",
-          other: "Heated steering wheel, 19\" machined-painted aluminum wheels",
+          upgradedOptions: "4K Tow Package, Black Appearance Package, Power Moonroof",
+          other: "Heated steering wheel, 19\" machine-face bright aluminum wheels, power-adjustable driver’s seat, Dual-Zone Electronic Automatic Temperature Control (DEATC), 8-speaker B&O® Sound System, 13.2\" Center Display, Smoked Truffle ActiveX® Seats, Adaptive Cruise Control (ACC)",
           competitors:
-            "Competitors: Hyundai Santa Cruz Limited. Maverick Lariat provides premium features like Pro Trailer Backup Assist and a heated steering wheel, often not found in similar competitor trims.",
+            "Competitors: Hyundai Santa Cruz Limited. Maverick Lariat provides premium features like Pro Trailer Backup Assist, a heated steering wheel, and an 8-speaker B&O® Sound System, often not found in similar competitor trims.",
           image: "./images/Maverick_Lariat.jpg",
           // UPDATED FLASHCARD DATA HERE
           useTitle: "Best Comfort/Tech",
           strengths: [
-            "Highest level of standard comfort and luxury features (ActiveX seating, heated steering wheel).",
+            "Highest level of standard comfort and luxury features (ActiveX seating, heated steering wheel, 8-speaker B&O® Sound System).",
             "Available 360-degree camera and Pro Trailer Backup Assist.",
             "Premium interior finishes and larger, distinctive 19” wheels.",
-            "Access to both EcoBoost (4,000 lbs towing) and Hybrid powertrains.",
+            "Access to both Hybrid and EcoBoost (4,000 lbs towing) powertrains.",
             "Highest starting price point in the core lineup."
           ],
           usage: [
@@ -1525,13 +1467,12 @@ const vehicles = {
         {
           name: "Tremor",
           price: "$40,645",
-          engine: "2.0L EcoBoost I4",
+          engine: "2.0L EcoBoost Advanced 4WD",
+          engineOptions: "None",
           horsepower: "250 hp",
           torque: "277 lb-ft",
-          transmission: "8-speed Automatic",
+          transmission: "8-Speed Automatic Transmission",
           transmissionOptions: "None",
-          drivetrain: "Intelligent AWD",
-          drivetrainOptions: "Twin Clutch Rear Drive Unit, Trail Control",
           towing: "2,000 lbs",
           suspension: "Off-road tuned",
           groundClearance: "9.4 in", // Tremor specific clearance
@@ -1540,19 +1481,19 @@ const vehicles = {
           cam360: "No",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Skid plates, Rear drive unit lock",
-          other: "Advanced 4WD with twin clutch rear drive unit, Unique springs and shocks",
+          upgradedOptions: "Skid plates, Lockable rear differential, Trail Control™",
+          other: "Advanced 4WD with twin clutch rear drive unit, Unique springs and shocks, 17\" machined-face tarnished dark painted wheels with orange pockets, orange front tow hooks, B&O Sound System",
           competitors:
-            "Competitors: None directly comparable. Maverick Tremor offers a unique, factory-backed off-road package with specialized suspension and a twin-clutch rear drive unit not available from competitors.",
+            "Competitors: None directly comparable. Maverick Tremor offers a unique, factory-backed off-road package with specialized suspension, elevated ground clearance, and a lockable rear differential not available from competitors.",
           image: "./images/Maverick_Tremor.jpg",
           // UPDATED FLASHCARD DATA HERE
           useTitle: "Best Off-Road Capability",
           strengths: [
             "Specialized off-road tuned suspension with 9.4 inches of ground clearance.",
-            "Advanced 4WD system with twin-clutch rear drive unit (rear axle lock).",
+            "Advanced 4WD system with twin-clutch rear drive unit (lockable rear differential).",
             "Unique off-road features: Trail Control and dedicated skid plates.",
             "Rugged, unique exterior styling with orange accents and all-terrain tires.",
-            "Lower towing capacity (2,000 lbs) than the XLT/Lariat with 4K package."
+            "Lower towing capacity (2,000 lbs) than the Lariat with 4K package."
           ],
           usage: [
             "Frequent off-road use, camping, or handling rough, unpaved terrain.",
@@ -1574,22 +1515,21 @@ const vehicles = {
           name: "XL",
           price: "$33,350",
           engine: "2.3L EcoBoost I4",
+          engineOptions: "None",
           horsepower: "270 hp",
           torque: "310 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "None",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4",
-          towing: "7,500 lbs",
-          suspension: "Independent Front/Solid Rear",
+          towing: "7,500 lbs (Standard 4-Pin Wiring and Ball Mounting Provisions)",
+          suspension: "Independent Front/Leaf Rear", // Corrected Leaf Rear for consistency
           groundClearance: "8.9 in",
           bedSize: "6 ft", // Based on SuperCab
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
           clothSeats: "Yes",
-          upgradedOptions: "STX Appearance Package, Trailer Tow Package",
-          other: "Remote Keyless Entry System",
+          upgradedOptions: "STX Appearance Package (Standard), Trailer Tow Package (Optional), 4x4 with Electronic-Locking Rear Differential (Optional)",
+          other: "Remote Keyless Entry System, LED Reflector Headlamps, Halogen Fog Lamps, Power Locking Tailgate, Power Glass Side Mirrors, Rear View Camera, AdvanceTrac® with RSC®",
           competitors:
             "Competitors: Chevrolet Colorado WT, Toyota Tacoma SR. Ranger XL offers a superior 2.3L EcoBoost engine providing best-in-class standard performance and towing capacity.",
           image: "./images/Ranger_XL.jpg",
@@ -1613,12 +1553,11 @@ const vehicles = {
           name: "XLT",
           price: "$35,375",
           engine: "2.3L EcoBoost I4",
+          engineOptions: "2.7L EcoBoost V6",
           horsepower: "270 hp",
           torque: "310 lb-ft",
           transmission: "10-speed Automatic",
-          transmissionOptions: "2.7L EcoBoost V6",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4",
+          transmissionOptions: "None",
           towing: "7,500 lbs",
           suspension: "Independent Front/Solid Rear",
           groundClearance: "8.9 in",
@@ -1627,21 +1566,22 @@ const vehicles = {
           cam360: "No",
           heatedSeats: "No",
           clothSeats: "Yes",
-          upgradedOptions: "Sport Appearance Package, Advanced Towing Package",
-          other: "Remote start",
+          upgradedOptions: "FX4 Off-Road Package, Advanced Towing Package, Power-Sliding Rear Window, 12\" Center Display, 360-Degree Camera (Optional)",
+          other: "Sport Appearance Package (Standard), LED Fog Lamps, Power-Folding Side Mirrors, Rear Parking Sensors, SYNC®4A with 10\" Display, Ford Co-Pilot360® Technology (BLIS, Lane-Keeping, etc.)",
           competitors:
             "Competitors: Chevrolet Colorado Z71, Toyota Tacoma TRD Sport. Ranger XLT offers an available 2.7L EcoBoost V6 engine, providing higher power than competitors' mid-level trims.",
           image: "./images/Ranger_XLT.jpg",
           useTitle: "Best Mid-Range Value",
           strengths: [
-            "Adds comfort and tech features like remote start.",
+            "Significant upgrade in standard safety and technology (Co-Pilot360, SYNC®4A, 10\" Display).",
             "Available 2.7L V6 engine for a significant power boost.",
+            "Access to specialized off-road features (FX4 Package, Ford Trail Control®).",
             "Maintains 7,500 lbs towing capacity.",
             "Still uses cloth seats as standard."
           ],
           usage: [
             "Family use and moderate recreational towing.",
-            "Commuters who appreciate added convenience."
+            "Commuters who appreciate added convenience and safety tech."
           ],
           demographic: [
             "Small families and buyers upgrading from smaller trucks.",
@@ -1651,13 +1591,12 @@ const vehicles = {
         {
           name: "Lariat",
           price: "$43,755",
-          engine: "2.7L EcoBoost V6",
-          horsepower: "315 hp",
-          torque: "400 lb-ft",
+          engine: "2.3L EcoBoost I4",
+          engineOptions: "2.7L EcoBoost V6",
+          horsepower: "270 hp",
+          torque: "310 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "None",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4",
           towing: "7,500 lbs",
           suspension: "Independent Front/Solid Rear",
           groundClearance: "9.3 in",
@@ -1666,16 +1605,17 @@ const vehicles = {
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Power, heated, leather-trimmed front seats with driver memory",
-          other: "Power, heated, leather-trimmed front seats with driver memory",
+          upgradedOptions: "FX4 Off-Road Package, Advanced Towing Package, Wireless Charging Pad, 120V/400W In-Cab/In-Bed Power Outlets (Optional)",
+          other: "Power, heated, leather-trimmed front seats with driver memory, 12\" Digital Cluster and Center Display, B&O® Sound System, Adaptive Cruise Control, LED Projector Headlamps, Zone Lighting",
           competitors:
-            "Competitors: Chevrolet Colorado ZR2, Toyota Tacoma Limited. Ranger Lariat delivers more luxury features like driver memory seats and zone lighting while offering the powerful 2.7L EcoBoost V6.",
+            "Competitors: Chevrolet Colorado ZR2, Toyota Tacoma Limited. Ranger Lariat delivers more luxury features like driver memory seats and zone lighting while offering the powerful 2.7L EcoBoost V6 option.",
           image: "./images/Ranger_Lariat.jpg",
           useTitle: "Luxury & High Power",
           strengths: [
-            "Powerful 315 hp V6 engine is standard.",
-            "Premium leather-trimmed, heated front seats.",
-            "Includes 360-degree camera for enhanced safety/parking.",
+            "Comprehensive luxury and tech standard (Leather, Heated Seats, 12\" Screens, B&O Audio).",
+            "Standard 360-Degree Camera and Adaptive Cruise Control.",
+            "Available powerful 315 hp V6 engine.",
+            "Access to FX4 Off-Road Package and high-end towing packages.",
             "Highest cost trim before the specialized Raptor."
           ],
           usage: [
@@ -1691,30 +1631,30 @@ const vehicles = {
           name: "Raptor",
           price: "$56,070",
           engine: "3.0L EcoBoost V6",
+          engineOptions: "None",
           horsepower: "405 hp",
           torque: "430 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "None",
-          drivetrain: "4x4",
-          drivetrainOptions: "Electronic Locking Front/Rear Axles, Advanced 4WD with Hi-Lock Transfer Case",
           towing: "5,510 lbs",
-          suspension: "Watts-link Rear/FOX Live Valve Shocks",
+          suspension: "Forged Aluminum Double A-Arm / Watts-Link Rear with 2.5-inch Fox Live Valve Shocks",
           groundClearance: "10.7 in",
           bedSize: "5 ft",
           bluecruise: "No",
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Electronic locking front and rear axles",
-          other: "2.5-inch FOX Racing Shocks with Live Valve Technology",
+          upgradedOptions: "Beadlock Capable Wheels (Optional), Engine Block Heater (Optional)",
+          other: "Electronic Locking Front & Rear Axles (Standard), Unique Ford Lettering Grille, Heavy Duty Exposed Steel Bash Plate, Zone Lighting, B&O Sound System, 12\" Digital Cluster and Center Display, Advanced Towing Package (Standard)",
           competitors:
             "Competitors: Chevrolet Colorado ZR2 Bison. Ranger Raptor features a 405 hp 3.0L EcoBoost V6 and advanced FOX Live Valve Shocks, providing superior high-speed off-road performance over its rivals.",
           image: "./images/Ranger_Raptor.jpg",
           useTitle: "High-Speed Off-Road",
           strengths: [
             "Extreme 405 hp V6 engine.",
-            "FOX Live Valve Shocks and Watts-link rear suspension.",
-            "Electronic locking front and rear axles.",
+            "FOX Live Valve Shocks and Watts-link rear suspension for superior off-roading.",
+            "Electronic locking front and rear axles standard.",
+            "Comprehensive luxury and tech standard (Heated Seats, 12\" Screens, B&O Audio).",
             "Towing capacity is lower than standard Ranger trims."
           ],
           usage: [
@@ -1737,31 +1677,30 @@ const vehicles = {
           name: "XL",
           price: "$38,810",
           engine: "2.7L EcoBoost V6",
+          engineOptions: "3.5L EcoBoost V6, 5.0L Ti-VCT V8",
           horsepower: "325 hp",
           torque: "400 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "3.5L EcoBoost V6, 5.0L V8",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4",
           towing: "8,400 lbs", // Estimated max for 2.7L
-          suspension: "Independent Front/Solid Rear",
+          suspension: "Independent Front/Solid Rear (Leaf, Two-Stage Variable Rate)",
           groundClearance: "9.4 in",
           bedSize: "6.5 ft",
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
           clothSeats: "Yes",
-          upgradedOptions: "36-gallon fuel tank, Class IV trailer hitch",
-          other: "12\" LCD capacitive touchscreen with swipe capability",
+          upgradedOptions: "36-gallon fuel tank, Power-Sliding Rear Window, Dual-Zone Auto Climate Control (Optional)",
+          other: "Standard 12\" Digital Cluster and 12\" Capacitive Touchscreen (SYNC® 4), BLIS® w/ Cross-Traffic Alert and Trailer Tow Coverage, Reverse Sensing System, LED Reflector Headlamps, Power Lock Tailgate",
           competitors:
             "Competitors: Chevrolet Silverado 1500 WT, Ram 1500 Tradesman. F-150 XL boasts a more powerful standard 2.7L EcoBoost V6 engine and a larger 12\" standard touchscreen than base models of the Chevrolet Silverado and Ram 1500.",
           image: "./images/F150_XL.jpg",
           useTitle: "Best Base Power/Work",
           strengths: [
             "Best-in-class standard 325 hp V6 engine.",
-            "Standard 12\" LCD touchscreen.",
+            "Standard dual 12\" screens (Cluster and Center Stack).",
             "Excellent towing capability for a base model.",
-            "Basic vinyl/cloth interior for durability."
+            "Includes essential safety features (BLIS, Reverse Sensing) as standard."
           ],
           usage: [
             "Commercial fleet and heavy job site use.",
@@ -1776,69 +1715,67 @@ const vehicles = {
           name: "STX",
           price: "$42,015",
           engine: "2.7L EcoBoost V6",
+          engineOptions: "5.0L Ti-VCT V8",
           horsepower: "325 hp",
           torque: "400 lb-ft",
           transmission: "10-speed Automatic",
-          transmissionOptions: "3.5L EcoBoost V6, 5.0L V8",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4",
+          transmissionOptions: "5.0L V8",
           towing: "8,400 lbs",
-          suspension: "Independent Front/Solid Rear",
+          suspension: "Independent Front/Solid Rear (Leaf, Two-Stage Variable Rate)",
           groundClearance: "9.4 in",
           bedSize: "5.5 ft",
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
           clothSeats: "Yes",
-          upgradedOptions: "18\" Gloss Black aluminum wheels, STX FX4 Trim",
-          other: "Available F-150 Lobo Package, Available Zone Lighting",
+          upgradedOptions: "FX4 Off-Road Package (Skid Plates, A/T Tires), Mobile Office Package (Console Work Surface, 400W Outlet)",
+          other: "18\" Gloss Black Wheels, Body-Color Bumpers, LED Fog Lamps with Cornering Lamps, Unique Sport Cloth Seating, 12\" Digital Cluster and 12\" Touchscreen (SYNC® 4)",
           competitors:
-            "Competitors: Chevrolet Silverado 1500 Custom, Ram 1500 Big Horn. F-150 STX focuses on sporty styling and a feature-rich package at a lower entry price than competitor mid-range trims.",
+            "Competitors: Chevrolet Silverado 1500 Custom, Ram 1500 Big Horn. F-150 STX focuses on sporty styling (body-color bumpers, black grille, black wheels) and a feature-rich package at a lower entry price than competitor mid-range trims.",
           image: "./images/F150_STX.jpg",
           useTitle: "Best Value/Style",
           strengths: [
             "Adds sporty, stylish elements over the XL.",
-            "Powerful 325 hp engine.",
-            "Good middle ground of features and price.",
-            "Lacks luxury features like leather and heating."
+            "Standard dual 12\" screens and LED Fog Lamps.",
+            "Optional V8 and dedicated Mobile Office Package.",
+            "Good middle ground of features and price."
           ],
           usage: [
             "Drivers who prioritize the look of their truck.",
-            "Commuting and light recreational use."
+            "Commuting and light recreational use, with an eye on affordability."
           ],
           demographic: [
             "Younger buyers and those wanting a sporty aesthetic.",
-            "Buyers stepping up from the XL."
+            "Buyers stepping up from the XL who want more style."
           ]
         },
         {
           name: "XLT",
           price: "$45,695",
           engine: "2.7L EcoBoost V6",
+          engineOptions: "3.5L EcoBoost V6, 5.0L Ti-VCT V8, 3.5L PowerBoost Full Hybrid V6 (430 hp)",
           horsepower: "325 hp",
           torque: "400 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "3.5L PowerBoost Full Hybrid V6, 5.0L V8",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4",
           towing: "8,400 lbs",
-          suspension: "Independent Front/Solid Rear",
+          suspension: "Independent Front/Solid Rear (Leaf, Two-Stage Variable Rate)",
           groundClearance: "9.4 in",
           bedSize: "5.5 ft",
           bluecruise: "No",
-          cam360: "Yes",
-          heatedSeats: "Yes",
+          cam360: "No",
+          heatedSeats: "No", // Optional
           clothSeats: "Yes",
-          upgradedOptions: "360-degree camera, Zone Lighting",
-          other: "Available 3.5L PowerBoost Full Hybrid V6",
+          upgradedOptions: "360-degree camera, Zone Lighting (Standard), Heated Seats (Optional), Pro Power Onboard (2kW/2.4kW/7.2kW), Pro Trailer Hitch Assist™ (Optional)",
+          other: "Standard 12\" SYNC 4 Touchscreen, LED Fog Lamps, Chrome Exterior Package, Available BlueCruise, Optional B&O Sound System",
           competitors:
-            "Competitors: Chevrolet Silverado 1500 LT, Ram 1500 Laramie. F-150 XLT offers the unique option of a full hybrid powertrain (PowerBoost) for fuel economy and Pro Power Onboard functionality, giving it an edge in versatility.",
+            "Competitors: Chevrolet Silverado 1500 LT, Ram 1500 Laramie. F-150 XLT offers the unique option of a full hybrid powertrain (PowerBoost) for 430 hp, fuel economy and high Pro Power Onboard wattage, giving it an edge in versatility.",
           image: "./images/F150_XLT.jpg",
           useTitle: "Best-Selling Balance",
           strengths: [
             "Optimal balance of price, features, and capability.",
-            "Optional PowerBoost Hybrid for power and Pro Power Onboard.",
-            "Adds heating and a 360-degree camera.",
+            "Optional 430 hp PowerBoost Hybrid for power and mobile Pro Power Onboard.",
+            "Adds available heating, Zone Lighting, and advanced towing tech.",
             "Still uses cloth seats as standard."
           ],
           usage: [
@@ -1854,30 +1791,29 @@ const vehicles = {
           name: "Lariat",
           price: "$63,360",
           engine: "5.0L V8",
+          engineOptions: "3.5L EcoBoost V6, 3.5L PowerBoost Full Hybrid V6",
           horsepower: "400 hp",
           torque: "410 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "3.5L PowerBoost Full Hybrid V6",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4, Two-Speed Automatic 4WD",
           towing: "11,300 lbs", // Estimated max for 5.0L
-          suspension: "Independent Front/Solid Rear",
+          suspension: "Independent Front/Solid Rear (Leaf, Two-Stage Variable Rate)",
           groundClearance: "9.4 in",
           bedSize: "5.5 ft",
-          bluecruise: "No",
+          bluecruise: "Yes", // BlueCruise Equipped (90-Day Trial) Standard
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Two-speed automatic 4WD, B&O Unleashed sound system",
-          other: "All standard XLT features, Neutral Towing Capability",
+          upgradedOptions: "Two-speed automatic 4WD (Standard), B&O Unleashed sound system (Optional), Pro Access Tailgate (Optional), Heads-Up Display (Optional)",
+          other: "Standard 4x4, Heated/Ventilated ActiveX-Trimmed Seats, LED Projector Headlamps, Standard B&O Sound System, Pro Trailer Hitch Assist™ and Pro Trailer Backup Assist™ (Standard)",
           competitors:
             "Competitors: Chevrolet Silverado 1500 RST, Ram 1500 Rebel. F-150 Lariat provides high-end audio options (B&O Unleashed) and available hybrid power, offering a higher level of technology and luxury than competitor mid-high trims.",
           image: "./images/F150_Lariat.jpg",
           useTitle: "Premium Power & Tech",
           strengths: [
             "Powerful 400 hp V8 engine and high 11,300 lbs towing.",
-            "Luxury interior with leather and advanced tech.",
-            "B&O Unleashed premium sound system available.",
+            "Luxury interior with Heated/Ventilated ActiveX seats and advanced tech.",
+            "Standard BlueCruise capability (90-Day Trial) and 360-Degree Camera.",
             "High starting price point."
           ],
           usage: [
@@ -1893,30 +1829,29 @@ const vehicles = {
           name: "Tremor",
           price: "$64,915",
           engine: "5.0L V8",
+          engineOptions: "3.5L EcoBoost V6",
           horsepower: "400 hp",
           torque: "410 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "3.5L EcoBoost V6",
-          drivetrain: "4x4",
-          drivetrainOptions: "Electronic Locking Rear Differential, Trail Control, Trail 1-Pedal Drive",
           towing: "10,900 lbs", // Estimated max for Tremor
-          suspension: "Off-road tuned",
+          suspension: "Long Travel, Unique Control Arms/Off-Road Shocks",
           groundClearance: "9.6 in", // Tremor specific clearance
           bedSize: "5.5 ft",
-          bluecruise: "No",
-          cam360: "Yes",
+          bluecruise: "Yes", // BlueCruise Equipped (90-Day Trial) Standard
+          cam360: "No", // Not explicitly listed as standard
           heatedSeats: "Yes",
-          clothSeats: "No",
-          upgradedOptions: "Trail Control, Trail 1-Pedal Drive, Trail Turn Assist",
-          other: "Selectable Drive Modes, All standard XLT features",
+          clothSeats: "Yes",
+          upgradedOptions: "Trail Control, Trail 1-Pedal Drive, Trail Turn Assist, Warn Xeon 12S Winch (Optional)",
+          other: "Standard 4x4, Electronic-Locking Rear Diff, Skid Plates, 33\" All-Terrain Tires, Pro Power Onboard (2kW), Unique Dual-Outlet Exhaust, Heated Front Seats (Standard)",
           competitors:
             "Competitors: Chevrolet Silverado 1500 Trail Boss, Ram 1500 Rebel. F-150 Tremor offers advanced off-road technologies like Trail 1-Pedal Drive and Trail Turn Assist, giving it a high-tech advantage on the trail.",
           image: "./images/F150_Tremor.jpg",
           useTitle: "Off-Road Tech & Power",
           strengths: [
-            "400 hp V8 engine with excellent off-road tech.",
-            "Trail 1-Pedal Drive and Trail Turn Assist.",
-            "Off-road tuned suspension with 9.6 in of clearance.",
+            "400 hp V8 engine with excellent standard off-road tech (Trail Control/1-Pedal Drive).",
+            "Long-travel suspension with 9.6 in of clearance and standard skid plates.",
+            "Standard BlueCruise capability (90-Day Trial) and Heated Front Seats.",
             "Towing capacity is slightly limited compared to Lariat."
           ],
           usage: [
@@ -1931,32 +1866,31 @@ const vehicles = {
         {
           name: "King Ranch",
           price: "$74,905",
-          engine: "5.0L V8",
+          engine: "3.5L EcoBoost V6",
+          engineOptions: "3.5L PowerBoost Full Hybrid V6",
           horsepower: "400 hp",
-          torque: "410 lb-ft",
+          torque: "500 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "3.5L PowerBoost Full Hybrid V6",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4, Two-Speed Automatic 4WD",
-          towing: "11,300 lbs",
+          towing: "13,500 lbs", // Estimated max for 3.5L
           suspension: "Luxury",
           groundClearance: "9.4 in",
           bedSize: "5.5 ft",
-          bluecruise: "Yes",
+          bluecruise: "Yes", // BlueCruise Equipped (1-year Plan) Standard
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Exclusive King Ranch exterior theme, Twin panel moonroof",
-          other: "BlueCruise hands-free highway driving equipped, All standard Lariat features",
+          upgradedOptions: "Exclusive King Ranch Del Rio Leather, Twin Panel Moonroof (Standard), Heads-Up Display (Standard), Pro Power Onboard (2kW)",
+          other: "BlueCruise hands-free highway driving (1-year plan), Power Deployable Running Boards, B&O Unleashed Sound System, Two-Tone Paint, 20\" Chrome-Like PVD Wheels",
           competitors:
             "Competitors: Chevrolet Silverado 1500 High Country, Ram 1500 Limited. F-150 King Ranch is one of the few luxury trucks to offer BlueCruise hands-free driving assistance, a feature not matched by competitors.",
           image: "./images/F150_KingRanch.jpg",
           useTitle: "Premium Luxury & Style",
           strengths: [
-            "Exclusive King Ranch luxury leather and styling.",
-            "Includes BlueCruise hands-free highway driving.",
-            "Optional PowerBoost Hybrid powertrain.",
-            "Focuses on luxury over maximum power."
+            "Exclusive King Ranch Del Rio Leather and styling.",
+            "Includes BlueCruise hands-free highway driving (1-year plan).",
+            "Powerful 3.5L EcoBoost with high towing capacity (13,500 lbs).",
+            "Standard Heads-Up Display, Power Deployable Running Boards, and B&O Unleashed."
           ],
           usage: [
             "Premium daily driver for buyers seeking unique luxury.",
@@ -1971,22 +1905,21 @@ const vehicles = {
           name: "Platinum",
           price: "$74,905",
           engine: "3.5L EcoBoost V6",
+          engineOptions: "3.5L PowerBoost Full Hybrid V6",
           horsepower: "400 hp",
           torque: "500 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "3.5L PowerBoost Full Hybrid V6",
-          drivetrain: "4x2 (RWD)",
-          drivetrainOptions: "4x4, Two-Speed Automatic 4WD",
           towing: "13,500 lbs", // Estimated max for 3.5L
           suspension: "Luxury",
           groundClearance: "9.4 in",
           bedSize: "5.5 ft",
-          bluecruise: "Yes",
+          bluecruise: "Yes", // BlueCruise Equipped (1-year Plan) Standard
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Available Platinum Plus, 3.5L PowerBoost Full Hybrid V6 engine",
-          other: "BlueCruise hands-free highway driving equipped, All standard Lariat features",
+          upgradedOptions: "Available Platinum Plus, 3.5L PowerBoost Full Hybrid V6 engine, Unique Multicontour Leather Seats, 20\" Painted Gloss Black Wheels",
+          other: "BlueCruise hands-free highway driving (1-year plan), Power Deployable Running Boards, Power Tailgate, Pro Access Tailgate (Standard), B&O Unleashed Sound System",
           competitors:
             "Competitors: Chevrolet Silverado 1500 High Country, Ram 1500 Limited. F-150 Platinum offers a blend of top-tier towing capability, the BlueCruise system, and available hybrid power, setting it apart in the luxury segment.",
           image: "./images/F150_Platinum.jpg",
@@ -1994,15 +1927,15 @@ const vehicles = {
           strengths: [
             "Highest conventional towing capacity (13,500 lbs).",
             "Powerful 3.5L EcoBoost engine (500 lb-ft torque).",
-            "Includes BlueCruise and top-tier luxury features.",
-            "Comparable price to King Ranch but with a modern luxury focus."
+            "Includes BlueCruise and top-tier luxury features with a modern aesthetic.",
+            "Standard B&O Unleashed and Multicontour Seats."
           ],
           usage: [
             "Drivers needing maximum towing capacity and luxury features.",
             "Executive transportation and long-distance hauling."
           ],
           demographic: [
-            "High-income business owners and executives.",
+            "High-income buyers and business owners.",
             "Customers prioritizing maximum capability and modern luxury."
           ]
         },
@@ -2010,22 +1943,21 @@ const vehicles = {
           name: "Raptor",
           price: "$79,005",
           engine: "3.5L EcoBoost High-Output V6",
+          engineOptions: "High-Output 5.2L Supercharged V8 (Raptor R)",
           horsepower: "450 hp",
           torque: "510 lb-ft",
           transmission: "10-speed Automatic",
-          transmissionOptions: "5.2L Supercharged V8 (Raptor R)",
-          drivetrain: "4x4",
-          drivetrainOptions: "Electronic Locking Front/Rear Axles, Hi-Lock Transfer Case",
-          towing: "8,200 lbs",
-          suspension: "Long Travel/FOX Shocks",
+          transmissionOptions: "5.2L Supercharged V8",
+          towing: "8,200 lbs", // Estimated max for Raptor
+          suspension: "Long Travel/FOX Racing Shox™ with Live Valve Technology",
           groundClearance: "12.0 in",
           bedSize: "5.5 ft",
           bluecruise: "No",
-          cam360: "Yes",
+          cam360: "Yes", // Included with Heads-Up Display and Pro Trailer Assist features
           heatedSeats: "Yes",
-          clothSeats: "No",
-          upgradedOptions: "5.2L Supercharged V8 engine, Dual-Valve Fox Shocks",
-          other: "4x4 with Hi-Lock transfer case, All standard Lariat features",
+          clothSeats: "Yes",
+          upgradedOptions: "5.2L Supercharged V8 engine, FOX Dual-Live Valve Shox, 37-inch Tires, Recaro® Black Leather Seats",
+          other: "4x4 with Hi-Lock Transfer Case, Heads-Up Display (Standard), B&O Unleashed Sound System (Standard), Trail Control/1-Pedal Drive, 35\" All-Terrain Tires (Standard)",
           competitors:
             "Competitors: Ram 1500 TRX. F-150 Raptor's available 5.2L Supercharged V8 (Raptor R) offers comparable performance to the Ram 1500 TRX, with a highly refined off-road suspension system.",
           image: "./images/F150_Raptor.jpg",
@@ -2033,7 +1965,7 @@ const vehicles = {
           strengths: [
             "Extreme 450 hp High-Output V6.",
             "Long-travel suspension with advanced FOX Shocks.",
-            "Best-in-class desert running performance.",
+            "Best-in-class desert running performance with standard 35\" tires.",
             "Lower towing and payload than standard F-150s."
           ],
           usage: [
@@ -2049,12 +1981,11 @@ const vehicles = {
           name: "Raptor R",
           price: "$109,145",
           engine: "5.2L Supercharged V8",
+          engineOptions: "None",
           horsepower: "720 hp",
           torque: "640 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "None",
-          drivetrain: "4x4",
-          drivetrainOptions: "Electronic Locking Front/Rear Axles, Hi-Lock Transfer Case",
           towing: "8,700 lbs",
           suspension: "Long Travel/Dual Live Valve FOX Shocks",
           groundClearance: "13.1 in",
@@ -2064,7 +1995,7 @@ const vehicles = {
           heatedSeats: "Yes",
           clothSeats: "No",
           upgradedOptions: "Recaro Black Leather Seats, Carbon Fiber Package",
-          other: "Standard 37-Inch Tires, Unique R Badging and Graphics",
+          other: "Standard 37-Inch Tires, Unique R Badging and Graphics, All standard Raptor features (Heads-Up Display, B&O Unleashed, etc.)",
           competitors:
             "Competitors: Ram 1500 TRX. F-150 Raptor R features the 5.2L Supercharged V8 engine, delivering 720 hp to directly compete with and outperform the Ram 1500 TRX in high-speed desert running.",
           image: "./images/F150_RaptorR.jpg",
@@ -2086,31 +2017,34 @@ const vehicles = {
         }
       ]
     },
-    {
-name: "Super Duty",
+{
+      name: "Super Duty",
       image: "./images/SuperDuty.jpg",
       price: "$45,300",
       trims: [
         {
           name: "F-250 XL",
           price: "$45,300",
-          engine: "6.8L V8 Gas",
-          horsepower: "405 hp",
-          torque: "445 lb-ft",
-          transmission: "TorqShift-G 10-speed Automatic",
-          transmissionOptions: "7.3L V8 Gas, 6.7L Power Stroke V8 Diesel",
+          engine: "6.8L 2-valve DEVCT NA PFI V8 Gas",
+          engineOptions: "7.3L 2-valve DEVCT NA PFI V8 Gas, 6.7L Power Stroke® V8 Turbo Diesel, 6.7L High Output Power Stroke® V8 Turbo Diesel",
+          horsepower: "405 hp @ 5,000 rpm",
+          torque: "445 lb.-ft. @ 4,000 rpm",
+          transmission: "TorqShift®-G 10-speed Automatic with Selectable Drive Modes",
+          transmissionOptions: "TorqShift® 10-speed Automatic",
           drivetrain: "4x2 (RWD)",
           drivetrainOptions: "4x4",
-          towing: "18,000 lbs", // Max conventional with 6.8L
-          suspension: "Heavy Duty",
-          groundClearance: "8.4 in",
-          bedSize: "8 ft",
+          towing: "18,200 lbs",
+          suspension: "Front - Independent Twin-I-Beam (4x2); Mono-beam (4x4) with Coil Springs",
+          groundClearance: "9.4 in",
+          bedSize: "6.75 ft or 8 ft",
+          gasTankSize: "34.0 gal (Crew Cab/Short Bed)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
-          clothSeats: "Yes",
-          upgradedOptions: "48-gallon fuel tank, Class IV trailer hitch",
-          other: "Standard 6.8L V8 for max capability at entry price.",
+          clothSeats: "No",
+          upgradedOptions: "XL Off-Road Package, STX Appearance Package, XL Chrome Package, 5th-Wheel/Gooseneck Hitch Prep Package",
+          other: "Standard 5G Wi-Fi connectivity and 8-inch LCD productivity screen.",
           competitors:
             "Competitors: Chevrolet Silverado 2500HD WT, Ram 2500 Tradesman. F-250 XL offers a strong V8 standard, focusing purely on work capability.",
           image: "./images/SuperDuty_XL.jpg",
@@ -2134,6 +2068,7 @@ name: "Super Duty",
           name: "F-250 XLT",
           price: "$51,295",
           engine: "6.8L V8 Gas",
+          engineOptions: "7.3L V8 Gas, 6.7L Power Stroke V8 Diesel",
           horsepower: "405 hp",
           torque: "445 lb-ft",
           transmission: "TorqShift-G 10-speed Automatic",
@@ -2144,6 +2079,8 @@ name: "Super Duty",
           suspension: "Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "8 ft",
+          gasTankSize: "34.0 gal (Crew Cab/Short Bed)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
@@ -2173,6 +2110,7 @@ name: "Super Duty",
           name: "F-250 LARIAT",
           price: "$64,740",
           engine: "7.3L V8 Gas",
+          engineOptions: "6.7L Power Stroke V8 Diesel",
           horsepower: "430 hp",
           torque: "485 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2183,6 +2121,8 @@ name: "Super Duty",
           suspension: "Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "6.75 ft",
+          gasTankSize: "34.0 gal (Crew Cab/Short Bed)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "No",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2211,6 +2151,7 @@ name: "Super Duty",
           name: "F-250 King Ranch",
           price: "$76,975",
           engine: "7.3L V8 Gas",
+          engineOptions: "6.7L Power Stroke V8 Diesel",
           horsepower: "430 hp",
           torque: "485 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2220,6 +2161,8 @@ name: "Super Duty",
           suspension: "Luxury Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "6.75 ft",
+          gasTankSize: "34.0 gal (Crew Cab/Short Bed)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2249,6 +2192,7 @@ name: "Super Duty",
           name: "F-250 Platinum",
           price: "$77,865",
           engine: "7.3L V8 Gas",
+          engineOptions: "6.7L Power Stroke V8 Diesel",
           horsepower: "430 hp",
           torque: "485 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2258,6 +2202,8 @@ name: "Super Duty",
           suspension: "Luxury Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "6.75 ft",
+          gasTankSize: "34.0 gal (Crew Cab/Short Bed)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2288,6 +2234,7 @@ name: "Super Duty",
           name: "F-350 XL",
           price: "$46,595",
           engine: "6.8L V8 Gas",
+          engineOptions: "7.3L V8 Gas, 6.7L Power Stroke V8 Diesel",
           horsepower: "405 hp",
           torque: "445 lb-ft",
           transmission: "TorqShift-G 10-speed Automatic",
@@ -2298,6 +2245,8 @@ name: "Super Duty",
           suspension: "Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "8 ft",
+          gasTankSize: "34.0 gal (Standard)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
@@ -2327,6 +2276,7 @@ name: "Super Duty",
           name: "F-350 XLT",
           price: "$52,600",
           engine: "6.8L V8 Gas",
+          engineOptions: "7.3L V8 Gas, 6.7L Power Stroke V8 Diesel",
           horsepower: "405 hp",
           torque: "445 lb-ft",
           transmission: "TorqShift-G 10-speed Automatic",
@@ -2337,6 +2287,8 @@ name: "Super Duty",
           suspension: "Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "8 ft",
+          gasTankSize: "34.0 gal (Standard)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
@@ -2364,6 +2316,7 @@ name: "Super Duty",
           name: "F-350 LARIAT",
           price: "$66,040",
           engine: "7.3L V8 Gas",
+          engineOptions: "6.7L Power Stroke V8 Diesel",
           horsepower: "430 hp",
           torque: "485 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2374,6 +2327,8 @@ name: "Super Duty",
           suspension: "Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "6.75 ft",
+          gasTankSize: "34.0 gal (Crew Cab/Short Bed)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "No",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2401,6 +2356,7 @@ name: "Super Duty",
           name: "F-350 King Ranch",
           price: "$78,275",
           engine: "7.3L V8 Gas",
+          engineOptions: "6.7L Power Stroke V8 Diesel",
           horsepower: "430 hp",
           torque: "485 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2410,6 +2366,8 @@ name: "Super Duty",
           suspension: "Luxury Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "6.75 ft",
+          gasTankSize: "34.0 gal (Crew Cab/Short Bed)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2437,6 +2395,7 @@ name: "Super Duty",
           name: "F-350 Platinum",
           price: "$79,165",
           engine: "7.3L V8 Gas",
+          engineOptions: "6.7L Power Stroke V8 Diesel",
           horsepower: "430 hp",
           torque: "485 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2446,6 +2405,8 @@ name: "Super Duty",
           suspension: "Luxury Heavy Duty",
           groundClearance: "8.4 in",
           bedSize: "6.75 ft",
+          gasTankSize: "34.0 gal (Crew Cab/Short Bed)",
+          gasTankOptions: "48.0 gal (Crew Cab/Long Bed or Diesel)",
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2474,6 +2435,7 @@ name: "Super Duty",
           name: "F-450 XL",
           price: "$59,955",
           engine: "6.7L Power Stroke V8 Diesel",
+          engineOptions: "High Output 6.7L Power Stroke V8 Diesel",
           horsepower: "500 hp",
           torque: "1200 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2484,6 +2446,8 @@ name: "Super Duty",
           suspension: "Heavy Duty with Wide Track Front Axle",
           groundClearance: "8.4 in",
           bedSize: "8 ft",
+          gasTankSize: "48.0 gal (Standard)",
+          gasTankOptions: "N/A (Highest factory capacity)",
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
@@ -2513,6 +2477,7 @@ name: "Super Duty",
           name: "F-450 XLT",
           price: "$67,195",
           engine: "6.7L Power Stroke V8 Diesel",
+          engineOptions: "High Output 6.7L Power Stroke V8 Diesel",
           horsepower: "500 hp",
           torque: "1200 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2523,6 +2488,8 @@ name: "Super Duty",
           suspension: "Heavy Duty with Wide Track Front Axle",
           groundClearance: "8.4 in",
           bedSize: "8 ft",
+          gasTankSize: "48.0 gal (Standard)",
+          gasTankOptions: "N/A (Highest factory capacity)",
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
@@ -2550,6 +2517,7 @@ name: "Super Duty",
           name: "F-450 LARIAT",
           price: "$80,165",
           engine: "6.7L Power Stroke V8 Diesel",
+          engineOptions: "High Output 6.7L Power Stroke V8 Diesel",
           horsepower: "500 hp",
           torque: "1200 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2559,6 +2527,8 @@ name: "Super Duty",
           suspension: "Heavy Duty with Wide Track Front Axle",
           groundClearance: "8.4 in",
           bedSize: "8 ft",
+          gasTankSize: "48.0 gal (Standard)",
+          gasTankOptions: "N/A (Highest factory capacity)",
           bluecruise: "No",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2587,6 +2557,7 @@ name: "Super Duty",
           name: "F-450 King Ranch",
           price: "$92,590",
           engine: "6.7L Power Stroke V8 Diesel",
+          engineOptions: "High Output 6.7L Power Stroke V8 Diesel",
           horsepower: "500 hp",
           torque: "1200 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2596,6 +2567,8 @@ name: "Super Duty",
           suspension: "Luxury Heavy Duty with Wide Track Front Axle",
           groundClearance: "8.4 in",
           bedSize: "8 ft",
+          gasTankSize: "48.0 gal (Standard)",
+          gasTankOptions: "N/A (Highest factory capacity)",
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2623,6 +2596,7 @@ name: "Super Duty",
           name: "F-450 Platinum",
           price: "$94,035",
           engine: "6.7L Power Stroke V8 Diesel",
+          engineOptions: "High Output 6.7L Power Stroke V8 Diesel",
           horsepower: "500 hp",
           torque: "1200 lb-ft",
           transmission: "TorqShift 10-speed Automatic",
@@ -2632,6 +2606,8 @@ name: "Super Duty",
           suspension: "Luxury Heavy Duty with Wide Track Front Axle",
           groundClearance: "8.4 in",
           bedSize: "8 ft",
+          gasTankSize: "48.0 gal (Standard)",
+          gasTankOptions: "N/A (Highest factory capacity)",
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
@@ -2655,7 +2631,7 @@ name: "Super Duty",
           demographic: [
             "Buyers demanding the highest level of capability, technology, and luxury available in a heavy-duty pickup."
           ]
-        }
+        },
       ]
     },
 {
@@ -2697,8 +2673,6 @@ name: "Super Duty",
           torque: "260 lb-ft",
           transmission: "10-speed Automatic SelectShift",
           transmissionOptions: "None",
-          drivetrain: "RWD",
-          drivetrainOptions: "Intelligent AWD",
           towing: "7,500 lbs",
           suspension: "Independent MacPherson-strut / Leaf springs",
           groundClearance: "7.0 in",
@@ -2737,8 +2711,6 @@ name: "Super Duty",
           torque: "262 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "None",
-          drivetrain: "RWD",
-          drivetrainOptions: "Intelligent AWD",
           towing: "5,100 lbs",
           suspension: "Heavy Duty",
           groundClearance: "6.0 in",
@@ -2777,8 +2749,6 @@ name: "Super Duty",
           torque: "262 lb-ft",
           transmission: "10-speed Automatic",
           transmissionOptions: "None",
-          drivetrain: "RWD",
-          drivetrainOptions: "Intelligent AWD",
           towing: "5,100 lbs",
           suspension: "Heavy Duty",
           groundClearance: "6.0 in",
@@ -2810,7 +2780,7 @@ name: "Super Duty",
         }
       ]
     }
-  ],
+],
 // NEW ELECTRIC AND HYBRID CATEGORY DATA
 "Electric & Hybrid": [
     // MOVED from "SUVs & Cars"
@@ -2827,8 +2797,6 @@ name: "Super Duty",
           torque: "428 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "RWD",
-          drivetrainOptions: "eAWD",
           towing: "1,500 lbs",
           suspension: "Independent",
           groundClearance: "5.7 in",
@@ -2865,8 +2833,6 @@ name: "Super Duty",
           torque: "428 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "RWD",
-          drivetrainOptions: "eAWD",
           towing: "1,500 lbs",
           suspension: "Independent",
           groundClearance: "5.7 in",
@@ -2903,8 +2869,6 @@ name: "Super Duty",
           torque: "600 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "eAWD",
-          drivetrainOptions: "None",
           towing: "1,500 lbs",
           suspension: "Sport-tuned",
           groundClearance: "5.3 in",
@@ -2941,8 +2905,6 @@ name: "Super Duty",
           torque: "700 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "eAWD",
-          drivetrainOptions: "None",
           towing: "1,500 lbs",
           suspension: "Sport-tuned",
           groundClearance: "6.7 in",
@@ -2987,8 +2949,6 @@ name: "Super Duty",
           torque: "775 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "Extended Range Battery",
-          drivetrain: "eAWD",
-          drivetrainOptions: "None",
           towing: "7,700 lbs",
           suspension: "Independent Rear",
           groundClearance: "8.4 in",
@@ -3026,8 +2986,6 @@ name: "Super Duty",
           torque: "775 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "Extended Range Battery",
-          drivetrain: "eAWD",
-          drivetrainOptions: "None",
           towing: "7,700 lbs",
           suspension: "Independent Rear",
           groundClearance: "8.4 in",
@@ -3065,8 +3023,6 @@ name: "Super Duty",
           torque: "775 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "eAWD",
-          drivetrainOptions: "None",
           towing: "10,000 lbs",
           suspension: "Independent Rear",
           groundClearance: "8.4 in",
@@ -3104,8 +3060,6 @@ name: "Super Duty",
           torque: "775 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "eAWD",
-          drivetrainOptions: "None",
           towing: "10,000 lbs",
           suspension: "Independent Rear",
           groundClearance: "8.4 in",
@@ -3143,8 +3097,6 @@ name: "Super Duty",
           torque: "775 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "eAWD",
-          drivetrainOptions: "None",
           towing: "8,500 lbs",
           suspension: "Independent Rear",
           groundClearance: "8.4 in",
@@ -3190,8 +3142,6 @@ name: "Super Duty",
           torque: "317 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "RWD",
-          drivetrainOptions: "None",
           towing: "N/A",
           suspension: "Heavy Duty",
           groundClearance: "6.0 in",
@@ -3229,8 +3179,6 @@ name: "Super Duty",
           torque: "317 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "RWD",
-          drivetrainOptions: "None",
           towing: "N/A",
           suspension: "Heavy Duty",
           groundClearance: "6.0 in",
@@ -3268,8 +3216,6 @@ name: "Super Duty",
           torque: "317 lb-ft",
           transmission: "Single Speed",
           transmissionOptions: "None",
-          drivetrain: "RWD",
-          drivetrainOptions: "None",
           towing: "3,000 lbs",
           suspension: "Heavy Duty",
           groundClearance: "6.0 in",
@@ -3303,6 +3249,31 @@ name: "Super Duty",
     }
 ]
 };
+
+// Data for the Comprehensive Super Duty Table (8 Columns) - UPDATED STRUCTURE FOR ENGINE/CAPABILITY BREAKDOWN
+const comprehensiveSuperDutyData = [
+    // --- F-250 Series (SRW) ---
+    // Gas Engine (Best F-250 Payload)
+    { model: "F-250 SRW", trim: "XL/XLT", duty: "Max Plyd", engine: "7.3L Gas", gcwr: "26.7k", gvwr: "10.0k", payload: "4.2k", tow: "19.5k" },
+    // Diesel H.O. (Best F-250 Towing)
+    { model: "F-250 SRW", trim: "Lariat+", duty: "Max Tow", engine: "6.7L HO", gcwr: "30.0k", gvwr: "10.8k", payload: "3.9k", tow: "23.0k" },
+    
+    // --- F-350 Series (SRW) ---
+    // Gas Engine (Best F-350 SRW Payload)
+    { model: "F-350 SRW", trim: "XL/XLT", duty: "Max Plyd", engine: "7.3L Gas", gcwr: "32.5k", gvwr: "11.9k", payload: "4.9k", tow: "22.4k" },
+    // Diesel H.O. (Best F-350 SRW Towing)
+    { model: "F-350 SRW", trim: "Lariat+", duty: "Max Tow", engine: "6.7L HO", gcwr: "40.0k", gvwr: "12.4k", payload: "4.8k", tow: "27.6k" },
+
+    // --- F-350 Series (DRW) ---
+    // Gas Engine (Absolute Best Payload due to low engine weight + DRW)
+    { model: "F-350 DRW", trim: "XL/XLT", duty: "Max Plyd", engine: "6.8L Gas", gcwr: "32.0k", gvwr: "14.0k", payload: "**8.0k**", tow: "18.9k" },
+    // Diesel H.O. (Best F-350 DRW Towing)
+    { model: "F-350 DRW", trim: "Lariat+", duty: "Max Tow", engine: "6.7L HO", gcwr: "45.0k", gvwr: "14.0k", payload: "6.9k", tow: "**38.0k**" },
+    
+    // --- F-450 Series (DRW) ---
+    // F-450 is Diesel-only for consumers, and its Max rating requires H.O.
+    { model: "F-450 DRW", trim: "All", duty: "Max", engine: "6.7L HO", gcwr: "45.0k", gvwr: "14.0k", payload: "6.3k", tow: "**40.0k**" },
+];
 
 // Font size calculation for category buttons
 const maxTextLength = Math.max(...categories.map((c) => c.length));
@@ -3537,7 +3508,7 @@ function TransitConfigCard({ vehicleSpecs }) {
       )
     ),
 
-    // 2. Key Dimensions Section (Images only, list deleted)
+    // 2. Key Dimensions Section (Images only, list deleted) (RESTORED SECTION)
     React.createElement("h4", { style: h4Style }, "KEY ROOF & LENGTH DIMENSIONS"),
     
     // --- ROOF HEIGHT DIAGRAM SECTION (Your Original) ---
@@ -3576,8 +3547,6 @@ function TransitConfigCard({ vehicleSpecs }) {
         React.createElement("p", { style: { fontSize: '10px', color: '#666', marginBottom: '0' } }, "")
     ),
     
-    // The Dimension List was DELETED here as requested.
-
     // 3. Cargo Volume Section (Existing)
     React.createElement("h4", { style: h4Style }, "MAX CARGO VOLUME"),
     React.createElement(
@@ -3597,6 +3566,169 @@ function TransitConfigCard({ vehicleSpecs }) {
 }
 
 // --- END OF TRANSIT CONFIG CARD COMPONENT ---
+
+// --- SUPER DUTY CONFIG CARD COMPONENT (FIXED WITH ENGINE) ---
+
+function SuperDutyConfigCard() {
+  const cardStyle = {
+    display: 'inline-block',
+    border: '1px solid #1976d2', // Dark blue border
+    margin: '5px',
+    padding: '15px',
+    background: '#e3f2fd', // Light blue background
+    borderRadius: '10px',
+    verticalAlign: 'top',
+    width: '100%',
+    maxWidth: '550px', // Slightly wider for the extra column
+    boxSizing: 'border-box',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    textAlign: 'center'
+  };
+
+  const tableWrapperStyle = {
+    marginBottom: '10px',
+    maxWidth: '100%',
+    overflowX: 'hidden'
+  };
+    
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'collapse',
+    fontSize: '7.5px', // Reduced font size to fit 8 columns
+    backgroundColor: 'white',
+    border: '1px solid #90caf9'
+  };
+
+  const thStyle = {
+    border: '1px solid #90caf9',
+    padding: '3px 1px', // Reduced padding
+    textAlign: 'center',
+    backgroundColor: '#bbdefb', // Header background
+    fontWeight: 'bold',
+    color: '#1976d2', // Dark blue text
+    fontSize: '8px'
+  };
+
+  const tdStyle = {
+    border: '1px solid #90caf9',
+    padding: '2px 1px', // Reduced padding
+    textAlign: 'center'
+  };
+  
+  const h4Style = {
+      color: '#1976d2', 
+      marginBottom: '10px', 
+      fontWeight: 'bold', 
+      borderBottom: '2px solid #90caf9', 
+      paddingBottom: '5px'
+  };
+  
+  // Define column widths for even distribution and minimal total width
+  // Total width of table is 100%. 
+  // Model and Trim take 35%, the remaining 65% is split by 6 columns (Duty, Engine, GCWR, GVWR, Plyd, Tow)
+  const modelWidth = "15%"; 
+  const trimWidth = "15%"; // Reduced Trim width to fit better
+  const dutyWidth = "12%"; // Duty is now slightly wider to fit 'Max Plyd' / 'Max Tow'
+  const evenColWidth = (100 - 15 - 15 - 12) / 4; // Remaining 58% split across 4 columns (Engine, GCWR, GVWR, Plyd, Tow) 
+  
+  // Helper to render the comprehensive table
+  const renderComprehensiveTable = () => React.createElement(
+      "div",
+      { style: tableWrapperStyle },
+      React.createElement(
+          "table",
+          { style: tableStyle },
+          React.createElement(
+              "thead",
+              null,
+              React.createElement(
+                  "tr",
+                  null,
+                  React.createElement("th", { style: thStyle, width: modelWidth }, "Model"),
+                  React.createElement("th", { style: thStyle, width: trimWidth }, "Trim"),
+                  React.createElement("th", { style: thStyle, width: dutyWidth }, "Duty"),
+                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "Engine"), // NEW COLUMN
+                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "GCWR"),
+                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "GVWR"),
+                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "Plyd"),
+                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "Tow")
+              )
+          ),
+          React.createElement(
+              "tbody",
+              null,
+              comprehensiveSuperDutyData.map((item, index) =>
+                  React.createElement(
+                      "tr",
+                      { key: index },
+                      // Model cell keeps slightly larger text and left alignment
+                      React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', textAlign: 'left', paddingLeft: '3px', fontSize: '8px' } }, item.model),
+                      React.createElement("td", { style: tdStyle }, item.trim),
+                      React.createElement("td", { style: tdStyle, fontWeight: 'bold', color: item.duty.includes('Plyd') ? '#004d40' : '#1976d2'  }, item.duty),
+                      React.createElement("td", { style: tdStyle, fontWeight: 'bold' }, item.engine), // NEW COLUMN DATA
+                      React.createElement("td", { style: tdStyle }, item.gcwr),
+                      React.createElement("td", { style: tdStyle }, item.gvwr),
+                      React.createElement("td", { style: tdStyle, fontWeight: item.payload.includes('k') ? 'bold' : 'normal', color: item.payload.includes('k') ? '#004d40' : '#000' }, item.payload), // Highlight Max Payload
+                      React.createElement("td", { style: tdStyle, fontWeight: item.tow.includes('k') ? 'bold' : 'normal', color: item.tow.includes('k') ? '#1976d2' : '#000' }, item.tow) // Highlight Max Tow
+                  )
+              )
+          )
+      )
+  );
+  
+  // Formatted Notes List 
+  const formattedNotes = [
+      "SRW = Single Rear Wheel; DRW = Dual Rear Wheel",
+      "**Engine listed is the one required to achieve the listed capacity.**",
+      "Max Plyd = Max Payload Configuration (usually lightest engine, 6.8L/7.3L Gas)",
+      "Max Tow = Max Towing Configuration (always the 6.7L HOiesel)",
+      "GCWR = Gross Combined Weight Rating (Max 5th Wheel/Gooseneck Towing)",
+      "GVWR = Gross Vehicle Weight Rating (Max)",
+      "Plyd = Payload (Max); Tow = 5th Wheel / Gooseneck Towing (Max)",
+      "6.7L HO = High Output Power Stroke Diesel",
+      "k = 1,000 lbs (used for GCWR, GVWR, Plyd, and Tow figures)",
+      "NOTE: Ratings are approximate and based on optimal configuration (Regular Cab 4x2, long bed)."
+  ];
+
+
+  return React.createElement(
+    "div",
+    { style: cardStyle },
+    
+    // Title Section
+    React.createElement("h3", { style: { color: '#1976d2', marginBottom: '5px' } }, "SUPER DUTY CONFIGURATION GUIDE"),
+    React.createElement("p", { style: { fontSize: '12px', color: '#4fc3f7', marginTop: '0', fontWeight: 'bold', fontStyle: 'italic' } }, "Quick Reference for Max Capacity & Trims"),
+    
+    // 1. Comprehensive Specification Table
+    React.createElement("h4", { style: h4Style }, "CAPACITY BY OPTIMIZED CONFIGURATION"),
+    renderComprehensiveTable(),
+    
+    // Formatted Notes List 
+    React.createElement(
+      "ul",
+      { style: { listStyleType: 'none', padding: '0', fontSize: '9px', textAlign: 'left', margin: '0 0 15px 0' } },
+      formattedNotes.map((note, index) => 
+        React.createElement("li", { key: index, style: { color: '#999', lineHeight: '1.4' } }, note)
+      )
+    ),
+
+    // 2. Engine Reference (Existing Section)
+    React.createElement("h4", { style: h4Style }, "ENGINE LINEUP REFERENCE"),
+    React.createElement(
+      "ul",
+      { style: { listStyleType: 'none', padding: '0', fontSize: '11px', textAlign: 'left', margin: '0 0 10px 0', lineHeight: '1.6' } },
+      React.createElement("li", null, React.createElement("b", { style: { color: '#1976d2' } }, "6.8L Gas V8: "), "Standard on XL. Max payload leader for DRW."),
+      React.createElement("li", null, React.createElement("b", { style: { color: '#1976d2' } }, "7.3L Gas V8: "), "Standard on XLT+. Best overall gas engine."),
+      React.createElement("li", null, React.createElement("b", { style: { color: '#1976d2' } }, "6.7L Power Stroke V8 Diesel: "), "Standard output diesel. Excellent balance of tow/payload."),
+      React.createElement("li", null, React.createElement("b", { style: { color: '#1976d2' } }, "6.7L H.O. Power Stroke V8 Diesel: "), "High Output version. **Max towing capability**.")
+    ),
+    
+    // Unique Identifier
+    React.createElement("p", { style: { fontSize: '10px', color: '#ff0000', marginTop: '15px', fontWeight: 'bold', borderTop: '1px dashed #90caf9', paddingTop: '5px' } }, "Super Duty Config Card")
+  );
+}
+
+// --- END OF SUPER DUTY CONFIG CARD COMPONENT ---
 
 function FlashCard({ trimData }) {
   const [isFlipped, setIsFlipped] = React.useState(false);
@@ -3822,7 +3954,7 @@ function FlashCard({ trimData }) {
         React.createElement("li", {style: {marginBottom: '2px'}}, "Horsepower: " + trimData.horsepower),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Torque: " + trimData.torque),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission: " + trimData.transmission),
-        React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission Options: " + trimData.transmissionOptions),
+        trimData.transmissionOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission Options: " + trimData.transmissionOptions) : null,
         
         // --- NEW LINE ADDED HERE ---
         trimData.drivetrain != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Drivetrain: " + trimData.drivetrain) : null,
@@ -3836,6 +3968,8 @@ function FlashCard({ trimData }) {
         React.createElement("li", {style: {marginBottom: '2px'}}, "Suspension: " + trimData.suspension),
         trimData.groundClearance != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Ground Clearance: " + trimData.groundClearance) : null,
         trimData.bedSize != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Bed Size: " + trimData.bedSize) : null,
+        trimData.gasTankSize != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Size: " + trimData.gasTankSize) : null,
+        trimData.gasTankOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Options: " + trimData.gasTankOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "BlueCruise: " + trimData.bluecruise),
         React.createElement("li", {style: {marginBottom: '2px'}}, "360 Cam: " + trimData.cam360),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Heated Seats: " + trimData.heatedSeats),
@@ -3943,7 +4077,7 @@ function StandardTrimCard({ trimData }) {
         React.createElement("li", {style: {marginBottom: '2px'}}, "Horsepower: " + trimData.horsepower),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Torque: " + trimData.torque),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission: " + trimData.transmission),
-        React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission Options: " + trimData.transmissionOptions),
+        trimData.transmissionOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission Options: " + trimData.transmissionOptions) : null,
         
         // --- NEW LINE ADDED HERE ---
         trimData.drivetrain != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Drivetrain: " + trimData.drivetrain) : null,
@@ -3957,6 +4091,8 @@ function StandardTrimCard({ trimData }) {
         React.createElement("li", {style: {marginBottom: '2px'}}, "Suspension: " + trimData.suspension),
         trimData.groundClearance != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Ground Clearance: " + trimData.groundClearance) : null,
         trimData.bedSize != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Bed Size: " + trimData.bedSize) : null,
+        trimData.gasTankSize != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Size: " + trimData.gasTankSize) : null,
+        trimData.gasTankOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Options: " + trimData.gasTankOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "BlueCruise: " + trimData.bluecruise),
         React.createElement("li", {style: {marginBottom: '2px'}}, "360 Cam: " + trimData.cam360),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Heated Seats: " + trimData.heatedSeats),
@@ -4027,6 +4163,7 @@ function VehiclePage({ vehicle, onBack, onHome }) {
   // 1. Determine Layout based on Aspect Ratio
   const isPortrait = window.innerWidth < window.innerHeight;
   const isTransit = vehicle.name === "Transit"; // Flag for conditional rendering
+  const isSuperDuty = vehicle.name === "Super Duty"; // NEW: Flag for Super Duty
   
   // Base direction is always column to stack Config Card above Trims Container
   const mainFlexDirection = "column";
@@ -4094,8 +4231,17 @@ function VehiclePage({ vehicle, onBack, onHome }) {
       "div",
       { style: mainFlexStyle },
       
-      // 1. Transit Config Card
-      isTransit && vehicle.specs && React.createElement(TransitConfigCard, { vehicleSpecs: vehicle.specs }),
+      // 1. Conditional Configuration Card 
+      (() => {
+          if (isTransit && vehicle.specs) {
+              return React.createElement(TransitConfigCard, { vehicleSpecs: vehicle.specs });
+          } else if (isSuperDuty) {
+              // Note: Super Duty doesn't use the vehicle.specs prop from the data structure, 
+              // it uses its own hardcoded data, similar to how Transit is set up but without needing external specs object.
+              return React.createElement(SuperDutyConfigCard);
+          }
+          return null;
+      })(),
       
       // 2. Trim Cards Container (Layout controlled by new trimsContainerStyle)
       React.createElement(
