@@ -3255,19 +3255,19 @@ const comprehensiveSuperDutyData = [
     // --- F-250 Series (SRW) ---
     // Gas Engine (Best F-250 Payload)
     { model: "F-250 SRW", trim: "XL/XLT", duty: "Max Plyd", engine: "7.3L Gas", gcwr: "26.7k", gvwr: "10.0k", payload: "4.2k", tow: "19.5k" },
-    // Diesel H.O. (Best F-250 Towing)
+    // Diesel HO (Best F-250 Towing)
     { model: "F-250 SRW", trim: "Lariat+", duty: "Max Tow", engine: "6.7L HO", gcwr: "30.0k", gvwr: "10.8k", payload: "3.9k", tow: "23.0k" },
     
     // --- F-350 Series (SRW) ---
     // Gas Engine (Best F-350 SRW Payload)
     { model: "F-350 SRW", trim: "XL/XLT", duty: "Max Plyd", engine: "7.3L Gas", gcwr: "32.5k", gvwr: "11.9k", payload: "4.9k", tow: "22.4k" },
-    // Diesel H.O. (Best F-350 SRW Towing)
+    // Diesel HO (Best F-350 SRW Towing)
     { model: "F-350 SRW", trim: "Lariat+", duty: "Max Tow", engine: "6.7L HO", gcwr: "40.0k", gvwr: "12.4k", payload: "4.8k", tow: "27.6k" },
 
     // --- F-350 Series (DRW) ---
     // Gas Engine (Absolute Best Payload due to low engine weight + DRW)
     { model: "F-350 DRW", trim: "XL/XLT", duty: "Max Plyd", engine: "6.8L Gas", gcwr: "32.0k", gvwr: "14.0k", payload: "**8.0k**", tow: "18.9k" },
-    // Diesel H.O. (Best F-350 DRW Towing)
+    // Diesel HO (Best F-350 DRW Towing)
     { model: "F-350 DRW", trim: "Lariat+", duty: "Max Tow", engine: "6.7L HO", gcwr: "45.0k", gvwr: "14.0k", payload: "6.9k", tow: "**38.0k**" },
     
     // --- F-450 Series (DRW) ---
