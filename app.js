@@ -14,39 +14,49 @@ const vehicles = {
     {
       name: "Mustang",
       image: "./images/Mustang.jpg",
-      price: "$27,000",
+      price: "$31,920",
       trims: [
         {
           name: "EcoBoost Fastback",
-          price: "$27,000",
+          price: "$31,920",
           engine: "2.3L I4 EcoBoost",
           engineOptions: "None",
-          horsepower: "310 hp",
+          horsepower: "315 hp",
           torque: "350 lb-ft",
+          gasTankSize: "16 Gallons",
+          gasTankOptions: "None",
+          mpg: "22 City / 33 Hwy / 26 Combined",
+          travelMiles: "416 Miles (2.3L I4 EcoBoost)",
           transmission: "10-speed Automatic",
           transmissionOptions: "None",
           drivetrain: "RWD",
           drivetrainOptions: "None",
           towing: "1,000 lbs",
-          suspension: "Independent Premium",
+          suspension: "Independent Rear Suspension",
           groundClearance: "5.3 in",
           bedSize: null,
           bluecruise: "No",
           cam360: "No",
           heatedSeats: "No",
           clothSeats: "Yes",
-          upgradedOptions: "Leather Seats, Sport Package",
-          other: "SYNC 4, Apple CarPlay",
-          competitors:
-            "Competitors: Chevrolet Camaro 1LT, Dodge Challenger SXT. Mustang EcoBoost Fastback offers better fuel economy, modern tech, and lower starting price than Chevrolet Camaro 1LT, and more modern infotainment than Dodge Challenger SXT.",
+          is2026: true,
+          changes2026: [
+            "New standard 13.2-inch Digital Instrument Cluster",
+            "Updated Co-Pilot360 2.0 safety features",
+            "Available Bronze Appearance Package",
+            "New exterior color: Molten Magenta"
+          ],
+          upgradedOptions: "Mustang Nite Pony Package, Wheel & Stripe Package, 2.3L High Performance Package",
+          other: "SYNC 4, 13.2-inch Touchscreen, Apple CarPlay, Electronic Line-Lock, Launch Control",
+          competitors: "Competitors: Chevrolet Camaro 1LT, Dodge Challenger SXT.",
           image: "./images/Mustang_EcoBoost.jpg",
-          useTitle: "Entry-Level Performance",
+          useTitle: "Best for Entry-Level Performance",
           strengths: [
             "Strong 310 hp for a four-cylinder.",
             "Best fuel economy in the Mustang lineup.",
             "Affordable entry point to sports car ownership.",
             "Towing limited to 1,000 lbs.",
-            "Lacks premium features like BlueCruise and heated seats."
+            "Lacks premium features like BlueCruise¹ and heated seats."
           ],
           usage: [
             "Daily driving and spirited weekend cruising.",
@@ -55,78 +65,100 @@ const vehicles = {
           demographic: [
             "Students or young professionals.",
             "Buyers prioritizing performance and looks over luxury."
-          ]
+          ],
+          footnote: "¹ BlueCruise is a hands-free highway driving feature that works on pre-mapped sections of divided highways (Hands-Free Blue Zones). It requires an active subscription after a trial period."
         },
         {
           name: "EcoBoost Premium Fastback",
-          price: "$34,000",
+          price: "$37,445",
           engine: "2.3L I4 EcoBoost",
           engineOptions: "None",
-          horsepower: "310 hp",
+          horsepower: "315 hp",
           torque: "350 lb-ft",
+          gasTankSize: "16 Gallons",
+          gasTankOptions: "None",
+          mpg: "22 City / 33 Hwy / 26 Combined",
+          travelMiles: "416 Miles (2.3L I4 EcoBoost)",
           transmission: "10-speed Automatic",
           transmissionOptions: "None",
           drivetrain: "RWD",
           drivetrainOptions: "None",
           towing: "1,000 lbs",
-          suspension: "Independent Premium",
+          suspension: "Independent Rear Suspension",
           groundClearance: "5.3 in",
           bedSize: null,
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
+          is2026: true,
+          changes2026: [
+            "New standard 13.2-inch Digital Instrument Cluster",
+            "Updated Co-Pilot360 2.0 safety features",
+            "Available Bronze Appearance Package",
+            "New exterior color: Molten Magenta"
+          ],
           upgradedOptions: "Leather Seats, Premium Audio",
           other: "SYNC 4, Apple CarPlay, Premium Audio",
-          competitors:
-            "Competitors: Chevrolet Camaro 2LT, Dodge Challenger GT. Mustang EcoBoost Premium Fastback adds more tech and comfort features including BlueCruise than competitors while keeping a competitive price.",
+          competitors: "Competitors: Chevrolet Camaro 2LT, Dodge Challenger GT.",
           image: "./images/Mustang_EcoBoost_Premium.jpg",
-          useTitle: "Tech & Comfort EcoBoost",
+          useTitle: "Best for Tech & Comfort EcoBoost",
           strengths: [
-            "Adds BlueCruise and 360-degree camera.",
+            "Adds BlueCruise¹ and 360-degree camera.",
             "Includes heated seats and premium interior materials.",
             "Maintains 310 hp and good fuel efficiency.",
             "Significantly higher starting price than the base trim."
           ],
           usage: [
-            "Long-distance commuting with BlueCruise.",
+            "Long-distance commuting with BlueCruise¹.",
             "Daily driver for the tech-focused buyer."
           ],
           demographic: [
             "Professionals wanting a sporty daily driver.",
             "Buyers transitioning from luxury SUVs/sedans."
-          ]
+          ],
+          footnote: "¹ BlueCruise is a hands-free highway driving feature that works on pre-mapped sections of divided highways (Hands-Free Blue Zones). It requires an active subscription after a trial period."
         },
         {
           name: "GT Fastback",
-          price: "$43,000",
+          price: "$45,460",
           engine: "5.0L V8",
           engineOptions: "None",
-          horsepower: "450 hp",
-          torque: "410 lb-ft",
+          horsepower: "480 hp",
+          torque: "415 lb-ft",
+          gasTankSize: "16 Gallons",
+          gasTankOptions: "None",
+          mpg: "15 City / 24 Hwy / 18 Combined",
+          travelMiles: "288 Miles (5.0L V8)",
           transmission: "6-speed Manual",
           transmissionOptions: "10-speed Automatic",
           drivetrain: "RWD",
           drivetrainOptions: "None",
           towing: "1,500 lbs",
-          suspension: "Independent MagneRide",
+          suspension: "Independent Rear Suspension",
           groundClearance: "5.3 in",
           bedSize: null,
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
+          is2026: true,
+          changes2026: [
+            "New standard 13.2-inch Digital Instrument Cluster",
+            "Updated Co-Pilot360 2.0 safety features",
+            "Available Bronze Appearance Package",
+            "New exterior color: Molten Magenta"
+          ],
           upgradedOptions: "Recaro Seats, Premium Audio Package",
-          other: "SYNC 4, Apple CarPlay, Premium Audio",
-          competitors:
-            "Competitors: Chevrolet Camaro SS 1LE, Dodge Challenger R/T. Mustang GT Fastback provides BlueCruise, a better standard manual transmission, and more refined handling than Dodge Challenger R/T.",
+          other: "SYNC 4, Apple CarPlay",
+          competitors: "Competitors: Chevrolet Camaro SS 1LE, Dodge Challenger R/T.",
           image: "./images/Mustang_GT.jpg",
-          useTitle: "Classic V8 Power",
+          useTitle: "Best for Classic V8 Power",
           strengths: [
             "Legendary 5.0L V8 with 450 hp.",
             "Standard 6-speed manual transmission.",
             "MagneRide suspension for superior handling.",
-            "Fuel economy is lower than EcoBoost trims.",
+            "Fuel economy is lower than EcoBoost¹ trims.",
             "High performance for the price point."
           ],
           usage: [
@@ -136,36 +168,47 @@ const vehicles = {
           demographic: [
             "V8 purists and traditional muscle car buyers.",
             "Drivers looking for the best performance value."
-          ]
+          ],
+          footnote: "¹ EcoBoost is a Ford engine technology that uses turbocharging and direct injection to deliver power similar to a larger engine, but with better fuel efficiency."
         },
         {
           name: "GT Premium Fastback",
-          price: "$50,000",
+          price: "$49,980",
           engine: "5.0L V8",
           engineOptions: "None",
-          horsepower: "450 hp",
-          torque: "410 lb-ft",
+          horsepower: "480 hp",
+          torque: "415 lb-ft",
+          gasTankSize: "16 Gallons",
+          gasTankOptions: "None",
+          mpg: "15 City / 24 Hwy / 18 Combined",
+          travelMiles: "288 Miles (5.0L V8)",
           transmission: "10-speed Automatic",
           transmissionOptions: "6-speed Manual",
           drivetrain: "RWD",
           drivetrainOptions: "None",
           towing: "1,500 lbs",
-          suspension: "Independent MagneRide Performance",
+          suspension: "Independent Rear Suspension",
           groundClearance: "5.3 in",
           bedSize: null,
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Recaro Seats, Track Package, Premium Audio, Tech Package",
-          other: "SYNC 4, Apple CarPlay, Premium Audio, Tech Package",
-          competitors:
-            "Competitors: Chevrolet Camaro 2SS, Dodge Challenger R/T Scat Pack. Mustang GT Premium Fastback adds luxury and tech options, including BlueCruise, over competitors’ similar trims.",
+          is2026: true,
+          changes2026: [
+            "New standard 13.2-inch Digital Instrument Cluster",
+            "Updated Co-Pilot360 2.0 safety features",
+            "Available Bronze Appearance Package",
+            "New exterior color: Molten Magenta"
+          ],
+          upgradedOptions: "Recaro Seats, Track Package",
+          other: "SYNC 4, Premium Audio",
+          competitors: "Competitors: Chevrolet Camaro 2SS",
           image: "./images/Mustang_GT_Premium.jpg",
-          useTitle: "Luxury V8 Touring",
+          useTitle: "Best for Luxury V8 Touring",
           strengths: [
             "Combines V8 power with premium luxury features.",
-            "Offers full tech package including BlueCruise.",
+            "Offers full tech package including BlueCruise¹.",
             "Performance-tuned MagneRide suspension.",
             "Highest price point before the specialized Dark Horse."
           ],
@@ -176,33 +219,44 @@ const vehicles = {
           demographic: [
             "Affluent buyers seeking both performance and comfort.",
             "Drivers who use their V8 Mustang as their primary vehicle."
-          ]
+          ],
+          footnote: "¹ BlueCruise is a hands-free highway driving feature that works on pre-mapped sections of divided highways (Hands-Free Blue Zones). It requires an active subscription after a trial period."
         },
         {
           name: "Dark Horse",
-          price: "$55,000",
+          price: "$63,280",
           engine: "5.0L V8",
           engineOptions: "None",
-          horsepower: "480 hp",
-          torque: "420 lb-ft",
+          horsepower: "500 hp",
+          torque: "418 lb-ft",
+          gasTankSize: "16 Gallons",
+          gasTankOptions: "None",
+          mpg: "14 City / 22 Hwy / 17 Combined",
+          travelMiles: "272 Miles (5.0L V8)",
           transmission: "6-speed Manual",
           transmissionOptions: "10-speed Automatic",
           drivetrain: "RWD",
           drivetrainOptions: "None",
           towing: "1,500 lbs",
-          suspension: "Independent MagneRide Performance",
+          suspension: "MagneRide Damping system",
           groundClearance: "5.3 in",
           bedSize: null,
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Recaro Seats, Track Package",
-          other: "SYNC 4, Apple CarPlay, Performance Tech",
-          competitors:
-            "Competitors: Chevrolet Camaro ZL1, Dodge Challenger SRT Hellcat. Dark Horse provides top track performance with advanced tech features, including BlueCruise, outperforming competitors in driving dynamics and standard tech.",
+          is2026: true,
+          changes2026: [
+            "New standard 13.2-inch Digital Instrument Cluster",
+            "Updated Co-Pilot360 2.0 safety features",
+            "Available Bronze Appearance Package",
+            "New exterior color: Molten Magenta"
+          ],
+          upgradedOptions: "Recaro Seats, Dark Horse Handling Package",
+          other: "Drift Brake",
+          competitors: "Competitors: Chevrolet Camaro ZL1",
           image: "./images/Mustang_DarkHorse.jpg",
-          useTitle: "Track-Ready Power",
+          useTitle: "Best for Track-Ready Power",
           strengths: [
             "Maximum 480 hp from the naturally aspirated V8.",
             "Designed and tuned for track performance.",
@@ -216,33 +270,44 @@ const vehicles = {
           demographic: [
             "Track drivers and motorsports enthusiasts.",
             "Collectors of specialized performance models."
-          ]
+          ],
+          footnote: ""
         },
         {
           name: "Dark Horse Premium",
-          price: "$60,000",
+          price: "$68,275",
           engine: "5.0L V8",
           engineOptions: "None",
-          horsepower: "480 hp",
-          torque: "420 lb-ft",
+          horsepower: "500 hp",
+          torque: "418 lb-ft",
+          gasTankSize: "16 Gallons",
+          gasTankOptions: "None",
+          mpg: "14 City / 22 Hwy / 17 Combined",
+          travelMiles: "272 Miles (5.0L V8)",
           transmission: "10-speed Automatic",
           transmissionOptions: "6-speed Manual",
           drivetrain: "RWD",
           drivetrainOptions: "None",
           towing: "1,500 lbs",
-          suspension: "Independent MagneRide Performance",
+          suspension: "MagneRide Damping system",
           groundClearance: "5.3 in",
           bedSize: null,
           bluecruise: "Yes",
           cam360: "Yes",
           heatedSeats: "Yes",
           clothSeats: "No",
-          upgradedOptions: "Recaro Seats, Track Package, Premium Audio, Performance Tech",
-          other: "SYNC 4, Apple CarPlay, Premium Audio, Performance Tech",
-          competitors:
-            "Competitors: Chevrolet Camaro ZL1, Dodge Challenger SRT Hellcat. Dark Horse Premium adds luxury and tech options to Dark Horse, surpassing competitors’ similar trims with superior standard features.",
+          is2026: true,
+          changes2026: [
+            "New standard 13.2-inch Digital Instrument Cluster",
+            "Updated Co-Pilot360 2.0 safety features",
+            "Available Bronze Appearance Package",
+            "New exterior color: Molten Magenta"
+          ],
+          upgradedOptions: "Carbon Fiber Wheels",
+          other: "Performance Tech",
+          competitors: "Competitors: Dodge Challenger SRT Hellcat",
           image: "./images/Mustang_DarkHorse_Premium.jpg",
-          useTitle: "Ultimate Track & Luxury",
+          useTitle: "Best for Ultimate Track & Luxury",
           strengths: [
             "Highest V8 performance with luxury and tech options.",
             "Standard 10-speed automatic for quick shifts.",
@@ -256,256 +321,392 @@ const vehicles = {
           demographic: [
             "High-net-worth performance buyers.",
             "Buyers looking for the best-equipped Mustang for both street and track."
-          ]
+          ],
+          footnote: ""
         }
       ]
     },
-    { // <--- COMMA ADDED HERE to separate Mustang object from Escape object
-  name: "Escape",
-  image: "./images/Escape.jpg", // main vehicle image
-  price: "$30,350",
-  trims: [
     {
-      name: "Escape Plug-in Hybrid",
-      price: "$35,400",
-      engine: "2.5L I4 Hybrid",
-      engineOptions: "None",
-      horsepower: "200 hp",
-      torque: "170 lb-ft",
-      transmission: "eCVT",
-      transmissionOptions: "None",
-      towing: "1,000 lbs",
-      suspension: "Independent",
-      groundClearance: "7.8 in", // Corrected for Hybrid FWD/PHEV
-      bedSize: null,
-      bluecruise: "Yes",
-      cam360: "No",
-      heatedSeats: "Yes",
-      clothSeats: "No",
-      upgradedOptions: "Premium Audio, Leather Seats",
-      other: "SYNC 4, Apple CarPlay",
-      competitors: "Competitors: Toyota RAV4 Prime, Honda CR-V Hybrid. The Escape Plug-in Hybrid offers a larger battery for a longer electric-only range than the Toyota RAV4 Prime, and is available with BlueCruise hands-free driving assistance.",
-      image: "./images/Escape_PlugInHybrid.jpg",
-      useTitle: "Max Efficiency & EV Range",
-      strengths: [
-        "Ability to drive on pure electric power for short distances.",
-        "Available BlueCruise hands-free driving.",
-        "Strong combined 200 hp powertrain.",
-        "Limited to 1,000 lbs towing capacity."
-      ],
-      usage: [
-        "Eco-conscious daily commuting and city driving.",
-        "Drivers with short commutes who can charge at home."
-      ],
-      demographic: [
-        "Urban/Suburban commuters.",
-        "Environmentally focused buyers."
-      ]
-    },
-    {
-      name: "Escape Active",
-      price: "$30,350",
-      engine: "1.5L I4 Turbo",
-      engineOptions: "None",
-      horsepower: "181 hp",
-      torque: "190 lb-ft",
-      transmission: "8-speed Automatic",
-      transmissionOptions: "None",
-      towing: "1,000 lbs",
-      suspension: "Independent",
-      groundClearance: "7.5 in", // Corrected for Gas FWD trims
-      bedSize: null,
-      bluecruise: "No",
-      cam360: "No",
-      heatedSeats: "No",
-      clothSeats: "Yes",
-      upgradedOptions: "Standard Package",
-      other: "SYNC 4, Apple CarPlay",
-      competitors: "Competitors: Toyota RAV4 LE, Honda CR-V LX. Escape Active provides a more powerful standard engine and a superior 8-speed automatic transmission compared to the CVT used in both Toyota RAV4 LE and Honda CR-V LX.",
-      image: "./images/Escape_Active.jpg",
-      useTitle: "Best Entry-Level Value",
-      strengths: [
-        "More powerful standard engine than many base competitors.",
-        "Standard 8-speed automatic transmission (not a CVT).",
-        "Most affordable starting price in the lineup.",
-        "Lacks advanced driver assistance features like BlueCruise."
-      ],
-      usage: [
-        "Primary family transportation and school drop-offs.",
-        "Budget-conscious buyers who need a reliable small SUV."
-      ],
-      demographic: [
-        "Young families and first-time SUV buyers.",
-        "Rental fleet or company car buyers."
-      ]
-    },
-    {
-      name: "Escape ST-Line",
-      price: "$31,195",
-      engine: "2.0L I4 Turbo",
-      engineOptions: "None",
-      horsepower: "250 hp",
-      torque: "280 lb-ft",
-      transmission: "8-speed Automatic",
-      transmissionOptions: "None",
-      towing: "1,200 lbs",
-      suspension: "Sport",
-      groundClearance: "7.5 in", // Corrected for Gas AWD trims
-      bedSize: null,
-      bluecruise: "No",
-      cam360: "Yes",
-      heatedSeats: "Yes",
-      clothSeats: "No",
-      upgradedOptions: "Leather Seats, Sport Package",
-      other: "SYNC 4, Apple CarPlay",
-      competitors: "Competitors: Toyota RAV4 XSE, Honda CR-V Sport-L. The Escape ST-Line features a 2.0L EcoBoost engine delivering 250 hp, significantly more power than the standard engines in the Toyota RAV4 XSE and Honda CR-V Sport-L.",
-      image: "./images/Escape_STLine.jpg",
-      useTitle: "Sporty Performance Look",
-      strengths: [
-        "Powerful 250 hp 2.0L EcoBoost engine.",
-        "Sport-tuned suspension for better handling.",
-        "Aggressive ST-Line exterior styling.",
-        "Doesn't include BlueCruise option."
-      ],
-      usage: [
-        "Drivers who want a sportier, more responsive SUV.",
-        "Highway cruising with faster merging and passing power."
-      ],
-      demographic: [
-        "Enthusiast buyers who want a powerful compact SUV.",
-        "Drivers stepping up from a sporty sedan/hatchback."
-      ]
-    },
-    {
-      name: "Escape ST-Line Select",
-      price: "$35,015",
-      engine: "2.0L I4 Turbo",
-      engineOptions: "None",
-      horsepower: "250 hp",
-      torque: "280 lb-ft",
-      transmission: "8-speed Automatic",
-      transmissionOptions: "None",
-      towing: "1,200 lbs",
-      suspension: "Sport",
-      groundClearance: "7.5 in", // Corrected for Gas AWD trims
-      bedSize: null,
-      bluecruise: "Yes",
-      cam360: "Yes",
-      heatedSeats: "Yes",
-      clothSeats: "No",
-      upgradedOptions: "Leather Seats, Premium Audio",
-      other: "SYNC 4, Apple CarPlay",
-      competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. Escape ST-Line Select offers the advanced BlueCruise hands-free driving system, which is not available on either the Toyota RAV4 Limited or Honda CR-V Touring.",
-      image: "./images/Escape_STLineSelect.jpg",
-      useTitle: "ST-Line with BlueCruise",
-      strengths: [
-        "First ST-Line trim to include BlueCruise hands-free driving.",
-        "Retains 250 hp engine and sport suspension.",
-        "Excellent blend of performance and advanced technology.",
-        "Higher cost than base ST-Line trim."
-      ],
-      usage: [
-        "Frequent highway drivers who want hands-free assistance.",
-        "Long road trips requiring comfort and driver tech."
-      ],
-      demographic: [
-        "Tech-savvy commuters and travelers.",
-        "Buyers prioritizing safety and convenience features."
-      ]
-    },
-    {
-      name: "Escape ST-Line Elite",
-      price: "$38,935",
-      engine: "2.0L I4 Turbo",
-      engineOptions: "None",
-      horsepower: "250 hp",
-      torque: "280 lb-ft",
-      transmission: "8-speed Automatic",
-      transmissionOptions: "None",
-      towing: "1,200 lbs",
-      suspension: "Sport",
-      groundClearance: "7.5 in", // Corrected for Gas AWD trims
-      bedSize: null,
-      bluecruise: "Yes",
-      cam360: "Yes",
-      heatedSeats: "Yes",
-      clothSeats: "No",
-      upgradedOptions: "Leather Seats, Premium Tech",
-      other: "SYNC 4, Apple CarPlay",
-      competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. The Escape ST-Line Elite combines the powerful 250 hp engine with BlueCruise and a 360-degree camera, a package of features that is not matched by competitors at this price point.",
-      image: "./images/Escape_STLineElite.jpg",
-      useTitle: "Top-Tier Sport Tech",
-      strengths: [
-        "Fully equipped with 250 hp, BlueCruise, and 360 camera.",
-        "Premium interior finishes and tech.",
-        "Excellent feature-to-price ratio against competitors.",
-        "Highest cost ST-Line trim."
-      ],
-      usage: [
-        "Customers who want all available tech and comfort in a sporty package.",
-        "Daily driving with a focus on convenience and safety."
-      ],
-      demographic: [
-        "Affluent families and tech enthusiasts.",
-        "Buyers seeking a luxury compact SUV feel."
-      ]
-    },
-    {
-      name: "Escape Platinum",
-      price: "$37,940",
-      engine: "2.0L I4 Turbo",
-      engineOptions: "None",
-      horsepower: "250 hp",
-      torque: "280 lb-ft",
-      transmission: "8-speed Automatic",
-      transmissionOptions: "None",
-      towing: "1,200 lbs",
-      suspension: "Luxury",
-      groundClearance: "7.5 in", // Corrected for Gas AWD trims
-      bedSize: null,
-      bluecruise: "Yes",
-      cam360: "Yes",
-      heatedSeats: "Yes",
-      clothSeats: "No",
-      upgradedOptions: "Leather Seats, Premium Audio, Tech Package",
-      other: "SYNC 4, Apple CarPlay",
-      competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. The Escape Platinum provides premium luxury features, the powerful 250 hp engine, and the BlueCruise hands-free system, offering a more complete top-trim package than competitors.",
-      image: "./images/Escape_Platinum.jpg",
-      useTitle: "Ultimate Luxury & Tech",
-      strengths: [
-        "Focus on luxury-tuned suspension and high-end materials.",
-        "Includes BlueCruise and a 360-degree camera.",
-        "250 hp engine provides ample power.",
-        "The most expensive and feature-rich trim."
-      ],
-      usage: [
-        "Drivers prioritizing a quiet, comfortable ride.",
-        "Executive or premium daily driver."
-      ],
-      demographic: [
-        "Empty-nesters and high-end compact SUV buyers.",
-        "Customers who prioritize luxury over sportiness."
-      ]
-    }
-  ]
-},
-{ // <--- COMMA ADDED HERE to separate Escape object from Bronco Sport object
+    name: "Escape",
+    image: "./images/Escape.jpg",
+    price: "$30,350",
+    trims: [
+      {
+        name: "Escape Plug-in Hybrid",
+        price: "$35,400",
+        engine: "2.5L I4 Hybrid",
+        engineOptions: "None",
+        horsepower: "200 hp",
+        torque: "170 lb-ft",
+        gasTank: "11.1 gal",
+        gasTankOptions: "14.8 gal (1.5L EcoBoost FWD), 15.7 gal (1.5L EcoBoost AWD), 15.7 gal (2.0L EcoBoost), 14.3 gal (2.5L Hybrid), 11.1 gal (2.5L Plug-in Hybrid)",
+        mpg: "42 City / 36 Hwy / 101 MPGe",
+        travelMiles: "37 Miles (Electric) / 400 Miles (Total)",
+        transmission: "eCVT",
+        transmissionOptions: "None",
+        drivetrain: "FWD",
+        drivetrainOptions: "None",
+        towing: "1,000 lbs",
+        suspension: "Independent",
+        groundClearance: "7.8 in",
+        bedSize: null,
+        bluecruise: "Yes",
+        cam360: "No",
+        heatedSeats: "Yes",
+        clothSeats: "No",
+        upgradedOptions: "Premium Audio, Leather Seats",
+        other: "SYNC 4, Apple CarPlay",
+        competitors: "Competitors: Toyota RAV4 Prime, Honda CR-V Hybrid. The Escape Plug-in Hybrid offers a larger battery for a longer electric-only range than the Toyota RAV4 Prime, and is available with BlueCruise hands-free driving assistance.",
+        image: "./images/Escape_PlugInHybrid.jpg",
+        useTitle: "Max Efficiency & EV Range",
+        strengths: [
+          "Ability to drive on pure electric power for short distances.",
+          "Available BlueCruise hands-free driving.",
+          "Strong combined 200 hp powertrain.",
+          "Limited to 1,000 lbs towing capacity."
+        ],
+        usage: [
+          "Eco-conscious daily commuting and city driving.",
+          "Drivers with short commutes who can charge at home."
+        ],
+        demographic: [
+          "Urban/Suburban commuters.",
+          "Environmentally focused buyers."
+        ]
+      },
+      {
+        name: "Escape Active",
+        price: "$30,350",
+        engine: "1.5L I4 Turbo",
+        engineOptions: "None",
+        horsepower: "181 hp",
+        torque: "190 lb-ft",
+        gasTank: "14.8 gal",
+        gasTankOptions: "14.8 gal (1.5L EcoBoost FWD), 15.7 gal (1.5L EcoBoost AWD), 15.7 gal (2.0L EcoBoost), 14.3 gal (2.5L Hybrid), 11.1 gal (2.5L Plug-in Hybrid)",
+        mpg: "27 City / 34 Hwy / 30 Combined",
+        travelMiles: "444 Miles (1.5L EcoBoost FWD)",
+        transmission: "8-speed Automatic",
+        transmissionOptions: "None",
+        drivetrain: "FWD",
+        drivetrainOptions: "AWD",
+        towing: "1,000 lbs",
+        suspension: "Independent",
+        groundClearance: "7.5 in",
+        bedSize: null,
+        bluecruise: "No",
+        cam360: "No",
+        heatedSeats: "No",
+        clothSeats: "Yes",
+        upgradedOptions: "Standard Package",
+        other: "SYNC 4, Apple CarPlay",
+        competitors: "Competitors: Toyota RAV4 LE, Honda CR-V LX. Escape Active provides a more powerful standard engine and a superior 8-speed automatic transmission compared to the CEO used in both Toyota RAV4 LE and Honda CR-V LX.",
+        image: "./images/Escape_Active.jpg",
+        useTitle: "Best Entry-Level Value",
+        strengths: [
+          "More powerful standard engine than many base competitors.",
+          "Standard 8-speed automatic transmission (not a CVT).",
+          "Most affordable starting price in the lineup.",
+          "Lacks advanced driver assistance features like BlueCruise."
+        ],
+        usage: [
+          "Primary family transportation and school drop-offs.",
+          "Budget-conscious buyers who need a reliable small SUV."
+        ],
+        demographic: [
+          "Young families and first-time SUV buyers.",
+          "Rental fleet or company car buyers."
+        ]
+      },
+      {
+        name: "Escape ST-Line",
+        price: "$31,195",
+        engine: "2.0L I4 Turbo",
+        engineOptions: "None",
+        horsepower: "250 hp",
+        torque: "280 lb-ft",
+        gasTank: "15.7 gal",
+        gasTankOptions: "14.8 gal (1.5L EcoBoost FWD), 15.7 gal (1.5L EcoBoost AWD), 15.7 gal (2.0L EcoBoost), 14.3 gal (2.5L Hybrid), 11.1 gal (2.5L Plug-in Hybrid)",
+        mpg: "23 City / 31 Hwy / 26 Combined",
+        travelMiles: "408 Miles (2.0L EcoBoost)",
+        transmission: "8-speed Automatic",
+        transmissionOptions: "None",
+        drivetrain: "AWD",
+        drivetrainOptions: "None",
+        towing: "1,200 lbs",
+        suspension: "Sport",
+        groundClearance: "7.5 in",
+        bedSize: null,
+        bluecruise: "No",
+        cam360: "Yes",
+        heatedSeats: "Yes",
+        clothSeats: "No",
+        upgradedOptions: "Leather Seats, Sport Package",
+        other: "SYNC 4, Apple CarPlay",
+        competitors: "Competitors: Toyota RAV4 XSE, Honda CR-V Sport-L. The Escape ST-Line features a 2.0L EcoBoost engine delivering 250 hp, significantly more power than the standard engines in the Toyota RAV4 XSE and Honda CR-V Sport-L.",
+        image: "./images/Escape_STLine.jpg",
+        useTitle: "Sporty Performance Look",
+        strengths: [
+          "Powerful 250 hp 2.0L EcoBoost engine.",
+          "Sport-tuned suspension for better handling.",
+          "Aggressive ST-Line exterior styling.",
+          "Doesn't include BlueCruise option."
+        ],
+        usage: [
+          "Drivers who want a sportier, more responsive SUV.",
+          "Highway cruising with faster merging and passing power."
+        ],
+        demographic: [
+          "Enthusiast buyers who want a powerful compact SUV.",
+          "Drivers stepping up from a sporty sedan/haddock."
+        ]
+      },
+      {
+        name: "Escape ST-Line Select",
+        price: "$35,015",
+        engine: "2.0L I4 Turbo",
+        engineOptions: "None",
+        horsepower: "250 hp",
+        torque: "280 lb-ft",
+        gasTank: "15.7 gal",
+        gasTankOptions: "14.8 gal (1.5L EcoBoost FWD), 15.7 gal (1.5L EcoBoost AWD), 15.7 gal (2.0L EcoBoost), 14.3 gal (2.5L Hybrid), 11.1 gal (2.5L Plug-in Hybrid)",
+        mpg: "23 City / 31 Hwy / 26 Combined",
+        travelMiles: "408 Miles (2.0L EcoBoost)",
+        transmission: "8-speed Automatic",
+        transmissionOptions: "None",
+        drivetrain: "AWD",
+        drivetrainOptions: "None",
+        towing: "1,200 lbs",
+        suspension: "Sport",
+        groundClearance: "7.5 in",
+        bedSize: null,
+        bluecruise: "Yes",
+        cam360: "Yes",
+        heatedSeats: "Yes",
+        clothSeats: "No",
+        upgradedOptions: "Leather Seats, Premium Audio",
+        other: "SYNC 4, Apple CarPlay",
+        competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. Escape ST-Line Select offers the advanced BlueCruise hands-free driving system, which is not available on either the Toyota RAV4 Limited or Honda CR-V Touring.",
+        image: "./images/Escape_STLineSelect.jpg",
+        useTitle: "ST-Line with BlueCruise",
+        strengths: [
+          "First ST-Line trim to include BlueCruise hands-free driving.",
+          "Retains 250 hp engine and sport suspension.",
+          "Excellent blend of performance and advanced technology.",
+          "Higher cost than base ST-Line trim."
+        ],
+        usage: [
+          "Frequent highway drivers who want hands-free assistance.",
+          "Long road trips requiring comfort and driver tech."
+        ],
+        demographic: [
+          "Tech-savvy commuters and travelers.",
+          "Buyers prioritizing safety and convenience features."
+        ]
+      },
+      {
+        name: "Escape ST-Line Elite",
+        price: "$38,935",
+        engine: "2.0L I4 Turbo",
+        engineOptions: "None",
+        horsepower: "250 hp",
+        torque: "280 lb-ft",
+        gasTank: "15.7 gal",
+        gasTankOptions: "14.8 gal (1.5L EcoBoost FWD), 15.7 gal (1.5L EcoBoost AWD), 15.7 gal (2.0L EcoBoost), 14.3 gal (2.5L Hybrid), 11.1 gal (2.5L Plug-in Hybrid)",
+        mpg: "23 City / 31 Hwy / 26 Combined",
+        travelMiles: "408 Miles (2.0L EcoBoost)",
+        transmission: "8-speed Automatic",
+        transmissionOptions: "None",
+        drivetrain: "AWD",
+        drivetrainOptions: "None",
+        towing: "1,200 lbs",
+        suspension: "Sport",
+        groundClearance: "7.5 in",
+        bedSize: null,
+        bluecruise: "Yes",
+        cam360: "Yes",
+        heatedSeats: "Yes",
+        clothSeats: "No",
+        upgradedOptions: "Leather Seats, Premium Tech",
+        other: "SYNC 4, Apple CarPlay",
+        competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. The Escape ST-Line Elite combines the powerful 250 hp engine with BlueCruise and a 360-degree camera, a package of features that is not matched by competitors at this price point.",
+        image: "./images/Escape_STLineElite.jpg",
+        useTitle: "Top-Tier Sport Tech",
+        strengths: [
+          "Fully equipped with 250 hp, BlueCruise, and 360 camera.",
+          "Premium interior finishes and tech.",
+          "Excellent feature-to-price ratio against competitors.",
+          "Highest cost ST-Line trim."
+        ],
+        usage: [
+          "Customers who want all available tech and comfort in a sporty package.",
+          "Daily driving with a focus on convenience and safety."
+        ],
+        demographic: [
+          "Affluent families and tech enthusiasts.",
+          "Buyers seeking a luxury compact SUV feel."
+        ]
+      },
+      {
+        name: "Escape Platinum",
+        price: "$37,940",
+        engine: "2.0L I4 Turbo",
+        engineOptions: "None",
+        horsepower: "250 hp",
+        torque: "280 lb-ft",
+        gasTank: "15.7 gal",
+        gasTankOptions: "14.8 gal (1.5L EcoBoost FWD), 15.7 gal (1.5L EcoBoost AWD), 15.7 gal (2.0L EcoBoost), 14.3 gal (2.5L Hybrid), 11.1 gal (2.5L Plug-in Hybrid)",
+        mpg: "23 City / 31 Hwy / 26 Combined",
+        travelMiles: "408 Miles (2.0L EcoBoost)",
+        transmission: "8-speed Automatic",
+        transmissionOptions: "None",
+        drivetrain: "AWD",
+        drivetrainOptions: "None",
+        towing: "1,200 lbs",
+        suspension: "Luxury",
+        groundClearance: "7.5 in",
+        bedSize: null,
+        bluecruise: "Yes",
+        cam360: "Yes",
+        heatedSeats: "Yes",
+        clothSeats: "No",
+        upgradedOptions: "Leather Seats, Premium Audio, Tech Package",
+        other: "SYNC 4, Apple CarPlay",
+        competitors: "Competitors: Toyota RAV4 Limited, Honda CR-V Touring. The Escape Platinum provides premium luxury features, the powerful 250 hp engine, and the BlueCruise hands-free system, offering a more complete top-trim package than competitors.",
+        image: "./images/Escape_Platinum.jpg",
+        useTitle: "Ultimate Luxury & Tech",
+        strengths: [
+          "Focus on luxury-tuned suspension and high-end materials.",
+          "Includes BlueCruise and a 360-degree camera.",
+          "250 hp engine provides ample power.",
+          "The most expensive and feature-rich trim."
+        ],
+        usage: [
+          "Drivers prioritizing a quiet, comfortable ride.",
+          "Executive or premium daily driver."
+        ],
+        demographic: [
+          "Empty-nesters and high-end compact SUV buyers.",
+          "Customers who prioritize luxury over sportiness."
+        ]
+      }
+    ]
+  },
+  {
+    name: "Bronco Sport",
+    image: "./images/BroncoSport.jpg",
+    price: "$31,695",
+    trims: [
+      {
+        name: "Bronco Sport Big Bend",
+        price: "$31,695",
+        engine: "1.5L EcoBoost I3",
+        engineOptions: "None",
+        horsepower: "181 hp",
+        torque: "190 lb-ft",
+        gasTank: "16.0 gal",
+        gasTankOptions: "16.0 gal (1.5L EcoBoost I3), 16.0 gal (2.0L EcoBoost I4)",
+        mpg: "25 City / 29 Hwy / 26 Combined",
+        travelMiles: "416 Miles (1.5L EcoBoost I3)",
+        transmission: "8-speed Automatic",
+        transmissionOptions: "None",
+        drivetrain: "4x4",
+        drivetrainOptions: "None",
+        towing: "2,000 lbs",
+        suspension: "Independent",
+        groundClearance: "7.8 in",
+        bedSize: null,
+        bluecruise: "No",
+        cam360: "No",
+        heatedSeats: "No",
+        clothSeats: "Yes",
+        upgradedOptions: "13.2” touchscreen, Wireless Apple CarPlay & Android Auto, Ford Co-Pilot360 Assist+",
+        other: "Extra-cost color option shown",
+        competitors: "Competitors: Jeep Compass Latitude, Toyota RAV4 LE. Bronco Sport Big Bend includes standard 4x4 and 5 G.O.A.T. Modes, offering significantly greater off-road capability and driver control than Jeep Compass Latitude or Toyota RAV4 LE.",
+        image: "./images/BroncoSport_BigBend.jpg",
+        useTitle: "Best Value Off-Road",
+        strengths: [
+          "Standard 4x4 and 5 G.O.A.T. Modes.",
+          "More off-road capable than similarly priced competitors.",
+          "Excellent entry price point for a true off-roader.",
+          "1.5L engine is less powerful than top trims."
+        ],
+        usage: [
+          "Light off-roading, camping, and handling snowy conditions.",
+          "Daily commuting with rugged capabilities."
+        ],
+        demographic: [
+          "First-time off-roaders and outdoor enthusiasts.",
+          "Customers needing standard 4x4 capability."
+        ]
+      },
+      {
+        name: "Bronco Sport Badlands",
+        price: "$40,115",
+        engine: "2.0L EcoBoost I4",
+        engineOptions: "None",
+        horsepower: "245 hp",
+        torque: "275 lb-ft",
+        gasTank: "16.0 gal",
+        gasTankOptions: "16.0 gal (1.5L EcoBoost I3), 16.0 gal (2.0L EcoBoost I4)",
+        mpg: "21 City / 26 Hwy / 23 Combined",
+        travelMiles: "368 Miles (2.0L EcoBoost I4)",
+        transmission: "8-speed Automatic",
+        transmissionOptions: "None",
+        drivetrain: "Advanced 4x4",
+        drivetrainOptions: "None",
+        towing: "2,000 lbs",
+        suspension: "Independent",
+        groundClearance: "8.8 in",
+        bedSize: null,
+        bluecruise: "No",
+        cam360: "No",
+        heatedSeats: "Yes",
+        clothSeats: "No",
+        upgradedOptions: "Advanced 4x4 with twin-clutch rear drive unit, 7 G.O.A.T. Modes, Steel-plated front bumper and underbody protection",
+        other: "Capability beyond compare",
+        competitors: "Competitors: Jeep Compass Trailhawk, Toyota RAV4 TRD Off-Road. Bronco Sport Badlands features a 245 hp engine and advanced 4x4 with a twin-clutch rear drive unit, providing superior power and traction technology compared to the Jeep Compass Trailhawk or Toyota RAV4 TRD Off-Road.",
+        image: "./images/BroncoSport_Badlands.jpg",
+        useTitle: "Maximum Off-Road Power",
+        strengths: [
+          "Most powerful 245 hp 2.0L engine.",
+          "Advanced 4x4 with twin-clutch rear drive unit (rear lock).",
+          "Increased 8.8 inches of ground clearance and skid plates.",
+          "Highest cost trim, focused solely on off-road capability."
+        ],
+        usage: [
+          "Serious off-roading, rock crawling, and heavy trail use.",
+          "Outdoor adventurers needing maximum capability."
+        ],
+        demographic: [
+          "Hardcore off-roading enthusiasts.",
+          "Drivers prioritizing capability over luxury features."
+        ]
+      }
+    ]
+  },
+{ 
   name: "Bronco Sport",
-  image: "./images/BroncoSport.jpg", // main vehicle image
+  image: "./images/BroncoSport.jpg", 
   price: "$31,695",
   trims: [
     {
       name: "Bronco Sport Big Bend",
       price: "$31,695",
-      engine: "1.5L EcoBoost I3", // approximate, adjust if needed
+      engine: "1.5L EcoBoost I3", 
       engineOptions: "None",
       horsepower: "181 hp",
       torque: "190 lb-ft",
+      gasTank: "16.0 gal",
+      gasTankOptions: "16.0 gal (1.5L EcoBoost I3), 16.0 gal (2.0L EcoBoost I4)",
+      mpg: "25 City / 29 Hwy / 26 Combined",
+      travelMiles: "416 Miles (1.5L EcoBoost I3)",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "4x4",
+      drivetrainOptions: "None",
       towing: "2,000 lbs",
       suspension: "Independent",
-      groundClearance: "7.8 in", // Corrected
+      groundClearance: "7.8 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -538,11 +739,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "181 hp",
       torque: "190 lb-ft",
+      gasTank: "16.0 gal",
+      gasTankOptions: "16.0 gal (1.5L EcoBoost I3), 16.0 gal (2.0L EcoBoost I4)",
+      mpg: "25 City / 29 Hwy / 26 Combined",
+      travelMiles: "416 Miles (1.5L EcoBoost I3)",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "4x4",
+      drivetrainOptions: "None",
       towing: "2,000 lbs",
       suspension: "Independent",
-      groundClearance: "7.8 in", // Corrected
+      groundClearance: "7.8 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -575,11 +782,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "181 hp",
       torque: "190 lb-ft",
+      gasTank: "16.0 gal",
+      gasTankOptions: "16.0 gal (1.5L EcoBoost I3), 16.0 gal (2.0L EcoBoost I4)",
+      mpg: "25 City / 29 Hwy / 26 Combined",
+      travelMiles: "416 Miles (1.5L EcoBoost I3)",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "4x4",
+      drivetrainOptions: "None",
       towing: "2,000 lbs",
       suspension: "Independent",
-      groundClearance: "7.8 in", // Corrected
+      groundClearance: "7.8 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -608,15 +821,21 @@ const vehicles = {
     {
       name: "Bronco Sport Badlands",
       price: "$40,115",
-      engine: "2.0L EcoBoost I4", // approximate, adjust if needed
+      engine: "2.0L EcoBoost I4", 
       engineOptions: "None",
       horsepower: "245 hp",
       torque: "275 lb-ft",
+      gasTank: "16.0 gal",
+      gasTankOptions: "16.0 gal (1.5L EcoBoost I3), 16.0 gal (2.0L EcoBoost I4)",
+      mpg: "21 City / 26 Hwy / 23 Combined",
+      travelMiles: "368 Miles (2.0L EcoBoost I4)",
       transmission: "8-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "Advanced 4x4",
+      drivetrainOptions: "None",
       towing: "2,000 lbs",
       suspension: "Independent",
-      groundClearance: "8.8 in", // Corrected to specific Badlands clearance
+      groundClearance: "8.8 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -644,9 +863,9 @@ const vehicles = {
     }
   ]
 },
-{ // <--- COMMA ADDED HERE to separate Bronco Sport object from Bronco object
+{ 
   name: "Bronco",
-  image: "./images/Bronco.jpg", // main vehicle image
+  image: "./images/Bronco.jpg", 
   price: "$39,995",
   trims: [
     {
@@ -656,11 +875,17 @@ const vehicles = {
       engineOptions: "2.7L EcoBoost V6",
       horsepower: "300 hp",
       torque: "320 lb-ft",
+      gasTank: "16.9 gal",
+      gasTankOptions: "16.9 gal (2.3L/2.7L 2-Door), 20.8 gal (2.3L/2.7L 4-Door), 21.2 gal (3.0L Raptor)",
+      mpg: "20 City / 21 Hwy / 20 Combined",
+      travelMiles: "338 Miles (2.3L EcoBoost 2-Door)",
       transmission: "7-speed Manual",
       transmissionOptions: "10-speed Automatic",
+      drivetrain: "4x4",
+      drivetrainOptions: "Advanced 4x4",
       towing: "3,500 lbs",
       suspension: "Independent",
-      groundClearance: "8.4 in", // Corrected
+      groundClearance: "8.4 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -693,11 +918,17 @@ const vehicles = {
       engineOptions: "2.7L EcoBoost V6",
       horsepower: "300 hp",
       torque: "320 lb-ft",
+      gasTank: "16.9 gal",
+      gasTankOptions: "16.9 gal (2.3L/2.7L 2-Door), 20.8 gal (2.3L/2.7L 4-Door), 21.2 gal (3.0L Raptor)",
+      mpg: "20 City / 21 Hwy / 20 Combined",
+      travelMiles: "338 Miles (2.3L EcoBoost 2-Door)",
       transmission: "10-speed Automatic",
       transmissionOptions: "7-speed Manual",
+      drivetrain: "4x4",
+      drivetrainOptions: "Advanced 4x4",
       towing: "3,500 lbs",
       suspension: "Independent",
-      groundClearance: "8.4 in", // Corrected
+      groundClearance: "8.4 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -730,11 +961,17 @@ const vehicles = {
       engineOptions: "2.3L EcoBoost I-4",
       horsepower: "330 hp",
       torque: "415 lb-ft",
+      gasTank: "20.8 gal",
+      gasTankOptions: "16.9 gal (2.3L/2.7L 2-Door), 20.8 gal (2.3L/2.7L 4-Door), 21.2 gal (3.0L Raptor)",
+      mpg: "20 City / 21 Hwy / 20 Combined",
+      travelMiles: "416 Miles (2.7L EcoBoost 4-Door)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "4x4",
+      drivetrainOptions: "Advanced 4x4",
       towing: "3,500 lbs",
       suspension: "Independent",
-      groundClearance: "9.0 in", // Corrected
+      groundClearance: "9.0 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -767,11 +1004,17 @@ const vehicles = {
       engineOptions: "2.3L EcoBoost I-4",
       horsepower: "330 hp",
       torque: "415 lb-ft",
+      gasTank: "20.8 gal",
+      gasTankOptions: "16.9 gal (2.3L/2.7L 2-Door), 20.8 gal (2.3L/2.7L 4-Door), 21.2 gal (3.0L Raptor)",
+      mpg: "17 City / 17 Hwy / 17 Combined",
+      travelMiles: "353 Miles (2.7L EcoBoost 4-Door)",
       transmission: "10-speed Automatic",
       transmissionOptions: "7-speed Manual",
+      drivetrain: "Advanced 4x4",
+      drivetrainOptions: "None",
       towing: "3,500 lbs",
       suspension: "Independent",
-      groundClearance: "10.5 in", // Corrected
+      groundClearance: "10.5 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -804,11 +1047,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "330 hp",
       torque: "415 lb-ft",
+      gasTank: "20.8 gal",
+      gasTankOptions: "16.9 gal (2.3L/2.7L 2-Door), 20.8 gal (2.3L/2.7L 4-Door), 21.2 gal (3.0L Raptor)",
+      mpg: "17 City / 17 Hwy / 17 Combined",
+      travelMiles: "353 Miles (2.7L EcoBoost 4-Door)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "Advanced 4x4",
+      drivetrainOptions: "None",
       towing: "3,500 lbs",
       suspension: "Independent",
-      groundClearance: "11.5 in", // Corrected (Standard Sasquatch/High Clearance)
+      groundClearance: "11.5 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -834,43 +1083,49 @@ const vehicles = {
         "Off-roaders prioritizing aesthetics and capability."
       ]
     },
-{
-  name: "Bronco Stroppe Edition",
-  price: "$75,635",
-  engine: "2.7L EcoBoost V6",
-  engineOptions: "None",
-  horsepower: "330 hp",
-  torque: "350 lb-ft",
-  transmission: "10-Speed Automatic",
-  transmissionOptions: "None",
-  towing: "2,000 lbs",
-  suspension: "HOSS 3.0 with FOX Internal Bypass Dampers",
-  groundClearance: "11.5 in", // Corrected
-  bedSize: null,
-  bluecruise: "No",
-  cam360: "No",
-  heatedSeats: "No",
-  clothSeats: "Yes",
-  upgradedOptions: "10-Speed automatic transmission, Trail One-Pedal Drive, HOSS 3.0 Package, Front Steel Bumper with Fog Lamps, Engine Block Heater (requires 10-Speed Automatic)",
-  other: "Four-Wheel Disc Brakes with ABS and ESC, Adaptive Cruise Control, Trail Control Optional, Trail Turn Assist Optional",
-  competitors: "Competitors: Jeep Wrangler Rubicon X, Toyota 4Runner TRD Pro. Stroppe Edition offers advanced HOSS 3.0 suspension, Trail One-Pedal Drive, and unique off-road performance features that make it more capable off-road and provides a better suspension system than the Jeep Wrangler Rubicon X or Toyota 4Runner TRD Pro.",
-  image: "./images/Bronco_Stroppe.jpg",
-  useTitle: "Rally-Inspired Special",
-  strengths: [
-    "Advanced HOSS 3.0 suspension for high-speed desert running.",
-    "Unique 'Stroppe' heritage and specialized tuning.",
-    "Features like Trail One-Pedal Drive.",
-    "Limited-edition vehicle with the highest price for the 2.7L V6."
-  ],
-  usage: [
-    "High-speed off-roading and dune climbing.",
-    "Buyers wanting a highly specialized, race-ready vehicle."
-  ],
-  demographic: [
-    "Affluent off-road racing enthusiasts.",
-    "Collectors of special edition, high-performance models."
-  ]
-},
+    {
+      name: "Bronco Stroppe Edition",
+      price: "$75,635",
+      engine: "2.7L EcoBoost V6",
+      engineOptions: "None",
+      horsepower: "330 hp",
+      torque: "350 lb-ft",
+      gasTank: "20.8 gal",
+      gasTankOptions: "16.9 gal (2.3L/2.7L 2-Door), 20.8 gal (2.3L/2.7L 4-Door), 21.2 gal (3.0L Raptor)",
+      mpg: "17 City / 17 Hwy / 17 Combined",
+      travelMiles: "353 Miles (2.7L EcoBoost 4-Door)",
+      transmission: "10-Speed Automatic",
+      transmissionOptions: "None",
+      drivetrain: "Advanced 4x4",
+      drivetrainOptions: "None",
+      towing: "2,000 lbs",
+      suspension: "HOSS 3.0 with FOX Internal Bypass Dampers",
+      groundClearance: "11.5 in", 
+      bedSize: null,
+      bluecruise: "No",
+      cam360: "No",
+      heatedSeats: "No",
+      clothSeats: "Yes",
+      upgradedOptions: "10-Speed automatic transmission, Trail One-Pedal Drive, HOSS 3.0 Package, Front Steel Bumper with Fog Lamps, Engine Block Heater (requires 10-Speed Automatic)",
+      other: "Four-Wheel Disc Brakes with ABS and ESC, Adaptive Cruise Control, Trail Control Optional, Trail Turn Assist Optional",
+      competitors: "Competitors: Jeep Wrangler Rubicon X, Toyota 4Runner TRD Pro. Stroppe Edition offers advanced HOSS 3.0 suspension, Trail One-Pedal Drive, and unique off-road performance features that make it more capable off-road and provides a better suspension system than the Jeep Wrangler Rubicon X or Toyota 4Runner TRD Pro.",
+      image: "./images/Bronco_Stroppe.jpg",
+      useTitle: "Rally-Inspired Special",
+      strengths: [
+        "Advanced HOSS 3.0 suspension for high-speed desert running.",
+        "Unique 'Stroppe' heritage and specialized tuning.",
+        "Features like Trail One-Pedal Drive.",
+        "Limited-edition vehicle with the highest price for the 2.7L V6."
+      ],
+      usage: [
+        "High-speed off-roading and dune climbing.",
+        "Buyers wanting a highly specialized, race-ready vehicle."
+      ],
+      demographic: [
+        "Affluent off-road racing enthusiasts.",
+        "Collectors of special edition, high-performance models."
+      ]
+    },
     {
       name: "Bronco Raptor",
       price: "$79,995",
@@ -878,11 +1133,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "418 hp",
       torque: "440 lb-ft",
+      gasTank: "21.2 gal",
+      gasTankOptions: "16.9 gal (2.3L/2.7L 2-Door), 20.8 gal (2.3L/2.7L 4-Door), 21.2 gal (3.0L Raptor)",
+      mpg: "15 City / 16 Hwy / 15 Combined",
+      travelMiles: "318 Miles (3.0L EcoBoost V6)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "Advanced 4x4",
+      drivetrainOptions: "None",
       towing: "3,500 lbs",
       suspension: "HOSS 4.0 with FOX Live Valve 3.1 Internal Bypass Semi-Active Dampers",
-      groundClearance: "13.1 in", // Corrected
+      groundClearance: "13.1 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "No",
@@ -910,7 +1171,7 @@ const vehicles = {
     }
   ]
 },
-{ // <--- COMMA ADDED HERE to separate Bronco object from Explorer object
+{ 
   name: "Explorer",
   image: "./images/Explorer.jpg",
   price: "$38,465",
@@ -922,11 +1183,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "300 hp",
       torque: "310 lb-ft",
+      gasTank: "17.9 gal",
+      gasTankOptions: "17.9 gal (2.3L EcoBoost I-4), 20.2 gal (3.0L EcoBoost V6)",
+      mpg: "21 City / 28 Hwy / 24 Combined",
+      travelMiles: "429 Miles (2.3L EcoBoost I-4)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "RWD",
+      drivetrainOptions: "Intelligent 4WD",
       towing: "5,300 lbs",
       suspension: "Independent",
-      groundClearance: "7.9 in", // Corrected
+      groundClearance: "7.9 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "Yes",
@@ -959,11 +1226,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "300 hp",
       torque: "310 lb-ft",
+      gasTank: "17.9 gal",
+      gasTankOptions: "17.9 gal (2.3L EcoBoost I-4), 20.2 gal (3.0L EcoBoost V6)",
+      mpg: "21 City / 28 Hwy / 24 Combined",
+      travelMiles: "429 Miles (2.3L EcoBoost I-4)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "RWD",
+      drivetrainOptions: "Intelligent 4WD",
       towing: "5,300 lbs",
       suspension: "Independent",
-      groundClearance: "7.9 in", // Corrected
+      groundClearance: "7.9 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "Yes",
@@ -996,11 +1269,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "300 hp",
       torque: "310 lb-ft",
+      gasTank: "17.9 gal",
+      gasTankOptions: "17.9 gal (2.3L EcoBoost I-4), 20.2 gal (3.0L EcoBoost V6)",
+      mpg: "21 City / 28 Hwy / 24 Combined",
+      travelMiles: "429 Miles (2.3L EcoBoost I-4)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "RWD",
+      drivetrainOptions: "Intelligent 4WD",
       towing: "5,300 lbs",
       suspension: "Sport-tuned",
-      groundClearance: "7.9 in", // Corrected
+      groundClearance: "7.9 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "Yes",
@@ -1033,11 +1312,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "400 hp",
       torque: "415 lb-ft",
+      gasTank: "20.2 gal",
+      gasTankOptions: "17.9 gal (2.3L EcoBoost I-4), 20.2 gal (3.0L EcoBoost V6)",
+      mpg: "18 City / 24 Hwy / 21 Combined",
+      travelMiles: "424 Miles (3.0L EcoBoost V6)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "Intelligent 4WD",
+      drivetrainOptions: "None",
       towing: "5,600 lbs",
       suspension: "Off-road tuned",
-      groundClearance: "8.66 in", // Corrected
+      groundClearance: "8.66 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "Yes",
@@ -1070,11 +1355,17 @@ const vehicles = {
       engineOptions: "3.0L EcoBoost V6 (400 hp)",
       horsepower: "300 hp",
       torque: "310 lb-ft",
+      gasTank: "17.9 gal",
+      gasTankOptions: "17.9 gal (2.3L EcoBoost I-4), 20.2 gal (3.0L EcoBoost V6)",
+      mpg: "21 City / 28 Hwy / 24 Combined",
+      travelMiles: "429 Miles (2.3L EcoBoost I-4)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "RWD",
+      drivetrainOptions: "Intelligent 4WD",
       towing: "5,300 lbs",
       suspension: "Luxury",
-      groundClearance: "7.9 in", // Corrected
+      groundClearance: "7.9 in", 
       bedSize: null,
       bluecruise: "Yes",
       cam360: "Yes",
@@ -1107,11 +1398,17 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "400 hp",
       torque: "415 lb-ft",
+      gasTank: "20.2 gal",
+      gasTankOptions: "17.9 gal (2.3L EcoBoost I-4), 20.2 gal (3.0L EcoBoost V6)",
+      mpg: "18 City / 24 Hwy / 21 Combined",
+      travelMiles: "424 Miles (3.0L EcoBoost V6)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "Intelligent 4WD",
+      drivetrainOptions: "None",
       towing: "5,600 lbs",
       suspension: "Sport-tuned",
-      groundClearance: "7.9 in", // Corrected
+      groundClearance: "7.9 in", 
       bedSize: null,
       bluecruise: "Yes",
       cam360: "Yes",
@@ -1139,7 +1436,7 @@ const vehicles = {
     }
   ]
 },
-{ // <--- COMMA ADDED HERE to separate Explorer object from Expedition object
+{ 
   name: "Expedition",
   image: "./images/Expedition.jpg",
   price: "$62,400",
@@ -1151,11 +1448,15 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "400 hp",
       torque: "480 lb-ft",
+      gasTank: "23.2 gal",
+      gasTankOptions: "23.2 gal (3.5L EcoBoost Standard), 27.8 gal (3.5L EcoBoost MAX)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "RWD", // Default
+      drivetrainOptions: "Intelligent 4WD",
       towing: "9,300 lbs",
       suspension: "Independent",
-      groundClearance: "8.7 in", // Corrected
+      groundClearance: "8.7 in", 
       bedSize: null,
       bluecruise: "No",
       cam360: "Yes",
@@ -1188,11 +1489,15 @@ const vehicles = {
       engineOptions: "None",
       horsepower: "440 hp",
       torque: "510 lb-ft",
+      gasTank: "23.2 gal",
+      gasTankOptions: "23.2 gal (3.5L EcoBoost Standard), 27.8 gal (3.5L EcoBoost MAX)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
+      drivetrain: "Intelligent 4WD",
+      drivetrainOptions: "None",
       towing: "9,300 lbs",
       suspension: "Luxury",
-      groundClearance: "8.7 in", // Corrected
+      groundClearance: "8.7 in", 
       bedSize: null,
       bluecruise: "Yes",
       cam360: "Yes",
@@ -1223,18 +1528,22 @@ const vehicles = {
       price: "$81,400",
       engine: "3.5L EcoBoost V6 High-Output",
       engineOptions: "None",
-      horsepower: "440 hp", // Retaining previous value for now as new text doesn't specify, but implies High-Output
-      torque: "510 lb-ft", // Retaining previous value for now as new text doesn't specify, but implies High-Output
+      horsepower: "440 hp", 
+      torque: "510 lb-ft", 
+      gasTank: "23.2 gal",
+      gasTankOptions: "23.2 gal (3.5L High-Output Standard), 27.8 gal (3.5L High-Output MAX)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
-      towing: "9,300 lbs", // Retaining previous value for now
+      drivetrain: "Intelligent 4WD",
+      drivetrainOptions: "None",
+      towing: "9,300 lbs", 
       suspension: "Modified Higher Ride Suspension with Premium Passive Shocks",
-      groundClearance: "10.6 in", // Corrected (Retaining the "corrected" value from the original)
+      groundClearance: "10.6 in", 
       bedSize: null,
       bluecruise: "No",
-      cam360: "Yes", // Retaining previous value
+      cam360: "Yes", 
       heatedSeats: "Yes",
-      clothSeats: "No", // Updated to "No" based on "perforated, leather-trimmed front seats"
+      clothSeats: "No", 
       upgradedOptions: "3.73 electronic-locking differential, 18\" Dark Carbonized Gray-painted aluminum wheels w/ Electric Spice pocket, 33\" all-terrain tires, Heated/Ventilated Perforated Leather Seats, Heated Second-Row Captain's Chairs",
       other: "Fuel Tank Underbody Protection, Modified Raptor Skid Plates - Front and Transmission Underbody, Customizable 24\" Panoramic Display and 13.2\" Center Display (Ford Digital Experience), Trail Control™ (Includes Trail One Pedal Drive and Trail Turn Assist)",
       competitors: "Competitors: Chevrolet Tahoe Z71, GMC Yukon AT4. Expedition Tremor provides superior off-road hardware including 33” all-terrain tires and a 3.73 electronic locking differential, giving it a clear advantage in trail capability and ground clearance (10.6 inches) over Chevrolet Tahoe Z71 and GMC Yukon AT4.",
@@ -1258,18 +1567,22 @@ const vehicles = {
     {
       name: "Expedition King Ranch",
       price: "$84,060",
-      engine: "3.5L EcoBoost V6 High-Output", // New text lists "3.5L EcoBoost® Engine" under "Power," but the description implies the high-output from previous context, keeping V6 H-O for consistency
+      engine: "3.5L EcoBoost V6 High-Output", 
       engineOptions: "None",
-      horsepower: "440 hp", // Retaining previous value
-      torque: "510 lb-ft", // Retaining previous value
+      horsepower: "440 hp", 
+      torque: "510 lb-ft", 
+      gasTank: "23.2 gal",
+      gasTankOptions: "23.2 gal (3.5L High-Output Standard), 27.8 gal (3.5L High-Output MAX)",
       transmission: "10-speed Automatic",
       transmissionOptions: "None",
-      towing: "9,300 lbs", // Retaining previous value
-      suspension: "Luxury", // Retaining previous value as new text does not specify
-      groundClearance: "8.7 in", // Corrected (Retaining the "corrected" value from the original)
+      drivetrain: "Intelligent 4WD",
+      drivetrainOptions: "None",
+      towing: "9,300 lbs", 
+      suspension: "Luxury", 
+      groundClearance: "8.7 in", 
       bedSize: null,
-      bluecruise: "Yes", // Retaining previous value
-      cam360: "Yes", // Retaining previous value
+      bluecruise: "Yes", 
+      cam360: "Yes", 
       heatedSeats: "Yes",
       clothSeats: "No",
       upgradedOptions: "Del Rio and Mesa Del Rio leather with Kingsville stitching, Finely crafted heated and ventilated first-row seats, Heated Second-Row Captain's Chairs, 22\" Sinister Bronze diamond-cut machined-face aluminum wheels with exclusive King Ranch center cap",
@@ -1295,7 +1608,6 @@ const vehicles = {
   ]
 }
 ],
-// START OF NEW CATEGORY DATA
 "Trucks & Vans": [
     {
       name: "Maverick",
@@ -3946,30 +4258,25 @@ function FlashCard({ trimData }) {
         "ul",
         { style: { fontSize: "12px", paddingLeft: "16px", flexGrow: 1, textAlign: 'left', marginBottom: '0px' } },
         
-        // 🔑 ENGINE AND OPTIONS FIX FOR FLASHCARD - UNBOLDED
+        // 🔑 ENGINE AND MPG REORDERED
         React.createElement("li", {style: {marginBottom: '2px'}}, "Engine: " + trimData.engine),
-        trimData.engineOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Engine Options: " + trimData.engineOptions) : null,
-        // ------------------------------------
+        React.createElement("li", {style: {marginBottom: '2px'}}, "MPG: " + trimData.mpg),
+        React.createElement("li", {style: {marginBottom: '2px'}}, "Travel Miles: " + trimData.travelMiles),
         
+        trimData.engineOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Engine Options: " + trimData.engineOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "Horsepower: " + trimData.horsepower),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Torque: " + trimData.torque),
+        React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Size: " + trimData.gasTankSize),
+        trimData.gasTankOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Options: " + trimData.gasTankOptions) : null,
+        
         React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission: " + trimData.transmission),
         trimData.transmissionOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission Options: " + trimData.transmissionOptions) : null,
-        
-        // --- NEW LINE ADDED HERE ---
         trimData.drivetrain != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Drivetrain: " + trimData.drivetrain) : null,
-        // ---------------------------
-        
-        // --- EXISTING LINE MODIFIED/CLEANED ---
         trimData.drivetrainOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Drivetrain Options: " + trimData.drivetrainOptions) : null,
-        // --------------------------------------
-        
         React.createElement("li", {style: {marginBottom: '2px'}}, "Towing: " + trimData.towing),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Suspension: " + trimData.suspension),
         trimData.groundClearance != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Ground Clearance: " + trimData.groundClearance) : null,
         trimData.bedSize != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Bed Size: " + trimData.bedSize) : null,
-        trimData.gasTankSize != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Size: " + trimData.gasTankSize) : null,
-        trimData.gasTankOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Options: " + trimData.gasTankOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "BlueCruise: " + trimData.bluecruise),
         React.createElement("li", {style: {marginBottom: '2px'}}, "360 Cam: " + trimData.cam360),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Heated Seats: " + trimData.heatedSeats),
@@ -4069,30 +4376,24 @@ function StandardTrimCard({ trimData }) {
         "ul",
         { style: { fontSize: "12px", paddingLeft: "16px", textAlign: 'left', flexGrow: 1, marginBottom: '0px' } }, 
         
-        // 🔑 ENGINE AND OPTIONS FIX FOR STANDARD CARD - UNBOLDED
+        // 🔑 ENGINE AND MPG REORDERED
         React.createElement("li", {style: {marginBottom: '2px'}}, "Engine: " + trimData.engine),
-        trimData.engineOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Engine Options: " + trimData.engineOptions) : null,
-        // ------------------------------------------
+        React.createElement("li", {style: {marginBottom: '2px'}}, "MPG: " + trimData.mpg),
+        React.createElement("li", {style: {marginBottom: '2px'}}, "Travel Miles: " + trimData.travelMiles),
 
+        trimData.engineOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Engine Options: " + trimData.engineOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "Horsepower: " + trimData.horsepower),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Torque: " + trimData.torque),
+        React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Size: " + trimData.gasTankSize),
+        trimData.gasTankOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Options: " + trimData.gasTankOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission: " + trimData.transmission),
         trimData.transmissionOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission Options: " + trimData.transmissionOptions) : null,
-        
-        // --- NEW LINE ADDED HERE ---
         trimData.drivetrain != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Drivetrain: " + trimData.drivetrain) : null,
-        // ---------------------------
-        
-        // --- EXISTING LINE MODIFIED/CLEANED ---
         trimData.drivetrainOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Drivetrain Options: " + trimData.drivetrainOptions) : null,
-        // --------------------------------------
-        
         React.createElement("li", {style: {marginBottom: '2px'}}, "Towing: " + trimData.towing),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Suspension: " + trimData.suspension),
         trimData.groundClearance != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Ground Clearance: " + trimData.groundClearance) : null,
         trimData.bedSize != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Bed Size: " + trimData.bedSize) : null,
-        trimData.gasTankSize != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Size: " + trimData.gasTankSize) : null,
-        trimData.gasTankOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Options: " + trimData.gasTankOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "BlueCruise: " + trimData.bluecruise),
         React.createElement("li", {style: {marginBottom: '2px'}}, "360 Cam: " + trimData.cam360),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Heated Seats: " + trimData.heatedSeats),
@@ -4260,12 +4561,16 @@ function VehiclePage({ vehicle, onBack, onHome }) {
   );
 }
 
-// App Component (No Change)
+// App Component
 function App() {
   const [activeCategory, setActiveCategory] = React.useState(null);
   const [selectedVehicle, setSelectedVehicle] = React.useState(null);
   const [categoryClicked, setCategoryClicked] = React.useState(false);
   const [windowSize, setWindowSize] = React.useState({ width: window.innerWidth, height: window.innerHeight });
+  
+  // NEW: State to handle the Gateway / Splash Screen
+  const [showGateway, setShowGateway] = React.useState(true);
+  const [selectedYear, setSelectedYear] = React.useState(null);
 
   React.useEffect(() => {
     const handleResize = () => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
@@ -4279,6 +4584,12 @@ function App() {
     setCategoryClicked(false);
   };
 
+  const handleYearSelect = (year) => {
+      setSelectedYear(year);
+      setShowGateway(false);
+  };
+
+  // If a vehicle is selected, show that page
   if (selectedVehicle) {
     return React.createElement(VehiclePage, {
       vehicle: selectedVehicle,
@@ -4291,84 +4602,151 @@ function App() {
 
   return React.createElement(
     "div",
-    null,
+    { style: { position: 'relative', minHeight: '100vh' } },
+    
+    // 1. MAIN APP CONTENT (BLURRED IF GATEWAY IS OPEN)
     React.createElement(
-      "header",
+      "div",
       {
         style: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 10px",
-          position: "relative"
+          filter: showGateway ? 'blur(8px)' : 'none',
+          transition: 'filter 0.3s ease',
+          pointerEvents: showGateway ? 'none' : 'auto'
         }
       },
-      categoryClicked &&
-        React.createElement(
-          "button",
-          { onClick: goHome, style: { position: "absolute", left: 0, padding: "6px 10px", cursor: "pointer" } },
-          "Home"
-        ),
-      React.createElement("img", {
-        src: "./images/logo.png",
-        alt: "AutoX Logo",
-        style: { maxHeight: "50px", objectFit: "contain", margin: "0 auto", display: "block" }
-      })
-    ),
-    React.createElement(
-      "nav",
-      {
-        style: {
-          display: "flex",
-          flexWrap: "nowrap",
-          gap: "4px",
-          justifyContent: "space-between",
-          overflow: "hidden",
-          marginTop: "10px"
-        }
-      },
-      categories.map((c) =>
-        React.createElement(
-          "button",
-          {
-            key: c,
-            onClick: () => {
-              setActiveCategory(c);
-              setCategoryClicked(true);
-            },
-            style: {
-              fontSize: `${fontSizeVW}vw`,
-              background: "#f4f4f4",
-              border: "1px solid black",
-              borderRadius: "4px",
-              flex: 1,
-              minWidth: 0,
-              padding: "4px 2px",
-              whiteSpace: "nowrap",
-              fontWeight: "bold",
-              textAlign: "center",
-              cursor: "pointer"
-            }
-          },
-          c
-        )
-      )
-    ),
-    categoryClicked &&
       React.createElement(
-        "div",
+        "header",
         {
           style: {
-            textAlign: "center",
-            fontWeight: "bold",
-            marginTop: "10px",
             display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-start"
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 10px",
+            position: "relative"
           }
         },
-        React.createElement(CategoryPage, { category: activeCategory, onSelectVehicle: setSelectedVehicle })
-      )
+        categoryClicked &&
+          React.createElement(
+            "button",
+            { onClick: goHome, style: { position: "absolute", left: 0, padding: "6px 10px", cursor: "pointer" } },
+            "Home"
+          ),
+        React.createElement("img", {
+          src: "./images/logo.png",
+          alt: "AutoX Logo",
+          style: { maxHeight: "50px", objectFit: "contain", margin: "0 auto", display: "block" }
+        })
+      ),
+      React.createElement(
+        "nav",
+        {
+          style: {
+            display: "flex",
+            flexWrap: "nowrap",
+            gap: "4px",
+            justifyContent: "space-between",
+            overflow: "hidden",
+            marginTop: "10px"
+          }
+        },
+        categories.map((c) =>
+          React.createElement(
+            "button",
+            {
+              key: c,
+              onClick: () => {
+                setActiveCategory(c);
+                setCategoryClicked(true);
+              },
+              style: {
+                fontSize: `${fontSizeVW}vw`,
+                background: "#f4f4f4",
+                border: "1px solid black",
+                borderRadius: "4px",
+                flex: 1,
+                minWidth: 0,
+                padding: "4px 2px",
+                whiteSpace: "nowrap",
+                fontWeight: "bold",
+                textAlign: "center",
+                cursor: "pointer"
+              }
+            },
+            c
+          )
+        )
+      ),
+      categoryClicked &&
+        React.createElement(
+          "div",
+          {
+            style: {
+              textAlign: "center",
+              fontWeight: "bold",
+              marginTop: "10px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "flex-start"
+            }
+          },
+          React.createElement(CategoryPage, { category: activeCategory, onSelectVehicle: setSelectedVehicle })
+        )
+    ),
+
+    // 2. GATEWAY OVERLAY (ONLY SHOWS ON INITIAL LOAD)
+    showGateway && React.createElement(
+        "div",
+        {
+            style: {
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'rgba(255,255,255,0.3)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 9999
+            }
+        },
+        React.createElement(
+            "button",
+            {
+                onClick: () => handleYearSelect(2026),
+                style: {
+                    padding: '20px 60px',
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    marginBottom: '20px',
+                    borderRadius: '12px',
+                    border: '2px solid #000',
+                    backgroundColor: '#fff',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+                }
+            },
+            "2026"
+        ),
+        React.createElement(
+            "button",
+            {
+                onClick: () => handleYearSelect(2025),
+                style: {
+                    padding: '20px 60px',
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    borderRadius: '12px',
+                    border: '2px solid #000',
+                    backgroundColor: '#fff',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+                }
+            },
+            "2025"
+        )
+    )
   );
 }
 
