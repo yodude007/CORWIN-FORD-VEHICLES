@@ -3476,7 +3476,6 @@ const vehicles = {
     }
 ]
 };
-
 // Data for the Comprehensive Super Duty Table (8 Columns) - UPDATED STRUCTURE FOR ENGINE/CAPABILITY BREAKDOWN
 const comprehensiveSuperDutyData = [
     // --- F-250 Series (SRW) ---
@@ -3788,7 +3787,7 @@ function TransitConfigCard({ vehicleSpecs }) {
     ),
     
     // Unique Identifier
-    React.createElement("p", { style: { fontSize: '10px', color: 'red', marginTop: '15px', fontWeight: 'bold', borderTop: '1px dashed #a5d6a7', paddingTop: '5px' } }, vehicleSpecs.uniqueIdentifier)
+    React.createElement("p", { style: { fontSize: '10px', color: red, marginTop: '15px', fontWeight: 'bold', borderTop: '1px dashed #a5d6a7', paddingTop: '5px' } }, vehicleSpecs.uniqueIdentifier)
   );
 }
 
@@ -3920,7 +3919,7 @@ function SuperDutyConfigCard() {
 
   return React.createElement(
     "div",
-    { style: cardStyle },
+    { cardStyle },
     
     // Title Section
     React.createElement("h3", { style: { color: '#1976d2', marginBottom: '5px' } }, "SUPER DUTY CONFIGURATION GUIDE"),
@@ -4323,12 +4322,33 @@ function StandardTrimCard({ trimData }) {
 }
 
 
-// Category Page Component (No Change)
-function CategoryPage({ category, onSelectVehicle }) {
+// Category Page Component (Refined Year Filter)
+function CategoryPage({ category, onSelectVehicle, selectedYear }) {
+  const filteredVehicles = (vehicles[category] || []).map(v => {
+    // Check if the vehicle name is Explorer (case insensitive)
+    if (v.name.toLowerCase().includes("explorer")) {
+      return {
+        ...v,
+        trims: v.trims.filter(trim => {
+          // Check if "Tremor" is in the trim name
+          const isTremor = trim.name.toLowerCase().includes("tremor");
+          // If it IS a Tremor, only keep it if year is 2026
+          if (isTremor) {
+            return selectedYear === 2026;
+          }
+          // Keep all other Explorer trims
+          return true;
+        })
+      };
+    }
+    // Return all other vehicles (Trucks, etc) unchanged
+    return v;
+  });
+
   return React.createElement(
     "div",
     { className: "category" },
-    vehicles[category].map((v) =>
+    filteredVehicles.map((v) =>
       React.createElement(
         "div",
         {
@@ -4604,7 +4624,11 @@ function App() {
               alignItems: "flex-start"
             }
           },
-          React.createElement(CategoryPage, { category: activeCategory, onSelectVehicle: setSelectedVehicle })
+          React.createElement(CategoryPage, { 
+            category: activeCategory, 
+            onSelectVehicle: setSelectedVehicle, 
+            selectedYear: selectedYear 
+          })
         )
     ),
 
