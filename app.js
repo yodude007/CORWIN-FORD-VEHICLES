@@ -3476,7 +3476,6 @@ const vehicles = {
     }
 ]
 };
-
 // Data for the Comprehensive Super Duty Table (8 Columns) - UPDATED STRUCTURE FOR ENGINE/CAPABILITY BREAKDOWN
 const comprehensiveSuperDutyData = [
     // --- F-250 Series (SRW) ---
@@ -3500,6 +3499,16 @@ const comprehensiveSuperDutyData = [
     // --- F-450 Series (DRW) ---
     // F-450 is Diesel-only for consumers, and its Max rating requires H.O.
     { model: "F-450 DRW", trim: "All", duty: "Max", engine: "6.7L HO", gcwr: "45.0k", gvwr: "14.0k", payload: "6.3k", tow: "**40.0k**" },
+];
+
+// Data for F-150 Comprehensive Table
+const comprehensiveF150Data = [
+    { engine: "3.5L EcoBoost", hp: "400", torque: "500", tow: "13,500", payload: "2,440", config: "SuperCrew 6.5' Box, 4x4" },
+    { engine: "5.0L Ti-VCT V8", hp: "400", torque: "410", tow: "12,900", payload: "2,225", config: "SuperCrew 5.5' Box, 4x4" },
+    { engine: "3.5L PowerBoost Hybrid", hp: "430", torque: "570", tow: "11,200", payload: "1,740", config: "SuperCrew 5.5' Box, 4x4" },
+    { engine: "2.7L EcoBoost V6", hp: "325", torque: "400", tow: "8,400", payload: "1,785", config: "Regular Cab 8' Box, 4x2" },
+    { engine: "3.5L HO EcoBoost (Raptor)", hp: "450", torque: "510", tow: "8,200", payload: "1,400", config: "SuperCrew 5.5' Box, 4x4" },
+    { engine: "5.2L SC V8 (Raptor R)", hp: "720", torque: "640", tow: "8,700", payload: "1,400", config: "SuperCrew 5.5' Box, 4x4" },
 ];
 
 // Font size calculation for category buttons
@@ -3788,11 +3797,85 @@ function TransitConfigCard({ vehicleSpecs }) {
     ),
     
     // Unique Identifier
-    React.createElement("p", { style: { fontSize: '10px', color: red, marginTop: '15px', fontWeight: 'bold', borderTop: '1px dashed #a5d6a7', paddingTop: '5px' } }, vehicleSpecs.uniqueIdentifier)
+    React.createElement("p", { style: { fontSize: '10px', color: 'red', marginTop: '15px', fontWeight: 'bold', borderTop: '1px dashed #a5d6a7', paddingTop: '5px' } }, vehicleSpecs.uniqueIdentifier)
   );
 }
 
 // --- END OF TRANSIT CONFIG CARD COMPONENT ---
+
+// --- F-150 CONFIG CARD COMPONENT ---
+
+function F150ConfigCard() {
+  const cardStyle = {
+    display: 'inline-block',
+    border: '1px solid #fbc02d', // Yellow border
+    margin: '5px',
+    padding: '15px',
+    background: '#fff9c4', // Light yellow background (same shade as green/blue)
+    borderRadius: '10px',
+    verticalAlign: 'top',
+    width: '100%',
+    maxWidth: '550px',
+    boxSizing: 'border-box',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    textAlign: 'center'
+  };
+
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'collapse',
+    fontSize: '8px',
+    backgroundColor: 'white',
+    border: '1px solid #fbc02d'
+  };
+
+  const thStyle = {
+    border: '1px solid #fbc02d',
+    padding: '4px',
+    backgroundColor: '#fff176', // Yellow header background
+    fontWeight: 'bold',
+    fontSize: '9px',
+    color: '#827717' // Dark yellow/brown text
+  };
+
+  const tdStyle = {
+    border: '1px solid #fbc02d',
+    padding: '4px',
+    textAlign: 'center'
+  };
+
+  return React.createElement(
+    "div",
+    { style: cardStyle },
+    React.createElement("h3", { style: { color: '#827717', marginBottom: '5px' } }, "F-150 CAPABILITY GUIDE"),
+    React.createElement("h4", { style: { borderBottom: '2px solid #fbc02d', paddingBottom: '5px', color: '#827717' } }, "ENGINE & TOWING SPECS"),
+    React.createElement(
+      "table",
+      { style: tableStyle },
+      React.createElement("thead", null, 
+        React.createElement("tr", null,
+          React.createElement("th", { style: thStyle }, "Engine"),
+          React.createElement("th", { style: thStyle }, "HP/Torque"),
+          React.createElement("th", { style: thStyle }, "Max Tow"),
+          React.createElement("th", { style: thStyle }, "Max Payload"),
+          React.createElement("th", { style: thStyle }, "Optimal Configuration")
+        )
+      ),
+      React.createElement("tbody", null,
+        comprehensiveF150Data.map((item, i) => React.createElement("tr", { key: i },
+          React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', textAlign: 'left' } }, item.engine),
+          React.createElement("td", { style: tdStyle }, `${item.hp} / ${item.torque}`),
+          React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', color: '#1976d2' } }, item.tow),
+          React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', color: '#388e3c' } }, item.payload),
+          React.createElement("td", { style: tdStyle }, item.config)
+        ))
+      )
+    ),
+    React.createElement("p", { style: { fontSize: '9px', color: '#666', marginTop: '10px', textAlign: 'left' } }, 
+      "Note: Requires proper equipment (Tow/Haul Pkg & Max Tow Axle). See dealer for specific ratings."
+    )
+  );
+}
 
 // --- SUPER DUTY CONFIG CARD COMPONENT (FIXED WITH ENGINE) ---
 
@@ -3852,11 +3935,10 @@ function SuperDutyConfigCard() {
   
   // Define column widths for even distribution and minimal total width
   // Total width of table is 100%. 
-  // Model and Trim take 35%, the remaining 65% is split by 6 columns (Duty, Engine, GCWR, GVWR, Plyd, Tow)
   const modelWidth = "15%"; 
-  const trimWidth = "15%"; // Reduced Trim width to fit better
-  const dutyWidth = "12%"; // Duty is now slightly wider to fit 'Max Plyd' / 'Max Tow'
-  const evenColWidth = (100 - 15 - 15 - 12) / 4; // Remaining 58% split across 4 columns (Engine, GCWR, GVWR, Plyd, Tow) 
+  const trimWidth = "15%"; 
+  const dutyWidth = "12%"; 
+  const evenColWidth = (100 - 15 - 15 - 12) / 4; 
   
   // Helper to render the comprehensive table
   const renderComprehensiveTable = () => React.createElement(
@@ -3920,7 +4002,7 @@ function SuperDutyConfigCard() {
 
   return React.createElement(
     "div",
-    { cardStyle },
+    { style: cardStyle },
     
     // Title Section
     React.createElement("h3", { style: { color: '#1976d2', marginBottom: '5px' } }, "SUPER DUTY CONFIGURATION GUIDE"),
@@ -3989,7 +4071,6 @@ function FlashCard({ trimData }) {
   };
 
   const sideStyle = {
-    // Base style for both sides
     width: '100%',
     height: 'auto', 
     WebkitBackfaceVisibility: 'hidden',
@@ -4033,11 +4114,9 @@ function FlashCard({ trimData }) {
 
   const tagTextWithSuperscript = (text, taggedTermMap) => {
     let resultText = text;
-    
     for (const term in taggedTermMap) {
       const superscript = taggedTermMap[term];
       const regex = new RegExp(`\\b(${term})\\b`, 'gi');
-      
       resultText = resultText.replace(regex, (match) => `${match}${superscript}`);
     }
     return resultText;
@@ -4045,95 +4124,42 @@ function FlashCard({ trimData }) {
   
   const { footnotes, taggedTermMap } = getFootnoteText(trimData); 
 
-
-  // Content for the Back Card (Strengths, Usage, Demographic)
   const backContent = React.createElement(
     'div',
     { style: backContentStyle }, 
-    
-    // Green Bubble Banner (Best for... logic)
     React.createElement(
       'div',
-      { style: { 
-        textAlign: 'center', 
-        marginBottom: '10px'
-      }},
+      { style: { textAlign: 'center', marginBottom: '10px' }},
       React.createElement(
         'div',
-        { style: {
-          backgroundColor: '#4caf50', 
-          color: 'white', 
-          padding: '2px 8px',
-          borderRadius: '12px',
-          fontWeight: 'bold',
-          fontSize: '10px',
-          display: 'inline-block' 
-        }},
+        { style: { backgroundColor: '#4caf50', color: 'white', padding: '2px 8px', borderRadius: '12px', fontWeight: 'bold', fontSize: '10px', display: 'inline-block' }},
         (() => {
           let title = trimData.useTitle.trim();
           const lowerTitle = title.toLowerCase();
-
-          if (lowerTitle.startsWith('best for ')) {
-            title = title.substring(9).trim(); 
-          } 
-          else if (lowerTitle.startsWith('best ')) {
-            title = title.substring(5).trim(); 
-          }
-          
+          if (lowerTitle.startsWith('best for ')) title = title.substring(9).trim(); 
+          else if (lowerTitle.startsWith('best ')) title = title.substring(5).trim(); 
           title = title.charAt(0).toUpperCase() + title.slice(1);
           return "Best for " + title;
         })()
       )
     ),
-
-    
-    // Full Title
-    React.createElement(
-      'h4',
-      { style: { color: '#004d40', marginBottom: '10px', textAlign: 'center' } },
-      trimData.name
-    ),
-    // Strengths
+    React.createElement('h4', { style: { color: '#004d40', marginBottom: '10px', textAlign: 'center' } }, trimData.name),
     React.createElement('h5', { style: categoryTitleStyle }, "Strengths & Trade-offs"),
-    React.createElement(
-      'ul',
-      { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
+    React.createElement('ul', { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
       trimData.strengths.map((s, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(s, taggedTermMap)))
     ),
-    // Usage
     React.createElement('h5', { style: categoryTitleStyle }, "Usage"),
-    React.createElement(
-      'ul',
-      { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
+    React.createElement('ul', { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
       trimData.usage.map((t, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(t, taggedTermMap)))
     ),
-    // Target Demographic
     trimData.demographic && React.createElement('h5', { style: categoryTitleStyle }, "Target Demographic"),
-    trimData.demographic && React.createElement(
-      'ul',
-      { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
+    trimData.demographic && React.createElement('ul', { style: { paddingLeft: '20px', marginTop: '5px', textAlign: 'left' } },
       trimData.demographic.map((d, i) => React.createElement('li', { key: i, style: listItemStyle }, tagTextWithSuperscript(d, taggedTermMap)))
     ),
-
     React.createElement("hr", { style: backDividerStyle }),
-
-    // DYNAMICALLY RENDER FOOTNOTES
     footnotes.length > 0 ? (
         footnotes.map((text, index) => 
-            React.createElement(
-                "p", 
-                { 
-                    key: index, 
-                    style: { 
-                        fontSize: '10px', 
-                        marginTop: '5px', 
-                        textAlign: 'left', 
-                        lineHeight: '1.2', 
-                        color: '#666' 
-                    } 
-                },
-                text
-            )
+            React.createElement("p", { key: index, style: { fontSize: '10px', marginTop: '5px', textAlign: 'left', lineHeight: '1.2', color: '#666' } }, text)
         )
     ) : null
   );
@@ -4150,40 +4176,21 @@ function FlashCard({ trimData }) {
         zIndex: isFlipped ? 1 : 2, 
       } 
     },
-    // Front Content JSX
     React.createElement(
       'div', 
       { style: { flexGrow: 1, display: 'flex', flexDirection: 'column', paddingBottom: '20px' } }, 
-      React.createElement("img", {
-        src: trimData.image,
-        alt: trimData.name,
-        style: { width: "100%", borderRadius: "6px", marginBottom: "5px" }
-      }),
-      React.createElement(
-        "div",
-        { style: { fontWeight: "bold", textAlign: "center", fontSize: "16px", marginBottom: "5px" } },
-        trimData.name
-      ),
-      React.createElement(
-        "div",
-        { style: { fontSize: "14px", marginBottom: "5px" } },
-        "Starting at " + trimData.price
-      ),
-      React.createElement(
-        "ul",
-        { style: { fontSize: "12px", paddingLeft: "16px", flexGrow: 1, textAlign: 'left', marginBottom: '0px' } },
-        
-        // 🔑 ENGINE AND MPG REORDERED
+      React.createElement("img", { src: trimData.image, alt: trimData.name, style: { width: "100%", borderRadius: "6px", marginBottom: "5px" } }),
+      React.createElement("div", { style: { fontWeight: "bold", textAlign: "center", fontSize: "16px", marginBottom: "5px" } }, trimData.name),
+      React.createElement("div", { style: { fontSize: "14px", marginBottom: "5px" } }, "Starting at " + trimData.price),
+      React.createElement("ul", { style: { fontSize: "12px", paddingLeft: "16px", flexGrow: 1, textAlign: 'left', marginBottom: '0px' } },
         React.createElement("li", {style: {marginBottom: '2px'}}, "Engine: " + trimData.engine),
         React.createElement("li", {style: {marginBottom: '2px'}}, "MPG: " + trimData.mpg),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Travel Miles: " + trimData.travelMiles),
-        
         trimData.engineOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Engine Options: " + trimData.engineOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "Horsepower: " + trimData.horsepower),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Torque: " + trimData.torque),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Size: " + trimData.gasTankSize),
         trimData.gasTankOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Gas Tank Options: " + trimData.gasTankOptions) : null,
-        
         React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission: " + trimData.transmission),
         trimData.transmissionOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Transmission Options: " + trimData.transmissionOptions) : null,
         trimData.drivetrain != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Drivetrain: " + trimData.drivetrain) : null,
@@ -4199,16 +4206,10 @@ function FlashCard({ trimData }) {
         React.createElement("li", {style: {marginBottom: '2px'}}, "Upgraded Options: " + trimData.upgradedOptions),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Other: " + trimData.other), 
       ),
-      
       React.createElement("hr", { style: { border: "0", borderTop: "1px solid #aaa", margin: "10px 5px 0 5px" } }), 
-      
       renderCompetitorText(trimData.competitors)
     ),
-    React.createElement(
-      "div",
-      { style: { marginTop: 'auto', color: 'blue', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic', paddingBottom: '0px' } },
-      "Tap for Strengths/Usage"
-    )
+    React.createElement("div", { style: { marginTop: 'auto', color: 'blue', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic', paddingBottom: '0px' } }, "Tap for Strengths/Usage")
   );
 
   const backSide = React.createElement(
@@ -4224,31 +4225,13 @@ function FlashCard({ trimData }) {
       } 
     },
     backContent,
-    React.createElement(
-      "div",
-      { style: { marginTop: 'auto', paddingTop: '5px', color: 'blue', fontWeight: 'bold', textAlign: 'center', fontSize: '10px', fontStyle: 'italic', paddingBottom: '0px' } },
-      "Tap to flip back"
-    )
+    React.createElement("div", { style: { marginTop: 'auto', paddingTop: '5px', color: 'blue', fontWeight: 'bold', textAlign: 'center', fontSize: '10px', fontStyle: 'italic', paddingBottom: '0px' } }, "Tap to flip back")
   );
 
-  return React.createElement(
-    "div",
-    { 
-      style: cardStyle,
-      onClick: () => setIsFlipped(!isFlipped)
-    },
-    React.createElement(
-      "div",
-      { style: innerStyle },
-      frontSide,
-      backSide
-    )
+  return React.createElement("div", { style: cardStyle, onClick: () => setIsFlipped(!isFlipped) },
+    React.createElement("div", { style: innerStyle }, frontSide, backSide)
   );
 }
-
-// ----------------------------------------------------------------------
-// STANDARD TRIM CARD COMPONENT 
-// ----------------------------------------------------------------------
 
 function StandardTrimCard({ trimData }) {
   return React.createElement(
@@ -4272,30 +4255,13 @@ function StandardTrimCard({ trimData }) {
     React.createElement(
       'div', 
       { style: { flexGrow: 1, display: 'flex', flexDirection: 'column', paddingBottom: '10px' } }, 
-      React.createElement("img", {
-        src: trimData.image,
-        alt: trimData.name,
-        style: { width: "100%", borderRadius: "6px", marginBottom: "5px" }
-      }),
-      React.createElement(
-        "div",
-        { style: { fontWeight: "bold", textAlign: "center", fontSize: "16px", marginBottom: "5px" } },
-        trimData.name
-      ),
-      React.createElement(
-        "div",
-        { style: { fontSize: "14px", marginBottom: "5px" } },
-        "Starting at " + trimData.price
-      ),
-      React.createElement(
-        "ul",
-        { style: { fontSize: "12px", paddingLeft: "16px", textAlign: 'left', flexGrow: 1, marginBottom: '0px' } }, 
-        
-        // 🔑 ENGINE AND MPG REORDERED
+      React.createElement("img", { src: trimData.image, alt: trimData.name, style: { width: "100%", borderRadius: "6px", marginBottom: "5px" } }),
+      React.createElement("div", { style: { fontWeight: "bold", textAlign: "center", fontSize: "16px", marginBottom: "5px" } }, trimData.name),
+      React.createElement("div", { style: { fontSize: "14px", marginBottom: "5px" } }, "Starting at " + trimData.price),
+      React.createElement("ul", { style: { fontSize: "12px", paddingLeft: "16px", textAlign: 'left', flexGrow: 1, marginBottom: '0px' } }, 
         React.createElement("li", {style: {marginBottom: '2px'}}, "Engine: " + trimData.engine),
         React.createElement("li", {style: {marginBottom: '2px'}}, "MPG: " + trimData.mpg),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Travel Miles: " + trimData.travelMiles),
-
         trimData.engineOptions != null ? React.createElement("li", {style: {marginBottom: '2px'}}, "Engine Options: " + trimData.engineOptions) : null,
         React.createElement("li", {style: {marginBottom: '2px'}}, "Horsepower: " + trimData.horsepower),
         React.createElement("li", {style: {marginBottom: '2px'}}, "Torque: " + trimData.torque),
@@ -4323,26 +4289,18 @@ function StandardTrimCard({ trimData }) {
 }
 
 
-// Category Page Component (Refined Year Filter)
 function CategoryPage({ category, onSelectVehicle, selectedYear }) {
   const filteredVehicles = (vehicles[category] || []).map(v => {
-    // Check if the vehicle name is Explorer (case insensitive)
     if (v.name.toLowerCase().includes("explorer")) {
       return {
         ...v,
         trims: v.trims.filter(trim => {
-          // Check if "Tremor" is in the trim name
           const isTremor = trim.name.toLowerCase().includes("tremor");
-          // If it IS a Tremor, only keep it if year is 2026
-          if (isTremor) {
-            return selectedYear === 2026;
-          }
-          // Keep all other Explorer trims
+          if (isTremor) return selectedYear === 2026;
           return true;
         })
       };
     }
-    // Return all other vehicles (Trucks, etc) unchanged
     return v;
   });
 
@@ -4354,21 +4312,9 @@ function CategoryPage({ category, onSelectVehicle, selectedYear }) {
         "div",
         {
           key: v.name,
-          style: {
-            border: "1px solid #ddd",
-            borderRadius: "10px",
-            margin: "10px 0",
-            padding: "10px",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px"
-          }
+          style: { border: "1px solid #ddd", borderRadius: "10px", margin: "10px 0", padding: "10px", display: "flex", alignItems: "center", gap: "10px" }
         },
-        React.createElement("img", {
-          src: v.image,
-          alt: v.name,
-          style: { width: "200px", borderRadius: "8px" }
-        }),
+        React.createElement("img", { src: v.image, alt: v.name, style: { width: "200px", borderRadius: "8px" } }),
         React.createElement(
           "div",
           null,
@@ -4378,14 +4324,7 @@ function CategoryPage({ category, onSelectVehicle, selectedYear }) {
             "button",
             {
               onClick: () => onSelectVehicle(v),
-              style: {
-                padding: "6px 10px",
-                marginTop: "6px",
-                cursor: "pointer",
-                borderRadius: "6px",
-                border: "none",
-                background: "#f4f4f4"
-              }
+              style: { padding: "6px 10px", marginTop: "6px", cursor: "pointer", borderRadius: "6px", border: "none", background: "#f4f4f4" }
             },
             "View Trims"
           )
@@ -4395,53 +4334,28 @@ function CategoryPage({ category, onSelectVehicle, selectedYear }) {
   );
 }
 
-// Vehicle Page Component (Contains the new layout logic)
 function VehiclePage({ vehicle, onBack, onHome }) {
-  // 1. Determine Layout based on Aspect Ratio
   const isPortrait = window.innerWidth < window.innerHeight;
-  const isTransit = vehicle.name === "Transit"; // Flag for conditional rendering
-  const isSuperDuty = vehicle.name === "Super Duty"; // NEW: Flag for Super Duty
-  
-  // Base direction is always column to stack Config Card above Trims Container
+  const isTransit = vehicle.name === "Transit"; 
+  const isSuperDuty = vehicle.name === "Super Duty"; 
+  const isF150 = vehicle.name === "F-150"; 
   const mainFlexDirection = "column";
 
-  // 2. Define Main Container Style (Config Card + Trims)
   const mainFlexStyle = {
     marginTop: "10px",
     display: "flex",
-    justifyContent: "center", // Centers elements within the column
-    alignItems: "center",     // Centers the config card horizontally
+    justifyContent: "center",
+    alignItems: "center",
     flexDirection: mainFlexDirection,
     gap: "20px"
   };
 
-  // 3. Define Trims Container Style (Handles the individual trim cards)
   let trimsContainerStyle;
-  
   if (isPortrait) {
-    // PORTRAIT MODE: Single column, vertically stacked.
-    trimsContainerStyle = {
-      display: "flex",
-      justifyContent: "center",
-      flexWrap: "nowrap", // Crucial: Prevents wrapping to a second column
-      flexDirection: "column", // Stack items vertically
-      alignItems: "center", // Center the cards themselves
-      width: "100%", 
-    };
+    trimsContainerStyle = { display: "flex", justifyContent: "center", flexWrap: "nowrap", flexDirection: "column", alignItems: "center", width: "100%" };
   } else {
-    // LANDSCAPE MODE: Single row, horizontally scrollable.
-    trimsContainerStyle = {
-      display: "flex",
-      justifyContent: "center", // Start from the left
-      flexWrap: "nowrap", // Crucial: Keeps all cards in one row
-      flexDirection: "row", 
-      alignItems: "flex-start",
-      width: "100%",
-      overflowX: "auto", // Enables horizontal scrolling if cards exceed screen width
-      padding: "0 5px" // Add slight padding for scroll visual
-    };
+    trimsContainerStyle = { display: "flex", justifyContent: "flex-start", flexWrap: "nowrap", flexDirection: "row", alignItems: "flex-start", width: "100%", overflowX: "auto", padding: "0 20px" };
   }
-
 
   return React.createElement(
     "div",
@@ -4456,55 +4370,34 @@ function VehiclePage({ vehicle, onBack, onHome }) {
     React.createElement(
       "div",
       { style: { display: "flex", justifyContent: "center", marginBottom: "20px" } },
-      React.createElement("img", {
-        src: vehicle.image,
-        alt: vehicle.name,
-        style: { width: "100%", maxWidth: "600px", borderRadius: "10px" }
-      })
+      React.createElement("img", { src: vehicle.image, alt: vehicle.name, style: { width: "100%", maxWidth: "600px", borderRadius: "10px" } })
     ),
-    
-    // Main Container: Config Card + Trim Cards
     React.createElement(
       "div",
       { style: mainFlexStyle },
-      
-      // 1. Conditional Configuration Card 
       (() => {
-          if (isTransit && vehicle.specs) {
-              return React.createElement(TransitConfigCard, { vehicleSpecs: vehicle.specs });
-          } else if (isSuperDuty) {
-              // Note: Super Duty doesn't use the vehicle.specs prop from the data structure, 
-              // it uses its own hardcoded data, similar to how Transit is set up but without needing external specs object.
-              return React.createElement(SuperDutyConfigCard);
-          }
+          if (isTransit && vehicle.specs) return React.createElement(TransitConfigCard, { vehicleSpecs: vehicle.specs });
+          else if (isSuperDuty) return React.createElement(SuperDutyConfigCard);
+          else if (isF150) return React.createElement(F150ConfigCard); 
           return null;
       })(),
-      
-      // 2. Trim Cards Container (Layout controlled by new trimsContainerStyle)
       React.createElement(
         "div",
         { style: trimsContainerStyle },
         vehicle.trims.map((trim) => {
-          // Condition to use the FlashCard
-          if (trim.strengths) { 
-            return React.createElement(FlashCard, { key: trim.name, trimData: trim });
-          }
-          // Use the standard card for all other trims
+          if (trim.strengths) return React.createElement(FlashCard, { key: trim.name, trimData: trim });
           return React.createElement(StandardTrimCard, { key: trim.name, trimData: trim });
         })
       )
-    ) // End of Main Flex Container
+    ) 
   );
 }
 
-// App Component
 function App() {
   const [activeCategory, setActiveCategory] = React.useState(null);
   const [selectedVehicle, setSelectedVehicle] = React.useState(null);
   const [categoryClicked, setCategoryClicked] = React.useState(false);
   const [windowSize, setWindowSize] = React.useState({ width: window.innerWidth, height: window.innerHeight });
-  
-  // NEW: State to handle the Gateway / Splash Screen
   const [showGateway, setShowGateway] = React.useState(true);
   const [selectedYear, setSelectedYear] = React.useState(null);
 
@@ -4514,194 +4407,51 @@ function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const goHome = () => {
-    setActiveCategory(null);
-    setSelectedVehicle(null);
-    setCategoryClicked(false);
-  };
+  const goHome = () => { setActiveCategory(null); setSelectedVehicle(null); setCategoryClicked(false); };
+  const handleYearSelect = (year) => { setSelectedYear(year); setShowGateway(false); };
+  const changeYear = () => { goHome(); setShowGateway(true); };
 
-  const handleYearSelect = (year) => {
-      setSelectedYear(year);
-      setShowGateway(false);
-  };
-
-  const changeYear = () => {
-      goHome();
-      setShowGateway(true);
-  };
-
-  // If a vehicle is selected, show that page
-  if (selectedVehicle) {
-    return React.createElement(VehiclePage, {
-      vehicle: selectedVehicle,
-      onBack: () => setSelectedVehicle(null),
-      onHome: goHome
-    });
-  }
-
-  const isPortrait = windowSize.width < window.innerHeight;
+  if (selectedVehicle) return React.createElement(VehiclePage, { vehicle: selectedVehicle, onBack: () => setSelectedVehicle(null), onHome: goHome });
 
   return React.createElement(
     "div",
     { style: { position: 'relative', minHeight: '100vh' } },
-    
-    // 1. MAIN APP CONTENT (BLURRED IF GATEWAY IS OPEN)
     React.createElement(
       "div",
-      {
-        style: {
-          filter: showGateway ? 'blur(8px)' : 'none',
-          transition: 'filter 0.3s ease',
-          pointerEvents: showGateway ? 'none' : 'auto'
-        }
-      },
+      { style: { filter: showGateway ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease', pointerEvents: showGateway ? 'none' : 'auto' } },
       React.createElement(
         "header",
-        {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "0 10px",
-            position: "relative"
-          }
-        },
-        categoryClicked &&
-          React.createElement(
-            "button",
-            { onClick: goHome, style: { position: "absolute", left: 0, padding: "6px 10px", cursor: "pointer" } },
-            "Home"
-          ),
-        React.createElement("img", {
-          src: "./images/logo.png",
-          alt: "AutoX Logo",
-          style: { maxHeight: "50px", objectFit: "contain", margin: "0 auto", display: "block" }
-        }),
-        React.createElement(
-          "button",
-          { 
-            onClick: changeYear, 
-            style: { position: "absolute", right: 0, padding: "6px 10px", cursor: "pointer" } 
-          },
-          "Change Year"
-        )
+        { style: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 10px", position: "relative" } },
+        categoryClicked && React.createElement("button", { onClick: goHome, style: { position: "absolute", left: 0, padding: "6px 10px", cursor: "pointer" } }, "Home"),
+        React.createElement("img", { src: "./images/logo.png", alt: "AutoX Logo", style: { maxHeight: "50px", objectFit: "contain", margin: "0 auto", display: "block" } }),
+        React.createElement("button", { onClick: changeYear, style: { position: "absolute", right: 0, padding: "6px 10px", cursor: "pointer" } }, "Change Year")
       ),
       React.createElement(
         "nav",
-        {
-          style: {
-            display: "flex",
-            flexWrap: "nowrap",
-            gap: "4px",
-            justifyContent: "space-between",
-            overflow: "hidden",
-            marginTop: "10px"
-          }
-        },
+        { style: { display: "flex", flexWrap: "nowrap", gap: "4px", justifyContent: "space-between", overflow: "hidden", marginTop: "10px" } },
         categories.map((c) =>
           React.createElement(
             "button",
             {
               key: c,
-              onClick: () => {
-                setActiveCategory(c);
-                setCategoryClicked(true);
-              },
-              style: {
-                fontSize: `${fontSizeVW}vw`,
-                background: "#f4f4f4",
-                border: "1px solid black",
-                borderRadius: "4px",
-                flex: 1,
-                minWidth: 0,
-                padding: "4px 2px",
-                whiteSpace: "nowrap",
-                fontWeight: "bold",
-                textAlign: "center",
-                cursor: "pointer"
-              }
+              onClick: () => { setActiveCategory(c); setCategoryClicked(true); },
+              style: { fontSize: `${fontSizeVW}vw`, background: "#f4f4f4", border: "1px solid black", borderRadius: "4px", flex: 1, minWidth: 0, padding: "4px 2px", whiteSpace: "nowrap", fontWeight: "bold", textAlign: "center", cursor: "pointer" }
             },
             c
           )
         )
       ),
-      categoryClicked &&
-        React.createElement(
-          "div",
-          {
-            style: {
-              textAlign: "center",
-              fontWeight: "bold",
-              marginTop: "10px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "flex-start"
-            }
-          },
-          React.createElement(CategoryPage, { 
-            category: activeCategory, 
-            onSelectVehicle: setSelectedVehicle, 
-            selectedYear: selectedYear 
-          })
-        )
+      categoryClicked && React.createElement("div", { style: { textAlign: "center", fontWeight: "bold", marginTop: "10px", display: "flex", justifyContent: "center", alignItems: "flex-start" } },
+          React.createElement(CategoryPage, { category: activeCategory, onSelectVehicle: setSelectedVehicle, selectedYear: selectedYear })
+      )
     ),
-
-    // 2. GATEWAY OVERLAY (ONLY SHOWS ON INITIAL LOAD)
     showGateway && React.createElement(
         "div",
-        {
-            style: {
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'rgba(255,255,255,0.3)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                zIndex: 9999
-            }
-        },
-        React.createElement(
-            "button",
-            {
-                onClick: () => handleYearSelect(2026),
-                style: {
-                    padding: '20px 60px',
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    marginBottom: '20px',
-                    borderRadius: '12px',
-                    border: '2px solid #000',
-                    backgroundColor: '#fff',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
-                }
-            },
-            "2026"
-        ),
-        React.createElement(
-            "button",
-            {
-                onClick: () => handleYearSelect(2025),
-                style: {
-                    padding: '20px 60px',
-                    fontSize: '24px',
-                    fontWeight: 'bold',
-                    borderRadius: '12px',
-                    border: '2px solid #000',
-                    backgroundColor: '#fff',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
-                }
-            },
-            "2025"
-        )
+        { style: { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(255,255,255,0.3)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', zIndex: 9999 } },
+        React.createElement("button", { onClick: () => handleYearSelect(2026), style: { padding: '20px 60px', fontSize: '24px', fontWeight: 'bold', marginBottom: '20px', borderRadius: '12px', border: '2px solid #000', backgroundColor: '#fff', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' } }, "2026"),
+        React.createElement("button", { onClick: () => handleYearSelect(2025), style: { padding: '20px 60px', fontSize: '24px', fontWeight: 'bold', borderRadius: '12px', border: '2px solid #000', backgroundColor: '#fff', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' } }, "2025")
     )
   );
 }
 
-// Renders the App into the root element
 ReactDOM.render(React.createElement(App), document.getElementById("root"));
