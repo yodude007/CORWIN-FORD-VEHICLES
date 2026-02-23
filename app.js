@@ -3476,6 +3476,7 @@ const vehicles = {
     }
 ]
 };
+
 // Data for the Comprehensive Super Duty Table (8 Columns) - UPDATED STRUCTURE FOR ENGINE/CAPABILITY BREAKDOWN
 const comprehensiveSuperDutyData = [
     // --- F-250 Series (SRW) ---
@@ -4524,6 +4525,11 @@ function App() {
       setShowGateway(false);
   };
 
+  const changeYear = () => {
+      goHome();
+      setShowGateway(true);
+  };
+
   // If a vehicle is selected, show that page
   if (selectedVehicle) {
     return React.createElement(VehiclePage, {
@@ -4570,7 +4576,15 @@ function App() {
           src: "./images/logo.png",
           alt: "AutoX Logo",
           style: { maxHeight: "50px", objectFit: "contain", margin: "0 auto", display: "block" }
-        })
+        }),
+        React.createElement(
+          "button",
+          { 
+            onClick: changeYear, 
+            style: { position: "absolute", right: 0, padding: "6px 10px", cursor: "pointer" } 
+          },
+          "Change Year"
+        )
       ),
       React.createElement(
         "nav",
