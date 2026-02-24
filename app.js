@@ -3526,10 +3526,10 @@ const f150AxleData = [
 ];
 
 // NEW: Sort Button Helper Component
-function SortHeader({ label, sortKey, sortConfig, requestSort, style }) {
+function SortHeader({ label, sortKey, sortConfig, requestSort, style, width }) {
     return React.createElement(
         "th",
-        { style: style, onClick: () => requestSort(sortKey) },
+        { style: { ...style, width: width }, onClick: () => requestSort(sortKey) },
         React.createElement("div", { style: { display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' } },
             label,
             React.createElement("span", { style: { marginLeft: '4px', fontSize: '8px' } }, 
@@ -3922,7 +3922,7 @@ function F150ConfigCard() {
     borderRadius: '10px',
     verticalAlign: 'top',
     width: '100%',
-    maxWidth: '550px',
+    maxWidth: '550px', 
     boxSizing: 'border-box',
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     textAlign: 'center'
@@ -4157,12 +4157,12 @@ function SuperDutyConfigCard() {
                       { key: index },
                       React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', textAlign: 'left', paddingLeft: '3px', fontSize: '8px' } }, item.model),
                       React.createElement("td", { style: tdStyle }, item.trim),
-                      React.createElement("td", { style: tdStyle, fontWeight: 'bold', color: item.duty.includes('Plyd') ? '#004d40' : '#1976d2'  }, item.duty),
-                      React.createElement("td", { style: tdStyle, fontWeight: 'bold' }, item.engine), 
+                      React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', color: item.duty.includes('Plyd') ? '#004d40' : '#1976d2' } }, item.duty),
+                      React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold' } }, item.engine), 
                       React.createElement("td", { style: tdStyle }, item.gcwr),
                       React.createElement("td", { style: tdStyle }, item.gvwr),
-                      React.createElement("td", { style: tdStyle, fontWeight: item.payload.includes('k') ? 'bold' : 'normal', color: item.payload.includes('k') ? '#004d40' : '#000' }, item.payload), 
-                      React.createElement("td", { style: tdStyle, fontWeight: item.tow.includes('k') ? 'bold' : 'normal', color: item.tow.includes('k') ? '#1976d2' : '#000' }, item.tow) 
+                      React.createElement("td", { style: { ...tdStyle, fontWeight: item.payload.includes('k') ? 'bold' : 'normal', color: item.payload.includes('k') ? '#004d40' : '#000' } }, item.payload), 
+                      React.createElement("td", { style: { ...tdStyle, fontWeight: item.tow.includes('k') ? 'bold' : 'normal', color: item.tow.includes('k') ? '#1976d2' : '#000' } }, item.tow) 
                   )
               )
           )
@@ -4173,7 +4173,7 @@ function SuperDutyConfigCard() {
       "SRW = Single Rear Wheel; DRW = Dual Rear Wheel",
       "**Engine listed is the one required to achieve the listed capacity.**",
       "Max Plyd = Max Payload Configuration (usually lightest engine, 6.8L/7.3L Gas)",
-      "Max Tow = Max Towing Configuration (always the 6.7L HOiesel)",
+      "Max Tow = Max Towing Configuration (always the 6.7L HO Diesel)",
       "GCWR = Gross Combined Weight Rating (Max 5th Wheel/Gooseneck Towing)",
       "GVWR = Gross Vehicle Weight Rating (Max)",
       "Plyd = Payload (Max); Tow = 5th Wheel / Gooseneck Towing (Max)",
@@ -4489,30 +4489,70 @@ function CategoryPage({ category, onSelectVehicle, selectedYear }) {
   return React.createElement(
     "div",
     { className: "category" },
-    filteredVehicles.map((v) =>
-      React.createElement(
+    filteredVehicles.map((v) => {
+      // Logic for Discontinued 2026 Escape
+      const isEscape2026 = v.name.toLowerCase().includes("escape") && selectedYear === 2026;
+
+      return React.createElement(
         "div",
         {
           key: v.name,
-          style: { border: "1px solid #ddd", borderRadius: "10px", margin: "10px 0", padding: "10px", display: "flex", alignItems: "center", gap: "10px" }
+          style: { 
+            border: "1px solid #ddd", 
+            borderRadius: "10px", 
+            margin: "10px 0", 
+            padding: "10px", 
+            display: "flex", 
+            alignItems: "center", 
+            gap: "10px",
+            backgroundColor: isEscape2026 ? "#fff3e0" : "transparent" // Slight warning tint
+          }
         },
-        React.createElement("img", { src: v.image, alt: v.name, style: { width: "200px", borderRadius: "8px" } }),
+        React.createElement("img", { 
+          src: v.image, 
+          alt: v.name, 
+          style: { 
+            width: "200px", 
+            borderRadius: "8px", 
+            filter: isEscape2026 ? "grayscale(100%) opacity(0.5)" : "none" // Visual cue for discontinued
+          } 
+        }),
         React.createElement(
           "div",
-          null,
-          React.createElement("h3", null, v.name),
-          React.createElement("p", null, "Starting at " + v.price),
-          React.createElement(
-            "button",
-            {
-              onClick: () => onSelectVehicle(v),
-              style: { padding: "6px 10px", marginTop: "6px", cursor: "pointer", borderRadius: "6px", border: "none", background: "#f4f4f4" }
-            },
-            "View Trims"
-          )
+          { style: { textAlign: "left" } },
+          React.createElement("h3", { style: { margin: "0" } }, v.name),
+          
+          isEscape2026 ? 
+            // Discontinued Content for 2026 Escape
+            React.createElement(
+              "div",
+              null,
+              React.createElement("p", { style: { color: "#d32f2f", fontWeight: "bold", margin: "5px 0" } }, "STATUS: DISCONTINUED FOR 2026"),
+              React.createElement("p", { style: { fontSize: "12px", color: "#666", maxWidth: "400px" } }, 
+                "Ford has officially retired the Escape nameplate for the 2026 model year. As the brand shifts focus toward a fully electrified future and more robust off-road offerings, the Escape's segment is being consolidated into newer EV platforms."
+              ),
+              React.createElement("div", { style: { fontSize: "11px", fontStyle: "italic", marginTop: "5px", color: "#00796b" } }, 
+                "Looking for a compact SUV? Check out the **2026 Bronco Sport** or the **2026 Mustang Mach-E**."
+              )
+            )
+            :
+            // Standard View for all other vehicles
+            React.createElement(
+              "div",
+              null,
+              React.createElement("p", null, "Starting at " + v.price),
+              React.createElement(
+                "button",
+                {
+                  onClick: () => onSelectVehicle(v),
+                  style: { padding: "6px 10px", marginTop: "6px", cursor: "pointer", borderRadius: "6px", border: "none", background: "#f4f4f4" }
+                },
+                "View Trims"
+              )
+            )
         )
-      )
-    )
+      );
+    })
   );
 }
 
