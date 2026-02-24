@@ -3511,6 +3511,47 @@ const comprehensiveF150Data = [
     { engine: "5.2L SC V8 (Raptor R)", hp: "720", torque: "640", tow: "8,700", payload: "1,400", config: "SuperCrew 5.5' Box, 4x4" },
 ];
 
+// Updated: Data for F-150 Towing & Axle Breakdown (Hierarchical)
+const f150AxleData = [
+    { trim: "XL/STX/XLT", engine: "5.0L V8", maxTow: "No", axle: "3.31/3.73", gvwr: "7,050", gcwr: "14,800" },
+    { trim: "XL/STX/XLT", engine: "5.0L V8", maxTow: "Yes", axle: "3.73", gvwr: "7,100", gcwr: "17,300" },
+    { trim: "XL/STX/XLT", engine: "3.5L EB", maxTow: "No", axle: "3.31/3.55", gvwr: "7,050", gcwr: "17,500" },
+    { trim: "XL/STX/XLT", engine: "3.5L EB", maxTow: "Yes", axle: "3.55/3.73", gvwr: "7,100", gcwr: "19,400" },
+    { trim: "Lariat", engine: "3.5L EB", maxTow: "No", axle: "3.31/3.55", gvwr: "7,100", gcwr: "17,500" },
+    { trim: "Lariat", engine: "3.5L EB", maxTow: "Yes", axle: "3.55", gvwr: "7,200", gcwr: "18,400" },
+    { trim: "Tremor", engine: "5.0L V8", maxTow: "N/A", axle: "3.73", gvwr: "7,100", gcwr: "14,500" },
+    { trim: "King Ranch", engine: "3.5L PowerBoost", maxTow: "N/A", axle: "3.73", gvwr: "7,350", gcwr: "17,000" },
+    { trim: "Platinum", engine: "3.5L PowerBoost", maxTow: "N/A", axle: "3.73", gvwr: "7,350", gcwr: "17,000" },
+    { trim: "Raptor/Raptor R", engine: "3.5L HO/5.2L SC", maxTow: "N/A", axle: "4.10", gvwr: "7,400", gcwr: "15,500" },
+];
+
+// NEW: Sort Button Helper Component
+function SortHeader({ label, sortKey, sortConfig, requestSort, style }) {
+    return React.createElement(
+        "th",
+        { style: style, onClick: () => requestSort(sortKey) },
+        React.createElement("div", { style: { display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' } },
+            label,
+            React.createElement("span", { style: { marginLeft: '4px', fontSize: '8px' } }, 
+                sortConfig.key === sortKey ? (sortConfig.direction === 'asc' ? '▲' : '▼') : '↕'
+            )
+        )
+    );
+}
+
+// Global Trim Hierarchy for Sorting logic
+const trimHierarchy = {
+    "XL": 1, "STX": 2, "XLT": 3, "LARIAT": 4, "TREMOR": 5, "KING RANCH": 6, "PLATINUM": 7, "RAPTOR": 8, "RAPTOR R": 9
+};
+
+const getTrimPriority = (trimStr) => {
+    const upper = trimStr.toUpperCase();
+    for (const [key, value] of Object.entries(trimHierarchy)) {
+        if (upper.includes(key)) return value;
+    }
+    return 99; // Default for others
+};
+
 // Font size calculation for category buttons
 const maxTextLength = Math.max(...categories.map((c) => c.length));
 const baseFontVW = 1.6;
@@ -3607,6 +3648,28 @@ const comprehensiveTransitData = [
 // --- TRANSIT CONFIG CARD COMPONENT ---
 
 function TransitConfigCard({ vehicleSpecs }) {
+  const [data, setData] = React.useState(comprehensiveTransitData);
+  const [sortConfig, setSortConfig] = React.useState({ key: null, direction: 'asc' });
+
+  const resetSort = () => {
+    setData(comprehensiveTransitData);
+    setSortConfig({ key: null, direction: 'asc' });
+  };
+
+  const requestSort = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+        direction = 'desc';
+    }
+    const sortedData = [...data].sort((a, b) => {
+        if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+        if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
+        return 0;
+    });
+    setData(sortedData);
+    setSortConfig({ key, direction });
+  };
+
   const cardStyle = {
     display: 'inline-block',
     border: '1px solid #004d40', 
@@ -3623,33 +3686,32 @@ function TransitConfigCard({ vehicleSpecs }) {
   };
 
   const tableWrapperStyle = {
-    // Scroll removed by instruction, rely on narrow columns
     marginBottom: '10px',
     maxWidth: '100%',
-    overflowX: 'hidden' // Force hidden just in case of slight overflow
+    overflowX: 'hidden' 
   };
     
   const tableStyle = {
     width: '100%',
     borderCollapse: 'collapse',
-    fontSize: '8px', // Reduced font size for data rows
+    fontSize: '8px', 
     backgroundColor: 'white',
     border: '1px solid #a5d6a7'
   };
 
   const thStyle = {
     border: '1px solid #a5d6a7',
-    padding: '4px 1px', // Reduced padding
+    padding: '4px 1px', 
     textAlign: 'center',
-    backgroundColor: '#c8e6c9', // Header background
+    backgroundColor: '#c8e6c9', 
     fontWeight: 'bold',
     color: '#004d40',
-    fontSize: '8px' // Reduced font size for headers
+    fontSize: '8px' 
   };
 
   const tdStyle = {
     border: '1px solid #a5d6a7',
-    padding: '3px 1px', // Reduced padding
+    padding: '3px 1px', 
     textAlign: 'center'
   };
   
@@ -3661,12 +3723,9 @@ function TransitConfigCard({ vehicleSpecs }) {
       paddingBottom: '5px'
   };
   
-  // Define column widths for even distribution and minimal total width
-  // Total width of table is 100%. 
-  const modelWidth = "25%"; // Model Name (must be readable)
-  const evenColWidth = "12.5%"; // Duty, Weight, Plyd, Tow, Roof, Seats (75% / 6)
+  const modelWidth = "25%"; 
+  const evenColWidth = "12.5%"; 
   
-  // Helper to render the comprehensive table
   const renderComprehensiveTable = () => React.createElement(
       "div",
       { style: tableWrapperStyle },
@@ -3679,25 +3738,23 @@ function TransitConfigCard({ vehicleSpecs }) {
               React.createElement(
                   "tr",
                   null,
-                  React.createElement("th", { style: thStyle, width: modelWidth }, "Model / Trim"),
-                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Duty"),
-                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Weight"), // GVWR condensed
-                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Plyd"), // Payload condensed
-                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Tow"), // Towing condensed
-                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Roof"),
-                  React.createElement("th", { style: thStyle, width: evenColWidth }, "Seats") // Seating condensed
+                  React.createElement(SortHeader, { style: thStyle, width: modelWidth, label: "Model / Trim", sortKey: "model", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth, label: "Duty", sortKey: "duty", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth, label: "Weight", sortKey: "gvwr", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth, label: "Plyd", sortKey: "payload", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth, label: "Tow", sortKey: "towing", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth, label: "Roof", sortKey: "roof", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth, label: "Seats", sortKey: "seating", sortConfig: sortConfig, requestSort: requestSort })
               )
           ),
           React.createElement(
               "tbody",
               null,
-              comprehensiveTransitData.map((item, index) =>
+              data.map((item, index) =>
                   React.createElement(
                       "tr",
                       { key: index },
-                      // Model cell keeps slightly larger text and left alignment
                       React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', textAlign: 'left', paddingLeft: '3px', fontSize: '9px' } }, item.model),
-                      // All other cells are small and centered
                       React.createElement("td", { style: tdStyle }, item.duty),
                       React.createElement("td", { style: tdStyle }, item.gvwr),
                       React.createElement("td", { style: tdStyle }, item.payload),
@@ -3710,7 +3767,6 @@ function TransitConfigCard({ vehicleSpecs }) {
       )
   );
   
-  // Formatted Notes List (Updated with new abbreviations, scroll note removed)
   const formattedNotes = [
       "SRW = Single Rear Wheel",
       "DRW = Dual Rear Wheel",
@@ -3727,15 +3783,16 @@ function TransitConfigCard({ vehicleSpecs }) {
     "div",
     { style: cardStyle },
     
-    // Title Section
     React.createElement("h3", { style: { color: '#004d40', marginBottom: '5px' } }, "TRANSIT CONFIGURATION GUIDE"),
     React.createElement("p", { style: { fontSize: '12px', color: '#388e3c', marginTop: '0', fontWeight: 'bold', fontStyle: 'italic' } }, "Quick Reference for Dimensions & Models"),
     
-    // 1. Comprehensive Specification Table (MAX CONDENSATION)
-    React.createElement("h4", { style: h4Style }, "MODEL SPECIFICATIONS"),
+    React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+        React.createElement("h4", { style: { ...h4Style, flexGrow: 1, borderBottom: 'none' } }, "MODEL SPECIFICATIONS"),
+        React.createElement("button", { onClick: resetSort, style: { fontSize: '10px', cursor: 'pointer', padding: '2px 5px', marginBottom: '10px' } }, "Reset Sort")
+    ),
+    React.createElement("div", { style: { borderBottom: '2px solid #a5d6a7', marginBottom: '10px' } }),
     renderComprehensiveTable(),
     
-    // Formatted Notes List 
     React.createElement(
       "ul",
       { style: { listStyleType: 'none', padding: '0', fontSize: '9px', textAlign: 'left', margin: '0 0 15px 0' } },
@@ -3744,10 +3801,8 @@ function TransitConfigCard({ vehicleSpecs }) {
       )
     ),
 
-    // 2. Key Dimensions Section (Images only, list deleted) (RESTORED SECTION)
     React.createElement("h4", { style: h4Style }, "KEY ROOF & LENGTH DIMENSIONS"),
     
-    // --- ROOF HEIGHT DIAGRAM SECTION (Your Original) ---
     React.createElement("h5", { style: { color: '#00796b', marginBottom: '5px', marginTop: '0', textAlign: 'center' } }, "Roof Height Comparison"),
     React.createElement("div", { style: { textAlign: 'center', marginBottom: '15px' } },
         React.createElement("img", {
@@ -3765,17 +3820,16 @@ function TransitConfigCard({ vehicleSpecs }) {
         React.createElement("p", { style: { fontSize: '10px', color: '#666', marginBottom: '0' } }, "")
     ),
 
-    // --- BODY AND WHEELBASE LENGTHS DIAGRAM SECTION (Your New Image) ---
     React.createElement("h5", { style: { color: '#00796b', marginBottom: '5px', marginTop: '0', textAlign: 'center' } }, "Body and Wheelbase Lengths"),
     React.createElement("div", { style: { textAlign: 'center', marginBottom: '15px' } },
         React.createElement("img", {
-          src: "./images/transit_length_visual.jpg", // The image file to be used for the side profiles
+          src: "./images/transit_length_visual.jpg", 
           alt: "Ford Transit Length Dimensions: Regular, Long, and Extended",
           style: { 
             width: "100%", 
             height: "auto", 
             maxWidth: '350px',
-            border: "1px solid black", // Maintain black border style
+            border: "1px solid black", 
             borderRadius: "5px", 
             marginBottom: "5px" 
           }
@@ -3783,7 +3837,6 @@ function TransitConfigCard({ vehicleSpecs }) {
         React.createElement("p", { style: { fontSize: '10px', color: '#666', marginBottom: '0' } }, "")
     ),
     
-    // 3. Cargo Volume Section (Existing)
     React.createElement("h4", { style: h4Style }, "MAX CARGO VOLUME"),
     React.createElement(
       "ul",
@@ -3796,7 +3849,6 @@ function TransitConfigCard({ vehicleSpecs }) {
           React.createElement("b", { style: { color: '#00796b' } }, "Passenger Van (Max Capacity): "), vehicleSpecs.maxCapacities.passengerVanVolume),
     ),
     
-    // Unique Identifier
     React.createElement("p", { style: { fontSize: '10px', color: 'red', marginTop: '15px', fontWeight: 'bold', borderTop: '1px dashed #a5d6a7', paddingTop: '5px' } }, vehicleSpecs.uniqueIdentifier)
   );
 }
@@ -3806,12 +3858,67 @@ function TransitConfigCard({ vehicleSpecs }) {
 // --- F-150 CONFIG CARD COMPONENT ---
 
 function F150ConfigCard() {
+  const [data, setData] = React.useState(comprehensiveF150Data);
+  const [axleData, setAxleData] = React.useState(f150AxleData);
+  const [sortConfig, setSortConfig] = React.useState({ key: null, direction: 'asc' });
+  const [axleSortConfig, setAxleSortConfig] = React.useState({ key: null, direction: 'asc' });
+
+  const resetSort = (isAxleTable = false) => {
+    if (isAxleTable) {
+        setAxleData(f150AxleData);
+        setAxleSortConfig({ key: null, direction: 'asc' });
+    } else {
+        setData(comprehensiveF150Data);
+        setSortConfig({ key: null, direction: 'asc' });
+    }
+  };
+
+  const requestSort = (key, isAxleTable = false) => {
+    let direction = 'asc';
+    const config = isAxleTable ? axleSortConfig : sortConfig;
+    const currentData = isAxleTable ? axleData : data;
+
+    if (config.key === key && config.direction === 'asc') {
+        direction = 'desc';
+    }
+
+    const sortedData = [...currentData].sort((a, b) => {
+        // Handle custom Trim hierarchy sorting
+        if (key === 'trim') {
+            const priA = getTrimPriority(a[key]);
+            const priB = getTrimPriority(b[key]);
+            return direction === 'asc' ? priA - priB : priB - priA;
+        }
+
+        const valA = a[key].toString().replace(/,/g, '').replace(/\*/g, '');
+        const valB = b[key].toString().replace(/,/g, '').replace(/\*/g, '');
+        
+        const numA = parseFloat(valA);
+        const numB = parseFloat(valB);
+
+        if (!isNaN(numA) && !isNaN(numB)) {
+            return direction === 'asc' ? numA - numB : numB - numA;
+        }
+        if (valA < valB) return direction === 'asc' ? -1 : 1;
+        if (valA > valB) return direction === 'asc' ? 1 : -1;
+        return 0;
+    });
+
+    if (isAxleTable) {
+        setAxleData(sortedData);
+        setAxleSortConfig({ key, direction });
+    } else {
+        setData(sortedData);
+        setSortConfig({ key, direction });
+    }
+  };
+
   const cardStyle = {
     display: 'inline-block',
-    border: '1px solid #fbc02d', // Yellow border
+    border: '1px solid #fbc02d', 
     margin: '5px',
     padding: '15px',
-    background: '#fff9c4', // Light yellow background (same shade as green/blue)
+    background: '#fff9c4', 
     borderRadius: '10px',
     verticalAlign: 'top',
     width: '100%',
@@ -3826,16 +3933,17 @@ function F150ConfigCard() {
     borderCollapse: 'collapse',
     fontSize: '8px',
     backgroundColor: 'white',
-    border: '1px solid #fbc02d'
+    border: '1px solid #fbc02d',
+    marginBottom: '15px'
   };
 
   const thStyle = {
     border: '1px solid #fbc02d',
     padding: '4px',
-    backgroundColor: '#fff176', // Yellow header background
+    backgroundColor: '#fff176', 
     fontWeight: 'bold',
     fontSize: '9px',
-    color: '#827717' // Dark yellow/brown text
+    color: '#827717' 
   };
 
   const tdStyle = {
@@ -3844,25 +3952,36 @@ function F150ConfigCard() {
     textAlign: 'center'
   };
 
+  const h4Style = {
+    color: '#827717',
+    marginTop: '15px'
+  };
+
   return React.createElement(
     "div",
     { style: cardStyle },
-    React.createElement("h3", { style: { color: '#827717', marginBottom: '5px' } }, "F-150 CAPABILITY GUIDE"),
-    React.createElement("h4", { style: { borderBottom: '2px solid #fbc02d', paddingBottom: '5px', color: '#827717' } }, "ENGINE & TOWING SPECS"),
+    React.createElement("h3", { style: { color: '#827717', marginBottom: '5px' } }, "F-150 CONFIGURATION GUIDE"),
+    React.createElement("p", { style: { fontSize: '12px', color: '#827717', marginTop: '0', fontWeight: 'bold', fontStyle: 'italic' } }, "Quick Reference for Max Capacity & Trims"),
+    
+    React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+        React.createElement("h4", { style: { ...h4Style, flexGrow: 1 } }, "ENGINE & TOWING SPECS"),
+        React.createElement("button", { onClick: () => resetSort(false), style: { fontSize: '10px', cursor: 'pointer', padding: '2px 5px' } }, "Reset Sort")
+    ),
+    React.createElement("div", { style: { borderBottom: '2px solid #fbc02d', marginBottom: '10px' } }),
     React.createElement(
       "table",
       { style: tableStyle },
       React.createElement("thead", null, 
         React.createElement("tr", null,
-          React.createElement("th", { style: thStyle }, "Engine"),
-          React.createElement("th", { style: thStyle }, "HP/Torque"),
-          React.createElement("th", { style: thStyle }, "Max Tow"),
-          React.createElement("th", { style: thStyle }, "Max Payload"),
-          React.createElement("th", { style: thStyle }, "Optimal Configuration")
+          React.createElement(SortHeader, { style: thStyle, label: "Engine", sortKey: "engine", sortConfig: sortConfig, requestSort: (k) => requestSort(k, false) }),
+          React.createElement(SortHeader, { style: thStyle, label: "HP/Torque", sortKey: "hp", sortConfig: sortConfig, requestSort: (k) => requestSort(k, false) }),
+          React.createElement(SortHeader, { style: thStyle, label: "Max Tow", sortKey: "tow", sortConfig: sortConfig, requestSort: (k) => requestSort(k, false) }),
+          React.createElement(SortHeader, { style: thStyle, label: "Max Payload", sortKey: "payload", sortConfig: sortConfig, requestSort: (k) => requestSort(k, false) }),
+          React.createElement(SortHeader, { style: thStyle, label: "Optimal Configuration", sortKey: "config", sortConfig: sortConfig, requestSort: (k) => requestSort(k, false) })
         )
       ),
       React.createElement("tbody", null,
-        comprehensiveF150Data.map((item, i) => React.createElement("tr", { key: i },
+        data.map((item, i) => React.createElement("tr", { key: i },
           React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', textAlign: 'left' } }, item.engine),
           React.createElement("td", { style: tdStyle }, `${item.hp} / ${item.torque}`),
           React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', color: '#1976d2' } }, item.tow),
@@ -3871,8 +3990,39 @@ function F150ConfigCard() {
         ))
       )
     ),
+
+    React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+        React.createElement("h4", { style: { ...h4Style, flexGrow: 1 } }, "MAX TOW & AXLE RATIO GUIDE"),
+        React.createElement("button", { onClick: () => resetSort(true), style: { fontSize: '10px', cursor: 'pointer', padding: '2px 5px' } }, "Reset Sort")
+    ),
+    React.createElement("div", { style: { borderBottom: '2px solid #fbc02d', marginBottom: '10px' } }),
+    React.createElement(
+      "table",
+      { style: tableStyle },
+      React.createElement("thead", null, 
+        React.createElement("tr", null,
+          React.createElement(SortHeader, { style: thStyle, label: "Trim Tier", sortKey: "trim", sortConfig: axleSortConfig, requestSort: (k) => requestSort(k, true) }),
+          React.createElement(SortHeader, { style: thStyle, label: "Engine", sortKey: "engine", sortConfig: axleSortConfig, requestSort: (k) => requestSort(k, true) }),
+          React.createElement(SortHeader, { style: thStyle, label: "Max Tow Pkg", sortKey: "maxTow", sortConfig: axleSortConfig, requestSort: (k) => requestSort(k, true) }),
+          React.createElement(SortHeader, { style: thStyle, label: "Axle Ratio", sortKey: "axle", sortConfig: axleSortConfig, requestSort: (k) => requestSort(k, true) }),
+          React.createElement(SortHeader, { style: thStyle, label: "GVWR", sortKey: "gvwr", sortConfig: axleSortConfig, requestSort: (k) => requestSort(k, true) }),
+          React.createElement(SortHeader, { style: thStyle, label: "GCWR", sortKey: "gcwr", sortConfig: axleSortConfig, requestSort: (k) => requestSort(k, true) })
+        )
+      ),
+      React.createElement("tbody", null,
+        axleData.map((item, i) => React.createElement("tr", { key: i },
+          React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold' } }, item.trim),
+          React.createElement("td", { style: tdStyle }, item.engine),
+          React.createElement("td", { style: { ...tdStyle, color: item.maxTow === 'Yes' ? '#388e3c' : '#000', fontWeight: item.maxTow === 'Yes' ? 'bold' : 'normal' } }, item.maxTow),
+          React.createElement("td", { style: tdStyle }, item.axle),
+          React.createElement("td", { style: tdStyle }, item.gvwr),
+          React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', color: '#1976d2' } }, item.gcwr)
+        ))
+      )
+    ),
+
     React.createElement("p", { style: { fontSize: '9px', color: '#666', marginTop: '10px', textAlign: 'left' } }, 
-      "Note: Requires proper equipment (Tow/Haul Pkg & Max Tow Axle). See dealer for specific ratings."
+      "Note: GCWR and Tow ratings assume Max Trailer Tow Package where indicated. High trim levels (Platinum/Limited) usually have lower payload due to curb weight."
     )
   );
 }
@@ -3880,16 +4030,56 @@ function F150ConfigCard() {
 // --- SUPER DUTY CONFIG CARD COMPONENT (FIXED WITH ENGINE) ---
 
 function SuperDutyConfigCard() {
+  const [data, setData] = React.useState(comprehensiveSuperDutyData);
+  const [sortConfig, setSortConfig] = React.useState({ key: null, direction: 'asc' });
+
+  const resetSort = () => {
+    setData(comprehensiveSuperDutyData);
+    setSortConfig({ key: null, direction: 'asc' });
+  };
+
+  const requestSort = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+        direction = 'desc';
+    }
+
+    const sortedData = [...data].sort((a, b) => {
+        // Trim logic (even if combined like XL/XLT)
+        if (key === 'trim') {
+            const priA = getTrimPriority(a[key].split('/')[0]);
+            const priB = getTrimPriority(b[key].split('/')[0]);
+            return direction === 'asc' ? priA - priB : priB - priA;
+        }
+
+        const valA = a[key].toString().replace(/\*/g, '').replace(/k/g, '');
+        const valB = b[key].toString().replace(/\*/g, '').replace(/k/g, '');
+        
+        const numA = parseFloat(valA);
+        const numB = parseFloat(valB);
+
+        if (!isNaN(numA) && !isNaN(numB)) {
+            return direction === 'asc' ? numA - numB : numB - numA;
+        }
+        if (valA < valB) return direction === 'asc' ? -1 : 1;
+        if (valA > valB) return direction === 'asc' ? 1 : -1;
+        return 0;
+    });
+
+    setData(sortedData);
+    setSortConfig({ key, direction });
+  };
+
   const cardStyle = {
     display: 'inline-block',
-    border: '1px solid #1976d2', // Dark blue border
+    border: '1px solid #1976d2', 
     margin: '5px',
     padding: '15px',
-    background: '#e3f2fd', // Light blue background
+    background: '#e3f2fd', 
     borderRadius: '10px',
     verticalAlign: 'top',
     width: '100%',
-    maxWidth: '550px', // Slightly wider for the extra column
+    maxWidth: '550px', 
     boxSizing: 'border-box',
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     textAlign: 'center'
@@ -3904,43 +4094,38 @@ function SuperDutyConfigCard() {
   const tableStyle = {
     width: '100%',
     borderCollapse: 'collapse',
-    fontSize: '7.5px', // Reduced font size to fit 8 columns
+    fontSize: '7.5px', 
     backgroundColor: 'white',
     border: '1px solid #90caf9'
   };
 
   const thStyle = {
     border: '1px solid #90caf9',
-    padding: '3px 1px', // Reduced padding
+    padding: '3px 1px', 
     textAlign: 'center',
-    backgroundColor: '#bbdefb', // Header background
+    backgroundColor: '#bbdefb', 
     fontWeight: 'bold',
-    color: '#1976d2', // Dark blue text
+    color: '#1976d2', 
     fontSize: '8px'
   };
 
   const tdStyle = {
     border: '1px solid #90caf9',
-    padding: '2px 1px', // Reduced padding
+    padding: '2px 1px', 
     textAlign: 'center'
   };
   
   const h4Style = {
       color: '#1976d2', 
       marginBottom: '10px', 
-      fontWeight: 'bold', 
-      borderBottom: '2px solid #90caf9', 
-      paddingBottom: '5px'
+      fontWeight: 'bold'
   };
   
-  // Define column widths for even distribution and minimal total width
-  // Total width of table is 100%. 
   const modelWidth = "15%"; 
   const trimWidth = "15%"; 
   const dutyWidth = "12%"; 
   const evenColWidth = (100 - 15 - 15 - 12) / 4; 
   
-  // Helper to render the comprehensive table
   const renderComprehensiveTable = () => React.createElement(
       "div",
       { style: tableWrapperStyle },
@@ -3953,39 +4138,37 @@ function SuperDutyConfigCard() {
               React.createElement(
                   "tr",
                   null,
-                  React.createElement("th", { style: thStyle, width: modelWidth }, "Model"),
-                  React.createElement("th", { style: thStyle, width: trimWidth }, "Trim"),
-                  React.createElement("th", { style: thStyle, width: dutyWidth }, "Duty"),
-                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "Engine"), // NEW COLUMN
-                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "GCWR"),
-                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "GVWR"),
-                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "Plyd"),
-                  React.createElement("th", { style: thStyle, width: evenColWidth + "%" }, "Tow")
+                  React.createElement(SortHeader, { style: thStyle, width: modelWidth, label: "Model", sortKey: "model", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: trimWidth, label: "Trim", sortKey: "trim", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: dutyWidth, label: "Duty", sortKey: "duty", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth + "%", label: "Engine", sortKey: "engine", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth + "%", label: "GCWR", sortKey: "gcwr", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth + "%", label: "GVWR", sortKey: "gvwr", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth + "%", label: "Plyd", sortKey: "payload", sortConfig: sortConfig, requestSort: requestSort }),
+                  React.createElement(SortHeader, { style: thStyle, width: evenColWidth + "%", label: "Tow", sortKey: "tow", sortConfig: sortConfig, requestSort: requestSort })
               )
           ),
           React.createElement(
               "tbody",
               null,
-              comprehensiveSuperDutyData.map((item, index) =>
+              data.map((item, index) =>
                   React.createElement(
                       "tr",
                       { key: index },
-                      // Model cell keeps slightly larger text and left alignment
                       React.createElement("td", { style: { ...tdStyle, fontWeight: 'bold', textAlign: 'left', paddingLeft: '3px', fontSize: '8px' } }, item.model),
                       React.createElement("td", { style: tdStyle }, item.trim),
                       React.createElement("td", { style: tdStyle, fontWeight: 'bold', color: item.duty.includes('Plyd') ? '#004d40' : '#1976d2'  }, item.duty),
-                      React.createElement("td", { style: tdStyle, fontWeight: 'bold' }, item.engine), // NEW COLUMN DATA
+                      React.createElement("td", { style: tdStyle, fontWeight: 'bold' }, item.engine), 
                       React.createElement("td", { style: tdStyle }, item.gcwr),
                       React.createElement("td", { style: tdStyle }, item.gvwr),
-                      React.createElement("td", { style: tdStyle, fontWeight: item.payload.includes('k') ? 'bold' : 'normal', color: item.payload.includes('k') ? '#004d40' : '#000' }, item.payload), // Highlight Max Payload
-                      React.createElement("td", { style: tdStyle, fontWeight: item.tow.includes('k') ? 'bold' : 'normal', color: item.tow.includes('k') ? '#1976d2' : '#000' }, item.tow) // Highlight Max Tow
+                      React.createElement("td", { style: tdStyle, fontWeight: item.payload.includes('k') ? 'bold' : 'normal', color: item.payload.includes('k') ? '#004d40' : '#000' }, item.payload), 
+                      React.createElement("td", { style: tdStyle, fontWeight: item.tow.includes('k') ? 'bold' : 'normal', color: item.tow.includes('k') ? '#1976d2' : '#000' }, item.tow) 
                   )
               )
           )
       )
   );
   
-  // Formatted Notes List 
   const formattedNotes = [
       "SRW = Single Rear Wheel; DRW = Dual Rear Wheel",
       "**Engine listed is the one required to achieve the listed capacity.**",
@@ -4004,15 +4187,16 @@ function SuperDutyConfigCard() {
     "div",
     { style: cardStyle },
     
-    // Title Section
     React.createElement("h3", { style: { color: '#1976d2', marginBottom: '5px' } }, "SUPER DUTY CONFIGURATION GUIDE"),
     React.createElement("p", { style: { fontSize: '12px', color: '#4fc3f7', marginTop: '0', fontWeight: 'bold', fontStyle: 'italic' } }, "Quick Reference for Max Capacity & Trims"),
     
-    // 1. Comprehensive Specification Table
-    React.createElement("h4", { style: h4Style }, "CAPACITY BY OPTIMIZED CONFIGURATION"),
+    React.createElement("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
+        React.createElement("h4", { style: { ...h4Style, flexGrow: 1 } }, "CAPACITY BY OPTIMIZED CONFIGURATION"),
+        React.createElement("button", { onClick: resetSort, style: { fontSize: '10px', cursor: 'pointer', padding: '2px 5px' } }, "Reset Sort")
+    ),
+    React.createElement("div", { style: { borderBottom: '2px solid #90caf9', marginBottom: '10px' } }),
     renderComprehensiveTable(),
     
-    // Formatted Notes List 
     React.createElement(
       "ul",
       { style: { listStyleType: 'none', padding: '0', fontSize: '9px', textAlign: 'left', margin: '0 0 15px 0' } },
@@ -4021,8 +4205,7 @@ function SuperDutyConfigCard() {
       )
     ),
 
-    // 2. Engine Reference (Existing Section)
-    React.createElement("h4", { style: h4Style }, "ENGINE LINEUP REFERENCE"),
+    React.createElement("h4", { style: { ...h4Style, borderBottom: '2px solid #90caf9', paddingBottom: '5px' } }, "ENGINE LINEUP REFERENCE"),
     React.createElement(
       "ul",
       { style: { listStyleType: 'none', padding: '0', fontSize: '11px', textAlign: 'left', margin: '0 0 10px 0', lineHeight: '1.6' } },
@@ -4032,7 +4215,6 @@ function SuperDutyConfigCard() {
       React.createElement("li", null, React.createElement("b", { style: { color: '#1976d2' } }, "6.7L H.O. Power Stroke V8 Diesel: "), "High Output version. **Max towing capability**.")
     ),
     
-    // Unique Identifier
     React.createElement("p", { style: { fontSize: '10px', color: '#ff0000', marginTop: '15px', fontWeight: 'bold', borderTop: '1px dashed #90caf9', paddingTop: '5px' } }, "Super Duty Config Card")
   );
 }
